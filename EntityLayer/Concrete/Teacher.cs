@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class Teacher:BaseEntity
+    public class Teacher
     {
         [Key]
         public int TeacherID { get; set; }
+        public string NameAndSurname { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public bool Status { get; set; }
         public int MajorScienceCode { get; set; }
         public List<Project> Projects { get; set; }
     }
