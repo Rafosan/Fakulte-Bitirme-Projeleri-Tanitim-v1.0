@@ -17,16 +17,15 @@ namespace DataAccessLayer.Repository
             context.SaveChanges();
         }
 
-        public T GetByID(int id)
-        {
-            return context.Set<T>().Find(id);
-        }
-
-        public List<T> GetListAll()
+        public List<T> GetAll()
         {
             return context.Set<T>().ToList();
         }
 
+        public T GetByID(int id)
+        {
+            return context.Set<T>().Find(id);
+        }
         public void Insert(T t)
         {
             context.Add(t);
