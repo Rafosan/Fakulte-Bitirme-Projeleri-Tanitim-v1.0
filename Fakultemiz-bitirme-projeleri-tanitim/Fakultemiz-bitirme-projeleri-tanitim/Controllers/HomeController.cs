@@ -18,10 +18,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
