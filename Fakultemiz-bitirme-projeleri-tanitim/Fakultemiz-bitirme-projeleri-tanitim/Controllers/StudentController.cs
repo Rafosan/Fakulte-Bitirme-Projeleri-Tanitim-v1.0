@@ -9,9 +9,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
     {
         //StudentManager studentManager=new StudentManager(new EfStudentDal());
         StudentManager studentManager;
-        EfStudentDal efStudentDal;
-
-        public StudentController(StudentManager studentManager)
+        public StudentController(EfStudentDal efStudentDal)
         {
             this.studentManager = studentManager;
         }

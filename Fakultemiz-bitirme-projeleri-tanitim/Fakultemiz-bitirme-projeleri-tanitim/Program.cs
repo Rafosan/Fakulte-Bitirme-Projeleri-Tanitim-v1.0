@@ -1,5 +1,8 @@
+using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
 using DataAccessLayer.Repository;
 using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +15,19 @@ var connectionString = builder.Configuration.GetConnectionString("MyDbConnection
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseSqlServer(connectionString));
 //burada da servislere eklemen lazým repositoryi
+builder.Services.AddScoped(typeof(IGenericDal<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IGenericService<About>), typeof(AboutManager));
+builder.Services.AddScoped(typeof(IGenericService<Admin>), typeof(AdminManager));
+builder.Services.AddScoped(typeof(IGenericService<Project>), typeof(ProjectManager));
+builder.Services.AddScoped(typeof(IGenericService<Student>), typeof(StudentManager));
+builder.Services.AddScoped(typeof(IGenericService<Teacher>), typeof(TeacherManager));
+builder.Services.AddScoped(typeof(EfStudentDal), typeof(GenericRepository<Student>));
+builder.Services.AddScoped(typeof(EfAboutDal), typeof(GenericRepository<About>));
+builder.Services.AddScoped(typeof(EfAdminDal), typeof(GenericRepository<Admin>));
+builder.Services.AddScoped(typeof(EfTeacherDal), typeof(GenericRepository<Teacher>));
+builder.Services.AddScoped(typeof(EfProjectDal), typeof(GenericRepository<Project>));
 
-builder.Services.AddScoped(typeof(DataAccessLayer.Abstract.IGenericDal<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(BusinessLayer.Abstract.IGenericService<>), typeof(GenericRepository<>));
+
 
 builder.Services.AddControllersWithViews();
 
