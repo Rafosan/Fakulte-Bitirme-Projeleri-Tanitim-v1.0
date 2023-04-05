@@ -1,4 +1,7 @@
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
+using DataAccessLayer.Repository;
+using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -8,6 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("MyDbConnection");
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseSqlServer(connectionString));
+//burada da servislere eklemen lazým repositoryi
+
+builder.Services.AddScoped(typeof(DataAccessLayer.Abstract.IGenericDal<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(BusinessLayer.Abstract.IGenericService<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<>
 
 builder.Services.AddControllersWithViews();
 

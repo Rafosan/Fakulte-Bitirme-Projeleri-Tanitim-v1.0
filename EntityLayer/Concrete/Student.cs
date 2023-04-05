@@ -16,6 +16,6 @@ namespace EntityLayer.Concrete
         public string Password { get; set; }
         public bool Status { get; set; }
         public int DepartmentCode { get; set; }
-        public ICollection<Project> Projects { get; set; }
+        public List<Project> Projects { get; set; }
     }
 }

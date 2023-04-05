@@ -5,12 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace DataAccessLayer.Repository
 {
     public class GenericRepository<T> : IGenericDal<T> where T : class
     {
-        MyDbContext context= new MyDbContext();
+        //bunu bu şekilde kullanamazsın DI dan çözdürmen lazım
+        MyDbContext context;
+        public GenericRepository(MyDbContext context)
+        {
+            this.context=context;
+        }
         public void Delete(T t)
         {
             context.Remove(t);
