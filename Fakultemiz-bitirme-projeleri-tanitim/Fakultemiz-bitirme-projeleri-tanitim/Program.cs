@@ -15,7 +15,6 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 
 builder.Services.AddScoped(typeof(DataAccessLayer.Abstract.IGenericDal<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(BusinessLayer.Abstract.IGenericService<>), typeof(GenericRepository<>));
-builder.Services.AddScoped<>
 
 builder.Services.AddControllersWithViews();
 
