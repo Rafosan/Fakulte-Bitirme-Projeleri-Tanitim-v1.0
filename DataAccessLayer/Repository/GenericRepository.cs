@@ -13,7 +13,7 @@ namespace DataAccessLayer.Repository
     public class GenericRepository<T> : IGenericDal<T> where T : class
     {
         //bunu bu şekilde kullanamazsın DI dan çözdürmen lazım
-        MyDbContext context;
+        private readonly MyDbContext context;
         public GenericRepository(MyDbContext context)
         {
             this.context=context;
@@ -42,7 +42,7 @@ namespace DataAccessLayer.Repository
         public void Update(T t)
         {
             context.Update(t);
-            context.SaveChanges() ;
+            context.SaveChanges();
         }
     }
 }

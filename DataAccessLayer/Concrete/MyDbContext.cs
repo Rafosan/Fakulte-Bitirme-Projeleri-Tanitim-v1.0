@@ -12,8 +12,7 @@ namespace DataAccessLayer.Concrete
     {
         public MyDbContext(DbContextOptions<MyDbContext> options)
         : base(options)
-        {
-        }
+        {}
         public DbSet<Project> Projects { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
