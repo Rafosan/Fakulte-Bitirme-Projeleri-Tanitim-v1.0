@@ -619,7 +619,7 @@ select:not([multiple]) {
     width: 250px;
     position: absolute;
     z-index: 1;
-    top: 100;
+    top: 100px;
     right: 0;
     background-color: #3399CC;
     overflow-x: hidden;

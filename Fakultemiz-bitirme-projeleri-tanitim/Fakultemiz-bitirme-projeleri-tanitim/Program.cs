@@ -26,7 +26,11 @@ builder.Services.AddScoped(typeof(IGenericDal<>), typeof(GenericRepository<>));
 //builder.Services.AddScoped(typeof(EfProjectDal), typeof(GenericRepository<Project>));
 builder.Services.AddScoped<EfStudentDal>();
 builder.Services.AddScoped<IStudentDal, EfStudentDal>();
-builder.Services.AddScoped<IStudentService, StudentManager>();
+builder.Services.AddScoped<IStudentService, StudentManager>(); 
+builder.Services.AddScoped<EfProjectDal>();
+builder.Services.AddScoped<IProjectDal, EfProjectDal>();
+builder.Services.AddScoped<IProjectService, ProjectManager>();
+
 
 
 
