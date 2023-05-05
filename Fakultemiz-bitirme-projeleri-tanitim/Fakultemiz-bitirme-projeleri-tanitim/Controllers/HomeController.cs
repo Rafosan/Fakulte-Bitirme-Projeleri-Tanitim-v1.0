@@ -24,10 +24,5 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             return View(values);
         }
 
-
-
-
-
-
     }
 }
