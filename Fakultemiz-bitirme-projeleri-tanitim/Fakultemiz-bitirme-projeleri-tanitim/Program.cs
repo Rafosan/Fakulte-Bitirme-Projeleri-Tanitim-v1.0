@@ -26,7 +26,9 @@ builder.Services.AddScoped<IAdminService, AdminManager>();
 builder.Services.AddScoped<EfTeacherDal>();
 builder.Services.AddScoped<ITeacherDal, EfTeacherDal>();
 builder.Services.AddScoped<ITeacherService, TeacherManager>();
-
+builder.Services.AddScoped<EfCategoryDal>();
+builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
 builder.Services.AddControllersWithViews();
 var app = builder.Build();

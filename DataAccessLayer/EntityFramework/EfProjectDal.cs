@@ -15,5 +15,9 @@ namespace DataAccessLayer.EntityFramework
         public EfProjectDal(MyDbContext context) : base(context)
         {
         }
+        public List<Project> GetListWithCategory()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

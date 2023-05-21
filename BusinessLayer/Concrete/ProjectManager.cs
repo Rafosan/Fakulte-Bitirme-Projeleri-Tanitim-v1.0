@@ -16,7 +16,6 @@ namespace BusinessLayer.Concrete
         {
             _projectDal = projectDal;
         }
-
         public void TAdd(Project t)
         {
             _projectDal.Insert(t);
@@ -35,6 +34,11 @@ namespace BusinessLayer.Concrete
         public Project TGetByID(int id)
         {
             return _projectDal.GetByID(id);
+        }
+
+        public List<Project> TGetProjectListByCategory()
+        {
+            return _projectDal.GetListWithCategory();
         }
 
         public void TUpdate(Project t)

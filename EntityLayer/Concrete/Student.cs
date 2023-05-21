@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityLayer.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,14 +8,8 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class Student
+    public class Student:BaseEntiy
     {
-        [Key]
-        public int StudentID { get; set; }
-        public string NameAndSurname { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public bool Status { get; set; }
         public int DepartmentCode { get; set; }
         public List<Project> Projects { get; set; }
     }

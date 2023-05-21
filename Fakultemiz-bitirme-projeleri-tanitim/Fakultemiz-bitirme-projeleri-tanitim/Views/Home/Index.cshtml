@@ -1,5 +1,6 @@
 ﻿@using EntityLayer.Concrete
 @model List<Project>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,11 +69,14 @@
                                aria-expanded="false">
                                 Yıllar
                             </a>
+                            
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">2023</a>
-                                <a class="dropdown-item" href="#">2024</a>
-                                <a class="dropdown-item" href="#">2025</a>
+                                @foreach (var item in Model)
+                                {
+                                <a class="dropdown-item" href="#">@item.Category.Value</a>
+                                    }
                             </div>
+                            
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
@@ -165,10 +169,10 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <h6 class="tm-text-gray-light">@item.Name</h6>
-                    <h6>@item.CreationTime</h6>
+                    <h6>@item.CreationTime.ToString("Y")</h6>
                 </div>
                 <p class="tm-pt-30">
-                    @item.Description
+                    @item.Description  
                     <a href="~/Ana-Sayfa-Template/project-detail.html" class="btn-devam tm-text-gray-light"> Devamını oku</a>
                 </p>
                 <i class="fas fa-heart icon-heart">10</i>

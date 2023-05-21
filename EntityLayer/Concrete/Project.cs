@@ -20,9 +20,9 @@ namespace EntityLayer.Concrete
         public string Subject { get; set; }
         public string Description { get; set; }
         public bool Status { get; set; }//
-        public int StudentID { get; set; }
         public Student Student { get; set; }
-        public int TeacherID { get; set; }
         public Teacher Teacher { get; set;}
+        public Category Category { get; set; }
+
     }
 }
