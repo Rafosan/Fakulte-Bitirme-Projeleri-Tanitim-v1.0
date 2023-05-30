@@ -82,9 +82,6 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectID"));
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
@@ -126,8 +123,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ProjectID");
-
-                    b.HasIndex("CategoryID");
 
                     b.HasIndex("StudentID");
 
@@ -200,12 +195,6 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Project", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.Category", "Category")
-                        .WithMany("Projects")
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("EntityLayer.Concrete.Student", "Student")
                         .WithMany("Projects")
                         .HasForeignKey("StudentID")
@@ -218,16 +207,9 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-
                     b.Navigation("Student");
 
                     b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
-                {
-                    b.Navigation("Projects");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Student", b =>

@@ -1,5 +1,5 @@
 ﻿@using EntityLayer.Concrete
-@model List<Project>
+@model HomeViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +51,7 @@
         </div>
     </nav>
 
+    @*@await Html.PartialAsync("~/Views/Default/CategoryPartial.cshtml")*@
     <div class="tm-hero d-flex align-items-center">
         <nav class="navbar navbar-expand-lg bg-body-tertiary  ">
             <div class="container-fluid navbar-title navbar-place">
@@ -69,14 +70,15 @@
                                aria-expanded="false">
                                 Yıllar
                             </a>
-                            
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @foreach (var item in Model)
-                                {
-                                <a class="dropdown-item" href="#">@item.Category.Value</a>
-                                    }
-                            </div>
-                            
+                        
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @foreach(var item in Model.Kategoriler){
+                                if(item.Type=="Yıl"){
+                           <a class="dropdown-item" href="#">@item.Value</a>
+                                }
+                            }
+                        </div>
+
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
@@ -88,10 +90,14 @@
                                aria-expanded="false">
                                 Bölümler
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Bilgisayar Mühendisliği</a>
-                                <a class="dropdown-item" href="#">Makine Mühendisliği</a>
-                            </div>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach (var item in Model.Kategoriler){
+                                    if (item.Type == "Bölüm"){
+                                        <a class="dropdown-item" href="#">@item.Value</a>
+                                    }
+                                }
+                                </div>
+                           
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
@@ -104,9 +110,11 @@
                                 Danışmanlar
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Tuncay Aydoğan</a>
-                                <a class="dropdown-item" href="#">Sinan Uğuz</a>
-                                <a class="dropdown-item" href="#">Kıyas Kayaalp</a>
+                                @foreach(var item in Model.Kategoriler){
+                                    if(item.Type=="Danışman"){
+                                <a class="dropdown-item" href="#">@item.Value</a>
+                                    }
+                                }
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -141,9 +149,8 @@
                 </button>
             </form>
         </div>
-
-
     </div>
+
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
@@ -159,12 +166,12 @@
             </div>
         </div>
         <div class="row tm-mb-90 tm-gallery">
-            @foreach(var item in Model){
+            @foreach(var item in Model.Projeler){
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
                     <img src="~/Ana-Sayfa-Template/img/img-01.jpg" alt="Image" class="img-fluid" />
                     <figcaption class="d-flex align-items-center justify-content-center">
-                            <a href="~/Ana-Sayfa-Template/project-detail.html">Devamını oku</a>
+                            <a href="Project/Index">Devamını oku</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -172,7 +179,7 @@
                     <h6>@item.CreationTime.ToString("Y")</h6>
                 </div>
                 <p class="tm-pt-30">
-                    @item.Description  
+                    @item.Description
                     <a href="~/Ana-Sayfa-Template/project-detail.html" class="btn-devam tm-text-gray-light"> Devamını oku</a>
                 </p>
                 <i class="fas fa-heart icon-heart">10</i>

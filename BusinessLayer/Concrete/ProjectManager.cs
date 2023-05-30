@@ -36,11 +36,6 @@ namespace BusinessLayer.Concrete
             return _projectDal.GetByID(id);
         }
 
-        public List<Project> TGetProjectListByCategory()
-        {
-            return _projectDal.GetListWithCategory();
-        }
-
         public void TUpdate(Project t)
         {
             _projectDal.Update(t);

@@ -14,6 +14,5 @@ namespace EntityLayer.Concrete
         public string Type { get; set; }
         public string Value { get; set; }
         public bool Status { get; set; }
-        public List<Project> Projects { get; set; }
     }
 }

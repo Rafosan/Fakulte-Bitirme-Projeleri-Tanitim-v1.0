@@ -92,18 +92,11 @@ namespace DataAccessLayer.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     StudentID = table.Column<int>(type: "int", nullable: false),
-                    TeacherID = table.Column<int>(type: "int", nullable: false),
-                    CategoryID = table.Column<int>(type: "int", nullable: false)
+                    TeacherID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Projects", x => x.ProjectID);
-                    table.ForeignKey(
-                        name: "FK_Projects_Categorys_CategoryID",
-                        column: x => x.CategoryID,
-                        principalTable: "Categorys",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Projects_Students_StudentID",
                         column: x => x.StudentID,
@@ -117,11 +110,6 @@ namespace DataAccessLayer.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Projects_CategoryID",
-                table: "Projects",
-                column: "CategoryID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_StudentID",
@@ -141,10 +129,10 @@ namespace DataAccessLayer.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                name: "Categorys");
 
             migrationBuilder.DropTable(
-                name: "Categorys");
+                name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "Students");

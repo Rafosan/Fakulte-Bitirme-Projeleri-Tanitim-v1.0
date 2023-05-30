@@ -22,7 +22,5 @@ namespace EntityLayer.Concrete
         public bool Status { get; set; }//
         public Student Student { get; set; }
         public Teacher Teacher { get; set;}
-        public Category Category { get; set; }
-
     }
 }

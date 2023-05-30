@@ -7,6 +7,7 @@ using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.Repository;
 using EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.EntityFramework
 {
@@ -14,10 +15,6 @@ namespace DataAccessLayer.EntityFramework
     {
         public EfProjectDal(MyDbContext context) : base(context)
         {
-        }
-        public List<Project> GetListWithCategory()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -9,6 +9,5 @@ namespace DataAccessLayer.Abstract
 {
     public interface IProjectDal:IGenericDal<Project>
     {
-        List<Project> GetListWithCategory();
     }
 }

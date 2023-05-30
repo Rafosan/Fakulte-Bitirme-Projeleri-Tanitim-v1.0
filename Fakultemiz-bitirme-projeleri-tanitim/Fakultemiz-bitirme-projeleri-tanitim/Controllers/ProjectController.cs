@@ -10,9 +10,10 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         {
             _projectService = projectService;
         }
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            return View();
+            var values = _projectService.TGetAll().FirstOrDefault();
+            return View(values);
         }
     }
 }

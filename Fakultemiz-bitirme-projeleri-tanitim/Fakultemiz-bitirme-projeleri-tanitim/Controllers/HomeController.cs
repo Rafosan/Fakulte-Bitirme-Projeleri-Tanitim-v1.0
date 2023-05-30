@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using BusinessLayer.Abstract;
+using EntityLayer.Concrete;
 using Fakultemiz_bitirme_projeleri_tanitim.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,15 +15,28 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         }
 
         private readonly IProjectService _projectService;
-        public HomeController(IProjectService projectService)
+        private readonly ICategoryService _categoryService;
+        public HomeController(IProjectService projectService, ICategoryService categoryService)
         {
             _projectService = projectService;
+            _categoryService = categoryService;
         }
         public IActionResult Index()
         {
+            //bu şekilde olması gerekiyor
+            //mantık olarak
+            // sıkıntı var mı?
             var values = _projectService.TGetAll();
-            return View(values);
+            var values2 = _categoryService.TGetAll();
+            var model = new HomeViewModel()
+            {
+                Projeler=values,
+                Kategoriler=values2,
+            };
+            return View(model);
         }
+        
+
 
     }
 }
