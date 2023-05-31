@@ -12,8 +12,10 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfAdminDal : GenericRepository<Admin>, IAdminDal
     {
+        private readonly MyDbContext _context;
         public EfAdminDal(MyDbContext context) : base(context)
         {
+            _context = context;
         }
     }
 }

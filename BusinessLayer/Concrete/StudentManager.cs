@@ -33,10 +33,6 @@ namespace BusinessLayer.Concrete
             return _studentDal.GetAll();
         }
 
-        public Student TGetByID(int id)
-        {
-           return _studentDal.GetByID(id);
-        }
 
         public void TUpdate(Student t)
         {

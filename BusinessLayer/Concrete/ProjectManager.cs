@@ -31,14 +31,18 @@ namespace BusinessLayer.Concrete
             return _projectDal.GetAll();
         }
 
-        public Project TGetByID(int id)
-        {
-            return _projectDal.GetByID(id);
-        }
-
         public void TUpdate(Project t)
         {
             _projectDal.Update(t);
+        }//
+        //public List<Project> TGetListExpression(int id)
+        //{
+        //    return _projectDal.GetListExpression(x => x.ProjectID == id);
+        //}
+
+        public List<Project> TGetListWithExpressionStudentAndTeacher(int id)
+        {
+            return _projectDal.GetListWithExpressionStudentAndTeacher(x => x.ProjectID == id);
         }
     }
 }

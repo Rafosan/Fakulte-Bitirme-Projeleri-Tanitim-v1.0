@@ -12,8 +12,10 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfStudentDal : GenericRepository<Student>, IStudentDal
     {
+        private readonly MyDbContext _context;
         public EfStudentDal(MyDbContext context) : base(context)
         {
+            _context = context;
         }
     }
 }

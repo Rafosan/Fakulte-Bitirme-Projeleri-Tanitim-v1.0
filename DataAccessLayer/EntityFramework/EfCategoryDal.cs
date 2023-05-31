@@ -12,8 +12,10 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfCategoryDal:GenericRepository<Category>,ICategoryDal
     {
+        private readonly MyDbContext _context;
         public EfCategoryDal(MyDbContext context) : base(context)
         {
+            _context = context;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿@using EntityLayer.Concrete
 @model Project
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +42,7 @@
                         <button class="btn btn-primary " id="project-heart-button">Projeyi Beğen</button>
                     </li>
                     <li class="nav-item">
-                        <a href="index.html" class="btn btn-primary">Ana Sayfa</a>
+                        <a href="~/Home/Index" class="btn btn-primary">Ana Sayfa</a>
                     </li>
                 </ul>
             </div>
@@ -53,15 +54,15 @@
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
             <h2 class="col-12 tm-text-primary">
-                Fakültemiz bitirme projeleri tanıtım web uygulaması otomasyonu
+                @Model.Subject
             </h2>
         </div>
         <div class="row mb-4 tm-text-year">
-            <h5 class="col-12 tm-text-primary">2023 / Bilgisayar Mühendisliği</h5>
+                <h5 class="col-12 tm-text-primary">@Model.CreationTime.ToString("Y") / @Model.Student.DepartmentCode </h5>
         </div>
         <div class="row mb-4">
             <h5 class="col-12 tm-text-primary">
-                Rafet Karaca ve Bilge Gökkaya / Prof.Dr. Tuncay Aydoğan
+                    @Model.Student.NameAndSurname / @Model.Teacher.NameAndSurname
             </h5>
         </div>
 
@@ -87,8 +88,7 @@
                     <h2 class="col-12 tm-text-primary">Proje Konusu</h2>
                 </div>
                 <p class="mb-4">
-                    Please support us by making Nam ex nibh, efficitur eget libero ut,
-                    placerat aliquet justo. Cras nec varius leo.
+                    @Model.Subject
                 </p>
             </div>
         </div>
@@ -100,15 +100,14 @@
                     <h2 class="col-12 tm-text-primary">Proje Özeti</h2>
                 </div>
                 <p class="mb-4">
-                    Please support us by making Nam ex nibh, efficitur eget libero ut,
-                    placerat aliquet justo. Cras nec varius leo.
+                        @Model.Description
                 </p>
             </div>
         </div>
         <br />
         <br />
 
-        <a href="index.html" class="btn btn-primary project-detail-button">Ana Sayfaya geri dön</a>
+        <a href="~/Home/Index" class="btn btn-primary project-detail-button">Ana Sayfaya geri dön</a>
 
 
 

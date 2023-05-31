@@ -171,7 +171,7 @@
                 <figure class="effect-ming tm-video-item">
                     <img src="~/Ana-Sayfa-Template/img/img-01.jpg" alt="Image" class="img-fluid" />
                     <figcaption class="d-flex align-items-center justify-content-center">
-                            <a href="Project/Index">Devamını oku</a>
+                            <a href="~/Project/Index/@item.ProjectID">Devamını oku</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -179,8 +179,9 @@
                     <h6>@item.CreationTime.ToString("Y")</h6>
                 </div>
                 <p class="tm-pt-30">
-                    @item.Description
-                    <a href="~/Ana-Sayfa-Template/project-detail.html" class="btn-devam tm-text-gray-light"> Devamını oku</a>
+                    @item.Description.Substring(0,item.Description.Substring(0,15).LastIndexOf(" "))
+                    <a>...</a>
+                    <a href="~/Project/Index/@item.ProjectID" class="btn-devam tm-text-gray-light"> Devamını oku</a>
                 </p>
                 <i class="fas fa-heart icon-heart">10</i>
 

@@ -32,10 +32,6 @@ namespace BusinessLayer.Concrete
             return _teacherDal.GetAll();
         }
 
-        public Teacher TGetByID(int id)
-        {
-            return _teacherDal.GetByID(id);
-        }
 
         public void TUpdate(Teacher t)
         {

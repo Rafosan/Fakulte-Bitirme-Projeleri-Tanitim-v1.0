@@ -14,8 +14,10 @@ namespace DataAccessLayer.EntityFramework
     //ver gibisinden eklemen lazım diğerlerini de
     public class EfTeacherDal : GenericRepository<Teacher>, ITeacherDal
     {
+        private readonly MyDbContext _context;
         public EfTeacherDal(MyDbContext context) : base(context)
         {
+            _context = context;
         }
     }
 }

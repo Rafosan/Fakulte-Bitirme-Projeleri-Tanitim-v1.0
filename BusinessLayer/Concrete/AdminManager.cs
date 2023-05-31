@@ -31,12 +31,6 @@ namespace BusinessLayer.Concrete
         {
            return _adminDal.GetAll();
         }
-
-        public Admin TGetByID(int id)
-        {
-            return _adminDal.GetByID(id);
-        }
-
         public void TUpdate(Admin t)
         {
             _adminDal.Update(t);
