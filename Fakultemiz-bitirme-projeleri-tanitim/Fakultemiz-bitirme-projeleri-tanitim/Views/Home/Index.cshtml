@@ -178,7 +178,18 @@
                     <h6>@item.CreationTime.ToString("Y")</h6>
                 </div>
                 <p class="tm-pt-30">
-                    @item.Description.Substring(0,item.Description.Substring(0,15).LastIndexOf(" "))
+                    @*@item.Description.Substring(0,item.Description.Substring(0,15).LastIndexOf(" "))*@
+                        @{
+                            string description = item.Description;
+                            int length = Math.Min(70, description.Length);
+                            int lastIndex = description.Substring(0, length).LastIndexOf(" ");
+
+                            string result = lastIndex != -1
+                            ? description.Substring(0, lastIndex)
+                            : description.Substring(0, length);
+                        }
+                        <!-- result değişkenini kullanarak sonucu görüntülemek için -->
+                        @result
                     <a>...</a>
                     <a href="~/Project/Index/@item.ProjectID" class="btn-devam tm-text-gray-light"> Devamını oku</a>
                 </p>
