@@ -69,14 +69,16 @@
                                aria-expanded="false">
                                 Yıllar
                             </a>
-                        
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @foreach(var item in Model.Kategoriler){
-                                if(item.Type=="Yıl"){
-                           <a class="dropdown-item" href="#">@item.Value</a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach (var item in Model.Kategoriler)
+                                {
+                                    if (item.Type == "Yıl")
+                                    {
+                                        <a class="dropdown-item" href="#">@item.Value</a>
+                                    }
                                 }
-                            }
-                        </div>
+                            </div>
 
                         </li>
                         <li class="nav-item dropdown">
@@ -89,14 +91,16 @@
                                aria-expanded="false">
                                 Bölümler
                             </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @foreach (var item in Model.Kategoriler){
-                                    if (item.Type == "Bölüm"){
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach (var item in Model.Kategoriler)
+                                {
+                                    if (item.Type == "Bölüm")
+                                    {
                                         <a class="dropdown-item" href="#">@item.Value</a>
                                     }
                                 }
-                                </div>
-                           
+                            </div>
+
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
@@ -109,9 +113,11 @@
                                 Danışmanlar
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @foreach(var item in Model.Kategoriler){
-                                    if(item.Type=="Danışman"){
-                                <a class="dropdown-item" href="#">@item.Value</a>
+                                @foreach (var item in Model.Kategoriler)
+                                {
+                                    if (item.Type == "Danışman")
+                                    {
+                                        <a class="dropdown-item" href="#">@item.Value</a>
                                     }
                                 }
                             </div>
@@ -165,20 +171,21 @@
             </div>
         </div>
         <div class="row tm-mb-90 tm-gallery">
-            @foreach(var item in Model.Projeler){
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="~/Ana-Sayfa-Template/img/img-01.jpg" alt="Image" class="img-fluid" />
-                    <figcaption class="d-flex align-items-center justify-content-center">
+            @foreach (var item in Model.Projeler)
+            {
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                    <figure class="effect-ming tm-video-item">
+                        <img src="~/Ana-Sayfa-Template/img/img-01.jpg" alt="Image" class="img-fluid" />
+                        <figcaption class="d-flex align-items-center justify-content-center">
                             <a href="~/Project/Index/@item.ProjectID">Devamını oku</a>
-                    </figcaption>
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <h6 class="tm-text-gray-light">@item.Name</h6>
-                    <h6>@item.CreationTime.ToString("Y")</h6>
-                </div>
-                <p class="tm-pt-30">
-                    @*@item.Description.Substring(0,item.Description.Substring(0,15).LastIndexOf(" "))*@
+                        </figcaption>
+                    </figure>
+                    <div class="d-flex justify-content-between tm-text-gray">
+                        <h6 class="tm-text-gray-light">@item.Name</h6>
+                        <h6>@item.CreationTime.ToString("Y")</h6>
+                    </div>
+                    <p class="tm-pt-30">
+                        @*@item.Description.Substring(0,item.Description.Substring(0,15).LastIndexOf(" "))*@
                         @{
                             string description = item.Description;
                             int length = Math.Min(70, description.Length);
@@ -189,26 +196,27 @@
                             : description.Substring(0, length);
                         }
                         <!-- result değişkenini kullanarak sonucu görüntülemek için -->
-                        @result
-                    <a>...</a>
-                    <a href="~/Project/Index/@item.ProjectID" class="btn-devam tm-text-gray-light"> Devamını oku</a>
-                </p>
-                <i class="fas fa-heart icon-heart">10</i>
+                    @result
+                        <a>...</a>
+                        <a href="~/Project/Index/@item.ProjectID" class="btn-devam tm-text-gray-light"> Devamını oku</a>
+                    </p>
+                    <i class="fas fa-heart icon-heart">10</i>
 
-            </div>
+                </div>
             }
         </div>
         @await Html.PartialAsync("~/Views/Shared/Partial/PagingPartial.cshtml")
     </div>
     <!-- container-fluid, tm-container-content -->
-
     @await Html.PartialAsync("~/Views/Shared/Partial/FooterPartial.cshtml")
 
     <script src="~/Ana-Sayfa-Template/js/plugins.js"></script>
     <script>
         $(window).on("load", function () {
-          $("body").addClass("loaded");
+            $("body").addClass("loaded");
         });
     </script>
 </body>
 </html>
+
+
