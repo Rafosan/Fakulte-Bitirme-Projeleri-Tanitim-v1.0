@@ -40,14 +40,5 @@ namespace DataAccessLayer.Repository
         {
             return _context.Set<T>().ToList();
         }
-
-        //public T GetByID(int id)
-        //{
-        //    return _context.Set<T>().Find(id);
-        //}
-        //public List<T> GetListExpression(Expression<Func<T, bool>> filter)
-        //{
-        //    return _context.Set<T>().Where(filter).ToList();
-        //}
     }
 }

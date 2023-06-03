@@ -23,9 +23,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         }
         public IActionResult Index()
         {
-            //bu şekilde olması gerekiyor
-            //mantık olarak
-            // sıkıntı var mı?
+            //bu şekilde olması gerekiyor 
             var values = _projectService.TGetAll();
             var values2 = _categoryService.TGetAll();
             var model = new HomeViewModel()
