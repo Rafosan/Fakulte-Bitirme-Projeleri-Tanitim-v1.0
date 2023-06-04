@@ -3,14 +3,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Isparta Uygulamalı Bilimler Üniversitesi</title>
-    <link href="~/ana-sayfa-template/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/ana-sayfa-template/fontawesome/css/all.min.css" rel="stylesheet" />
-    <link href="~/ana-sayfa-template/css/templatemo-style.css" rel="stylesheet" />
-</head>
 <body>
     <!-- Page Loader -->
     <div id="loader-wrapper">
@@ -24,7 +16,7 @@
             <a class="navbar-brand"
                href="https://teknoloji.isparta.edu.tr"
                target="_blank">
-                <img src="img/logo.png" alt="logo" width="80px" />
+                <img src="~/img/logo.png" alt="logo" width="80px" />
                 Isparta Uygulamalı Bilimler Üniversitesi Teknoloji Fakültesi
             </a>
             <button class="navbar-toggler"
@@ -42,7 +34,7 @@
                         <button class="btn btn-primary " id="project-heart-button">Projeyi Beğen</button>
                     </li>
                     <li class="nav-item">
-                        <a href="~/Home/Index" class="btn btn-primary">Ana Sayfa</a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Ana Sayfa</a>
                     </li>
                 </ul>
             </div>
@@ -107,7 +99,7 @@
         <br />
         <br />
 
-        <a href="~/Home/Index" class="btn btn-primary project-detail-button">Ana Sayfaya geri dön</a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary project-detail-button">Ana Sayfaya geri dön</a>
 
 
 

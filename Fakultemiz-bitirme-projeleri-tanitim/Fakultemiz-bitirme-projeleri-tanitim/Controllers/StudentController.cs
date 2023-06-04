@@ -19,5 +19,14 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             var values = _studentService.TGetAll();
             return View(values);
         }
+        public IActionResult ProjectUpdate()
+        {
+            return View();
+        }
+        public IActionResult ProjectStatus()
+        {
+            return View();
+        }
+
     }
 }
