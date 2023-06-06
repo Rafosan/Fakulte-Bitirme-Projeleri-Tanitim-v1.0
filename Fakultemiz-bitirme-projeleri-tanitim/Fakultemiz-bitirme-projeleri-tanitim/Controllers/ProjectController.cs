@@ -16,7 +16,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         {
             var values = _projectService.TGetListWithExpressionStudentAndTeacher(id).FirstOrDefault();
             return View(values);
-
         }
     }
 }

@@ -1,0 +1,119 @@
+﻿@using EntityLayer.Concrete
+@model Project
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <!-- Page Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand"
+               href="https://teknoloji.isparta.edu.tr"
+               target="_blank">
+                <img src="~/img/logo.png" alt="logo" width="80px" />
+                Isparta Uygulamalı Bilimler Üniversitesi Teknoloji Fakültesi
+            </a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button class="btn btn-primary " id="project-heart-button">Projeyi Beğen</button>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Ana Sayfa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <hr />
+
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row mb-4">
+            <h2 class="col-12 tm-text-primary">
+                @Model.Subject
+            </h2>
+        </div>
+        <div class="row mb-4 tm-text-year">
+                <h5 class="col-12 tm-text-primary">@Model.CreationTime.ToString("Y") / @Model.Student.DepartmentCode </h5>
+        </div>
+        <div class="row mb-4">
+            <h5 class="col-12 tm-text-primary">
+                    @Model.Student.NameAndSurname / @Model.Teacher.NameAndSurname
+            </h5>
+        </div>
+
+        <div class="row tm-mb-90">
+            <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+                <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
+            </div>
+            <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+                <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
+            </div>
+        </div>
+        <div class="row tm-mb-90">
+            <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+                <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
+            </div>
+            <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+                <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-5 col-md-6 col-sm-12">
+            <div class="tm-bg-gray tm-video-details">
+                <div class="row mb-4">
+                    <h2 class="col-12 tm-text-primary">Proje Konusu</h2>
+                </div>
+                <p class="mb-4">
+                    @Model.Subject
+                </p>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="col-xl-12 col-lg-5 col-md-6 col-sm-12">
+            <div class="tm-bg-gray tm-video-details">
+                <div class="row mb-4">
+                    <h2 class="col-12 tm-text-primary">Proje Özeti</h2>
+                </div>
+                <p class="mb-4">
+                        @Model.Description
+                </p>
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary project-detail-button">Ana Sayfaya geri dön</a>
+
+
+
+        <br />
+        <br />
+    </div>
+    <!-- container-fluid, tm-container-content -->
+    @await Html.PartialAsync("~/Views/Shared/Partial/FooterPartial.cshtml")
+
+    <script src="~/Ana-Sayfa-Template/js/plugins.js"></script>
+    <script>
+        $(window).on("load", function () {
+            $("body").addClass("loaded");
+        });
+    </script>
+</body>
+</html>

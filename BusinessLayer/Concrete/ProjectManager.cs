@@ -35,14 +35,14 @@ namespace BusinessLayer.Concrete
         {
             _projectDal.Update(t);
         }//
-        //public List<Project> TGetListExpression(int id)
-        //{
-        //    return _projectDal.GetListExpression(x => x.ProjectID == id);
-        //}
-
         public List<Project> TGetListWithExpressionStudentAndTeacher(int id)
         {
             return _projectDal.GetListWithExpressionStudentAndTeacher(x => x.ProjectID == id);
+        }
+
+        public Project TGetByID(int id)
+        {
+           return _projectDal.GetByID(id);
         }
     }
 }

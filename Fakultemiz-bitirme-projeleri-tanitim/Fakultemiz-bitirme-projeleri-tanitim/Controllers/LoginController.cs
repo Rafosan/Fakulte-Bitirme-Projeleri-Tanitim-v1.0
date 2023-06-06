@@ -8,7 +8,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         {
             return View();
         }
-        public IActionResult TeacherIndex()
+        public IActionResult AdminAndTeacherIndex()
         {
             return View();
         }

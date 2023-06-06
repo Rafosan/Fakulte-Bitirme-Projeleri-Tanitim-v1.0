@@ -1,4 +1,7 @@
-﻿@using EntityLayer.Concrete
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using EntityLayer.Concrete
 @model Project
 
 <!DOCTYPE html>
@@ -98,22 +101,10 @@
         </div>
         <br />
         <br />
-
         <a href="@Url.Action("Index", "Home")" class="btn btn-primary project-detail-button">Ana Sayfaya geri dön</a>
-
-
-
         <br />
         <br />
     </div>
-    <!-- container-fluid, tm-container-content -->
     @await Html.PartialAsync("~/Views/Shared/Partial/FooterPartial.cshtml")
-
-    <script src="~/Ana-Sayfa-Template/js/plugins.js"></script>
-    <script>
-        $(window).on("load", function () {
-            $("body").addClass("loaded");
-        });
-    </script>
 </body>
 </html>

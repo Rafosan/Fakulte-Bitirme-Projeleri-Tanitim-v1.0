@@ -12,10 +12,10 @@ namespace EntityLayer.Concrete
         [Key]
         public int ProjectID { get; set; }
         public string Name { get; set; }
-        public string Image1 { get; set; }
-        public string Image2 { get; set; }
-        public string Image3 { get; set; }
-        public string Image4 { get; set; }
+        public byte[]? Image1 { get; set; }
+        public byte[]? Image2 { get; set; }
+        public byte[]? Image3 { get; set; }
+        public byte[]? Image4 { get; set; }
         public DateTime CreationTime { get; set; }
         public string Subject { get; set; }
         public string Description { get; set; }

@@ -1,0 +1,214 @@
+﻿@using EntityLayer.Concrete
+@model HomeViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <!-- Page Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand"
+               href="https://teknoloji.isparta.edu.tr"
+               target="_blank">
+                <img src="~/img/logo.png" alt="logo" width="80px" />
+                Isparta Uygulamalı Bilimler Üniversitesi Teknoloji Fakültesi
+            </a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1 btn btn-primary"
+                           aria-current="page"
+                           href="~/Login/StudentIndex">Öğrenci Girişi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1 btn btn-primary"
+                           href="~/Login/TeacherIndex">Admin ve Akademisyen Girişi</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tm-hero d-flex align-items-center">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary  ">
+            <div class="container-fluid navbar-title navbar-place">
+                <a class="navbar-brand nav-item" href="#">Kategoriler</a>
+
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+                        style="--bs-scroll-height: 100px">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Yıllar
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach (var item in Model.Kategoriler)
+                                {
+                                    if (item.Type == "Yıl")
+                                    {
+                                        <a class="dropdown-item" href="#">@item.Value</a>
+                                    }
+                                }
+                            </div>
+
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Bölümler
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach (var item in Model.Kategoriler)
+                                {
+                                    if (item.Type == "Bölüm")
+                                    {
+                                        <a class="dropdown-item" href="#">@item.Value</a>
+                                    }
+                                }
+                            </div>
+
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Danışmanlar
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach (var item in Model.Kategoriler)
+                                {
+                                    if (item.Type == "Danışman")
+                                    {
+                                        <a class="dropdown-item" href="#">@item.Value</a>
+                                    }
+                                }
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Konular
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">A</a>
+                                <a class="dropdown-item" href="#">B</a>
+                                <a class="dropdown-item" href="#">C</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class=" tm-search">
+            <form class="d-flex tm-search-form" role="search">
+                <input class="form-control tm-search-input"
+                       type="search"
+                       placeholder="Arama"
+                       aria-label="Search" />
+                <button class="btn btn-outline-success tm-search-btn" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary">Bitirme Projeleri</h2>
+            <div class="col-6 d-flex justify-content-end align-items-center">
+                <form action="" class="tm-text-primary">
+                    Sayfa
+                    <input type="text"
+                           value="1"
+                           size="1"
+                           class="tm-input-paging tm-text-primary" />
+                </form>
+            </div>
+        </div>
+        <div class="row tm-mb-90 tm-gallery">
+            @foreach (var item in Model.Projeler)
+            {
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                    <figure class="effect-ming tm-video-item">
+                        <img src="~/Ana-Sayfa-Template/img/img-01.jpg" alt="Image" class="img-fluid" />
+                        <figcaption class="d-flex align-items-center justify-content-center">
+                            <a href="~/Project/Index/@item.ProjectID">Devamını oku</a>
+                        </figcaption>
+                    </figure>
+                    <div class="d-flex justify-content-between tm-text-gray">
+                        <h6 class="tm-text-gray-light">@item.Name</h6>
+                        <h6>@item.CreationTime.ToString("Y")</h6>
+                    </div>
+                    <p class="tm-pt-30">
+                        @*@item.Description.Substring(0,item.Description.Substring(0,15).LastIndexOf(" "))*@
+                        @{
+                            string description = item.Description;
+                            int length = Math.Min(70, description.Length);
+                            int lastIndex = description.Substring(0, length).LastIndexOf(" ");
+
+                            string result = lastIndex != -1
+                            ? description.Substring(0, lastIndex)
+                            : description.Substring(0, length);
+                        }
+                        <!-- result değişkenini kullanarak sonucu görüntülemek için -->
+                    @result
+                        <a>...</a>
+                        <a href="~/Project/Index/@item.ProjectID" class="btn-devam tm-text-gray-light"> Devamını oku</a>
+                    </p>
+                    <i class="fas fa-heart icon-heart">10</i>
+
+                </div>
+            }
+        </div>
+        @await Html.PartialAsync("~/Views/Shared/Partial/PagingPartial.cshtml")
+    </div>
+    <!-- container-fluid, tm-container-content -->
+    @await Html.PartialAsync("~/Views/Shared/Partial/FooterPartial.cshtml")
+
+    <script src="~/Ana-Sayfa-Template/js/plugins.js"></script>
+    <script>
+        $(window).on("load", function () {
+            $("body").addClass("loaded");
+        });
+    </script>
+</body>
+</html>
+
+

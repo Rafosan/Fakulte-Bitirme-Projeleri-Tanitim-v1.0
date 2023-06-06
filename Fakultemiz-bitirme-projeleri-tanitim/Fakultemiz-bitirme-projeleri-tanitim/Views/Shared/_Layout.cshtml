@@ -9,6 +9,12 @@
     <link href="~/ana-sayfa-template/css/templatemo-style.css" rel="stylesheet" />
 </head>
 <body>
+    <script src="~/js/Anajs/js/plugins.js"></script>
+    <script>
+        $(window).on("load", function () {
+            $("body").addClass("loaded");
+        });
+    </script>
 @RenderBody()
 </body>
 </html>

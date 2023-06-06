@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<body style="background-color: #69f0ae">
+    <!-- Page Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <nav class="navbar navbar-expand-lg" style="background-color: #fff">
+        <div class="container-fluid">
+            <a class="navbar-brand"
+               href="https://teknoloji.isparta.edu.tr"
+               target="_blank">
+                <img src="~/img/logo.png" alt="logo" width="80px" />
+                Isparta Uygulamalı Bilimler Üniversitesi Teknoloji Fakültesi
+            </a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1 btn btn-primary"
+                           aria-current="page"
+                           href="@Url.Action("Index", "Home")">Ana Sayfa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="card">
+        <h5 class="header">Admin ve Akademisyen Girişi</h5>
+        <div class="card-body">
+            <form class="form">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Kullanıcı Adı :</label>
+                    <input class="form-control"
+                           id="exampleInputEmail1"
+                           aria-describedby="emailHelp"
+                           placeholder="" />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Şifre :</label>
+                    <input type="password"
+                           class="form-control"
+                           id="exampleInputPassword1"
+                           placeholder="" />
+                </div>
+                <a href="@Url.Action("Index", "Admin")" class="btn btn-primary">Giriş Yap</a>
+            </form>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Partial/FooterPartial.cshtml")
+</body>
+</html>
+
+
+

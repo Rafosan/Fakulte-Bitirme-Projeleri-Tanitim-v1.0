@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
 <html lang="en">
 <body style="background-color: #69f0ae">
     <!-- Page Loader -->
@@ -61,13 +64,6 @@
     </div>
 
     @await Html.PartialAsync("~/Views/Shared/Partial/FooterPartial.cshtml")
-
-    <script src="~/Ana-Sayfa-Template/js/plugins.js"></script>
-    <script>
-        $(window).on("load", function () {
-            $("body").addClass("loaded");
-        });
-    </script>
 </body>
 </html>
 

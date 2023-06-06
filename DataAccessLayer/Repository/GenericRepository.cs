@@ -40,5 +40,10 @@ namespace DataAccessLayer.Repository
         {
             return _context.Set<T>().ToList();
         }
+
+        public T GetByID(int id)
+        {
+            return _context.Set<T>().Find(id);
+        }
     }
 }
