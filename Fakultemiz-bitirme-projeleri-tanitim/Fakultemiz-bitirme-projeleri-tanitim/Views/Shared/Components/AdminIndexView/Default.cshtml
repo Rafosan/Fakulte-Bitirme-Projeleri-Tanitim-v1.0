@@ -1,8 +1,5 @@
 ﻿@using EntityLayer.Concrete
 @model Teacher
-@{
-    Layout = "~/Views/Shared/_PanelLayout.cshtml";
-}
 <!DOCTYPE html>
 <html>
 <body>
@@ -28,23 +25,23 @@
                             <li class="active">
                                 <a href="@Url.Action("Index","Admin")">Akademik Danışman Ekle </a>
                             </li>
-                            <li><a href="admin_teacherDelete.html">Akademik Danışman Sil</a></li>
-                            <li><a href="admin_teacherList.html">Akademik Danışman Listele</a></li>
+                            <li><a href="@Url.Action("TeacherDelete","Admin")">Akademik Danışman Sil</a></li>
+                            <li><a href="@Url.Action("TeacherList","Admin")">Akademik Danışman Listele</a></li>
 
                         </ul>
                     </li>
                     <li>
-                        <a href="admin_studentIndex.html">
+                        <a href="@Url.Action("StudentIndex","Admin")">
                             <i class="fa fa-th-large"></i>
                             <span class="nav-label">Öğrenci İşlemleri</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="admin_studentIndex.html">Öğrenci Ekle </a>
+                                <a href="@Url.Action("StudentIndex","Admin")">Öğrenci Ekle </a>
                             </li>
-                            <li><a href="admin_studentDelete.html">Öğrenci Sil</a></li>
-                            <li><a href="admin_studentList.html">Öğrenci Listele</a></li>
+                            <li><a href="@Url.Action("StudentDelete","Admin")">Öğrenci Sil</a></li>
+                            <li><a href="@Url.Action("StudentList","Admin")">Öğrenci Listele</a></li>
 
                         </ul>
                     </li>
@@ -96,26 +93,31 @@
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Danışman Bölüm : </label>
-
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
-                                    </div>
+                                        <div class="col-sm-10">
+                                            @Html.DropDownListFor(x => x.MajorScienceCode, new SelectList(new List<string>
+                                        {
+                                        "Bilgisayar Mühendisliği", "İnşaat Mühendisliği",
+                                        "Mekatronik Mühendisliği", "Elektrik Mühendisliği"
+                                        }), "Seçiniz", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x=>x.MajorScienceCode)
+                                        </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Danışman Kullanıcı Adı : </label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
+                                        @Html.TextBoxFor(x=>x.UserName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.UserName)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Danışman Şifre : </label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
+                                        @Html.TextBoxFor(x=>x.Password, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.Password)
                                     </div>
                                 </div>
-
 
                                 <div class="form-group row btn-kaydet">
                                     <button class="btn btn-lg btn-primary float-right m-t-n-xs"
