@@ -1,4 +1,6 @@
-﻿@{
+﻿@using EntityLayer.Concrete
+@model Project
+@{
     Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
 <!DOCTYPE html>
@@ -26,8 +28,8 @@
                             <li class="active">
                                 <a href="@Url.Action("Index","Student")">Proje Ekleme</a>
                             </li>
-                            <li><a href="project_update.html">Proje Güncelleme</a></li>
-                            <li><a href="project_status.html">Proje Durumu</a></li>
+                            <li><a href="@Url.Action("ProjectUpdate","Student")">Proje Güncelleme</a></li>
+                            <li><a href="@Url.Action("ProjectStatus","Student")">Proje Durumu</a></li>
 
                         </ul>
                     </li>
@@ -41,8 +43,7 @@
                      role="navigation"
                      style="margin-bottom: 0">
                     <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary"
-                           href="#">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#">
                             <i class="fa fa-bars"></i>
                         </a>
                     </div>
@@ -67,25 +68,21 @@
                             <h5>Proje Ekleme Formu</h5>
                         </div>
                         <div class="ibox-content">
-                            <form method="get">
-                                <div class="form-group row">
+                            @using (Html.BeginForm("Index", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                            
+                                <div class="form-group row" >
                                     <label class="col-sm-2 col-form-label">Proje Adı : </label>
-
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
+                                    <div class="col-sm-10" >
+                                        @Html.TextBoxFor(x=>x.Name,new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.Name)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Projeyi kaç kişi yapıyor?</label>
 
                                     <div class="col-sm-10">
-                                        <select class="form-control m-b" name="account">
-                                            <option value="" disabled selected>Seçiniz</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                        </select>
+                                        @Html.DropDownListFor(x => x.Student.NameAndSurname, new SelectList(new List<int> { 1, 2, 3, 4 }), "Seçiniz", new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -94,38 +91,20 @@
                                     </label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
+                                        @Html.TextBoxFor(x=>x.Student.NameAndSurname,new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.Student.NameAndSurname)
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">
-                                        Projeyi yapan 2.kişinin adı soyadı :
-                                    </label>
-
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Bölüm :</label>
-
-                                    <div class="col-sm-10">
-                                        <select class="form-control m-b" name="account">
-                                            <option value="" disabled selected>Seçiniz</option>
-                                            <option>Bilgisayar Mühendisliği</option>
-                                            <option>İnşaat Mühendisliği</option>
-                                            <option>Mekatronik Mühendisliği</option>
-                                            <option>Elektrik Mühendisliği</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                
+                                
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">
                                         Proje Konusu :
                                     </label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
+                                        @Html.TextBoxFor(x=>x.Subject,new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.Subject)
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -134,80 +113,85 @@
                                     </label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
+                                        @Html.TextBoxFor(x=>x.Description,new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.Description)
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Bölüm :</label>
+                                    <div class="col-sm-10">
+                                        @Html.DropDownListFor(x => x.Student.DepartmentCode, new SelectList(new List<string>
+                                    {
+                                    "Bilgisayar Mühendisliği", "İnşaat Mühendisliği",
+                                    "Mekatronik Mühendisliği", "Elektrik Mühendisliği"
+                                    }), "Seçiniz", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.Student.DepartmentCode)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Akademik Danışman :</label>
 
                                     <div class="col-sm-10">
-                                        <select class="form-control m-b" name="account">
-                                            <option value="" disabled selected>Seçiniz</option>
-                                            <option>Tuncay Aydoğan</option>
-                                            <option>Serdar Paçacı</option>
-                                            <option>Burhan Duman</option>
-                                        </select>
+                                        @Html.DropDownListFor(x => x.Teacher.NameAndSurname, new SelectList(new List<string>
+                                    {
+                                    "Tuncay Aydoğan", "Serdar Paçacı", "Burhan Duman"
+                                    }), "Seçiniz", new { @class = "form-control " })
+                                        @Html.ValidationMessageFor(x=>x.Teacher.NameAndSurname)
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">
                                         Projenin Ana Sayfa Resmi :
                                     </label>
 
-                                    <form action="#" class=" " id="dropzoneForm">
-                                        <div class="fallback">
-                                            <input name="file" type="file" multiple />
-                                        </div>
-                                    </form>
+                                    <div class="col-sm-10">
+                                        <input name="file" type="file" multiple />
+                                        @Html.ValidationMessageFor(x=>x.Image1)
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">
                                         Projenin 2.Resmi :
                                     </label>
 
-                                    <form action="#" class=" " id="dropzoneForm">
-                                        <div class="fallback">
-                                            <input name="file" type="file" multiple />
-                                        </div>
-                                    </form>
+                                    <div class="col-sm-10">
+                                        <input name="file" type="file" multiple />
+                                        @Html.ValidationMessageFor(x=>x.Image2)
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">
                                         Projenin 3.Resmi :
                                     </label>
 
-                                    <form action="#" class="" id="dropzoneForm">
-                                        <div class="fallback">
-                                            <input name="file" type="file" multiple />
-                                        </div>
-                                    </form>
+                                    <div class="col-sm-10">
+                                        <input name="file" type="file" multiple />
+                                        @Html.ValidationMessageFor(x=>x.Image3)
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">
                                         Projenin 4.Resmi :
                                     </label>
 
-                                    <form action="#" class=" " id="dropzoneForm">
-                                        <div class="fallback">
-                                            <input name="file" type="file" multiple />
-                                        </div>
-                                    </form>
+                                    <div class="col-sm-10">
+                                        <input name="file" type="file" multiple />
+                                        @Html.ValidationMessageFor(x=>x.Image4)
+                                    </div>
                                 </div>
                                 <div class="form-group row btn-kaydet">
                                     <button class="btn btn-lg btn-primary float-right m-t-n-xs"
-                                            type="submit">
+                                            type="submit" id="StudentKaydet">
                                         <strong>Projeyi Kaydet</strong>
                                     </button>
-                                </div>
-
-                            </form>
+                                </div>  
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </body>
 </html>

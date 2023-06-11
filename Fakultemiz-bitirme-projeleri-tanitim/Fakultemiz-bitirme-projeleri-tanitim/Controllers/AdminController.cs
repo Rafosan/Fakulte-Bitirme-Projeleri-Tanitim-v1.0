@@ -6,14 +6,17 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
-        public AdminController(IAdminService adminService)
-        { 
+        private readonly ITeacherService _teacherService;
+        private readonly IStudentService _studentService;
+        public AdminController(IAdminService adminService, ITeacherService teacherService, IStudentService studentService)
+        {
             _adminService = adminService;
+            _teacherService = teacherService;
+            _studentService = studentService;
         }
         public IActionResult Index()
         {
-            var values= _adminService.TGetAll();
-            return View(values);
+            return View();
         }
         
         public IActionResult StudentIndex() 

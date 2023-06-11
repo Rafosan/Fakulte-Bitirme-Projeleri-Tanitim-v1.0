@@ -41,7 +41,7 @@
     </nav>
 
     <div class="card">
-        <h5 class="header">Admin ve Akademisyen Girişi</h5>
+        <h5 class="header">Akademisyen Girişi</h5>
         <div class="card-body">
             <form class="form">
                 <div class="form-group">
@@ -58,13 +58,11 @@
                            id="exampleInputPassword1"
                            placeholder="" />
                 </div>
-                <a href="@Url.Action("Index", "Admin")" class="btn btn-primary">Giriş Yap</a>
+                <a href="@Url.Action("Index", "Teacher")" class="btn btn-primary">Giriş Yap</a>
             </form>
         </div>
     </div>
     @await Html.PartialAsync("~/Views/Shared/Partial/FooterPartial.cshtml")
 </body>
 </html>
-
-
 
