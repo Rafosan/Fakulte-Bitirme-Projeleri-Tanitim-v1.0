@@ -1,5 +1,5 @@
 ﻿@using EntityLayer.Concrete
-@model IEnumerable<Teacher>
+@model List<Teacher>
 @{
     Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
@@ -85,7 +85,6 @@
 
                         </div>
                         <div class="ibox-content">
-
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover dataTables-example">
                                     <thead>
@@ -108,26 +107,18 @@
                                             <td>@item.MajorScienceCode</td>
                                             <td>@item.UserName</td>
                                             <td>@item.Password</td>
-                                            <td><input type="checkbox" class="i-checks" name="input[]"></td>
+                                            <td>
+                                                        <form action="@Url.Action("TeacherDelete", "Admin")" method="post">
+                                                            <input type="hidden" name="id" value="@item.ID" />
+                                                            <button type="submit" class="btn btn-danger">Sil</button>
+                                                        </form>
+                                            </td>
                                         </tr>
                                         }
                                     </tbody>
-
                                 </table>
-
                             </div>
-                            <div class="form-group row btn-kaydet">
-                                <button class="btn btn-lg btn-primary float-right m-t-n-xs"
-                                        type="submit">
-                                    <strong>Kaydet</strong>
-                                </button>
-                            </div>
-                            <form method="post" action="@Url.Action("TeacherDelete","Admin")">
-                                <input type="hidden" name="itemIds" value="" id="itemIds" />
-                                <button type="submit" class="btn btn-danger">Seçilenleri Sil</button>
-                            </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -135,14 +126,4 @@
     </div>
 </body>
 </html>
-<script>
-    $(document).ready(function () {
-        $('.item-checkbox').click(function () {
-            var itemIds = [];
-            $('.item-checkbox:checked').each(function () {
-                itemIds.push($(this).data('id'));
-            });
-            $('#itemIds').val(itemIds.join(','));
-        });
-    });
-</script>
+

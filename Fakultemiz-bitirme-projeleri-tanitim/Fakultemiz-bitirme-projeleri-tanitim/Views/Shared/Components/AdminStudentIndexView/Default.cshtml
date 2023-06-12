@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using EntityLayer.Concrete
+@model Student
+@{
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<!DOCTYPE html>
 <html>
 <body>
     <div id="wrapper">
@@ -79,36 +84,44 @@
                             <h5>Öğrenci Ekleme Formu</h5>
                         </div>
                         <div class="ibox-content">
-                            <form method="get">
+                            @using (Html.BeginForm("StudentIndex", "Admin", FormMethod.Post)){
+                            
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Öğrenci Adı Soyadı : </label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
+                                        @Html.TextBoxFor(x=>x.NameAndSurname,new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.NameAndSurname)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Öğrenci Bölüm : </label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
+                                        @Html.DropDownListFor(x => x.DepartmentCode, new SelectList(new List<string>
+                                    {
+                                    "Bilgisayar Mühendisliği", "İnşaat Mühendisliği",
+                                    "Mekatronik Mühendisliği", "Elektrik Mühendisliği"
+                                    }), "Seçiniz", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.DepartmentCode)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Öğrenci Kullanıcı Adı : </label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
+                                        @Html.TextBoxFor(x=>x.UserName,new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.UserName)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Öğrenci Şifre : </label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" />
+                                        @Html.TextBoxFor(x=>x.Password,new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.Password)
                                     </div>
                                 </div>
-
 
                                 <div class="form-group row btn-kaydet">
                                     <button class="btn btn-lg btn-primary float-right m-t-n-xs"
@@ -116,8 +129,7 @@
                                         <strong>Kaydet</strong>
                                     </button>
                                 </div>
-
-                            </form>
+                            }
                         </div>
                     </div>
                 </div>

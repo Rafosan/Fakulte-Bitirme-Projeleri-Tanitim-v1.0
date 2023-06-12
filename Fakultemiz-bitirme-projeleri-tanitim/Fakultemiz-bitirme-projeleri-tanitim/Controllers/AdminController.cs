@@ -3,6 +3,7 @@ using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Packaging.Signing;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
@@ -17,6 +18,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _teacherService = teacherService;
             _studentService = studentService;
         }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -53,7 +55,12 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         [HttpPost]
         public IActionResult TeacherDelete(int id)
         {
-            return View();
+            var teacher = _teacherService.TGetByID(id);
+            if (teacher != null)
+            {
+                _teacherService.TDelete(teacher);
+            }
+            return RedirectToAction("TeacherDelete");
         }
 
         public IActionResult TeacherList()
@@ -61,6 +68,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             var values=_teacherService.TGetAll();
             return View(values);
         }
+
         [HttpGet]
         public IActionResult StudentIndex()
         {
@@ -73,6 +81,8 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             ValidationResult validationResult = validator.Validate(parametre);
             if (validationResult.IsValid)
             {
+                parametre.Status = true;
+                parametre.DepartmentCode = 100;
                 _studentService.TAdd(parametre);
                 return RedirectToAction("StudentIndex", "Admin");
             }
@@ -86,17 +96,27 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult StudentDelete()
         {
             var values=_studentService.TGetAll();
             return View(values);
         }
+        [HttpPost]
+        public IActionResult StudentDelete(int id)
+        {
+            var student = _studentService.TGetByID(id);
+            if (student != null)
+            {
+                _studentService.TDelete(student);
+            }
+            return RedirectToAction("StudentDelete");
+        }
+
         public IActionResult StudentList()
         {
             var values=_studentService.TGetAll();
             return View(values);
         }
-
-
     }
 }

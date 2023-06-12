@@ -1,5 +1,8 @@
 ﻿@using EntityLayer.Concrete
 @model List<Student>
+@{
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
 <!DOCTYPE html>
 <html>
 <body>
@@ -105,22 +108,18 @@
                                             <td>@item.DepartmentCode</td>
                                             <td>@item.UserName</td>
                                             <td>@item.Password</td>
-                                            <td><input type="checkbox" class="i-checks" name="input[]"></td>
+                                            <td>
+                                                    <form action="@Url.Action("StudentDelete", "Admin")" method="post">
+                                                        <input type="hidden" name="id" value="@item.ID" />
+                                                        <button type="submit" class="btn btn-danger">Sil</button>
+                                                    </form>
+                                            </td>
                                         </tr>
                                         }
                                     </tbody>
-
                                 </table>
-
-                            </div>
-                            <div class="form-group row btn-kaydet">
-                                <button class="btn btn-lg btn-primary float-right m-t-n-xs"
-                                        type="submit">
-                                    <strong>Kaydet</strong>
-                                </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
