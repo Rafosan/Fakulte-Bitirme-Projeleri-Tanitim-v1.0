@@ -74,24 +74,17 @@
                                 <div class="form-group row" >
                                     <label class="col-sm-2 col-form-label">Proje Adı : </label>
                                     <div class="col-sm-10" >
-                                        @Html.TextBoxFor(x=>x.Name,new { @class = "form-control" })
+                                        @Html.TextBoxFor(x=>x.Name,new { @class = "form-control", placeholder = "Başlık olarak gözükecek"})
                                         @Html.ValidationMessageFor(x=>x.Name)
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Projeyi kaç kişi yapıyor?</label>
-
-                                    <div class="col-sm-10">
-                                        @Html.DropDownListFor(x => x.Student.NameAndSurname, new SelectList(new List<int> { 1, 2, 3, 4 }), "Seçiniz", new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">
-                                        Projeyi yapan 1.kişinin adı soyadı :
+                                        Projeyi yapan kişilerin adı soyadı :
                                     </label>
 
                                     <div class="col-sm-10">
-                                        @Html.TextBoxFor(x=>x.Student.NameAndSurname,new { @class = "form-control" })
+                                        @Html.TextBoxFor(x=>x.Student.NameAndSurname,new { @class = "form-control",placeholder = "Aralarına virgül koyarak yazın"})
                                         @Html.ValidationMessageFor(x=>x.Student.NameAndSurname)
                                     </div>
                                 </div>
@@ -103,7 +96,7 @@
                                     </label>
 
                                     <div class="col-sm-10">
-                                        @Html.TextBoxFor(x=>x.Subject,new { @class = "form-control" })
+                                        @Html.TextBoxFor(x=>x.Subject,new { @class = "form-control",placeholder = "Resimlerin altında gözükecek" })
                                         @Html.ValidationMessageFor(x=>x.Subject)
                                     </div>
                                 </div>
@@ -113,21 +106,11 @@
                                     </label>
 
                                     <div class="col-sm-10">
-                                        @Html.TextBoxFor(x=>x.Description,new { @class = "form-control" })
+                                        @Html.TextBoxFor(x=>x.Description,new { @class = "form-control",placeholder = "Konunun altında gözükecek" })
                                         @Html.ValidationMessageFor(x=>x.Description)
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Bölüm :</label>
-                                    <div class="col-sm-10">
-                                        @Html.DropDownListFor(x => x.Student.DepartmentCode, new SelectList(new List<string>
-                                    {
-                                    "Bilgisayar Mühendisliği", "İnşaat Mühendisliği",
-                                    "Mekatronik Mühendisliği", "Elektrik Mühendisliği"
-                                    }), "Seçiniz", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(x=>x.Student.DepartmentCode)
-                                    </div>
-                                </div>
+                                
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Akademik Danışman :</label>
 
@@ -146,7 +129,7 @@
                                     </label>
 
                                     <div class="col-sm-10">
-                                        <input name="file" type="file" multiple />
+                                        <input name="Image1" type="file" multiple />
                                         @Html.ValidationMessageFor(x=>x.Image1)
                                     </div>
                                 </div>

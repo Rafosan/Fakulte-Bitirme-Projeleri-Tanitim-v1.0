@@ -1,9 +1,8 @@
-﻿@{
+﻿@using EntityLayer.Concrete
+@model Project
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using EntityLayer.Concrete
-@model Project
-
 <!DOCTYPE html>
 <html lang="en">
 <body>
@@ -49,7 +48,7 @@
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
             <h2 class="col-12 tm-text-primary">
-                @Model.Subject
+                @Model.Name
             </h2>
         </div>
         <div class="row mb-4 tm-text-year">
@@ -57,23 +56,27 @@
         </div>
         <div class="row mb-4">
             <h5 class="col-12 tm-text-primary">
-                    @Model.Student.NameAndSurname / @Model.Teacher.NameAndSurname
+                @Model.Student.NameAndSurname / @Model.Teacher.NameAndSurname
             </h5>
         </div>
 
         <div class="row tm-mb-90">
             <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+                @Model.Image1
                 <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
             </div>
             <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+                @Model.Image2
                 <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
             </div>
         </div>
         <div class="row tm-mb-90">
             <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+                @Model.Image3
                 <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
             </div>
             <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+                @Model.Image4
                 <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
             </div>
         </div>

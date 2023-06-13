@@ -12,6 +12,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         {
             _projectService = projectService;
         }
+        [HttpGet]
         public IActionResult Index(int id)
         {
             var values = _projectService.TGetListWithExpressionStudentAndTeacher(id).FirstOrDefault();

@@ -80,33 +80,29 @@
                                                 <th>#</th>
                                                 <th>Proje Adı</th>
                                                 <th>Yükleme Tarihi</th>
-                                                <th>Akademik Danışman Açıklama</th>
+                                                <th>Konu</th>
+                                                <th>Açıklama</th>
                                                 <th>Yayınlanma Durumu</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>1</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>mdo</td>
-                                                <td>true</td>
+                                                <td>@Model.ProjectID</td>
+                                                <td>@Model.Name</td>
+                                                <td>@Model.CreationTime</td>
+                                                <td>@Model.Subject</td>
+                                                <td>@Model.Description</td>
+                                                <td>
+                                                    @if (Model.Status)
+                                                    {
+                                                        <span>Yayınlandı</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Yayınlanmadı</span>
+                                                    }
+                                                    </td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>fat</td>
-                                                <td>true</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>twitter</td>
-                                                <td>false</td>
-                                            </tr>
-
                                         </tbody>
                                     </table>
 
