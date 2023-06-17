@@ -37,6 +37,11 @@ namespace BusinessLayer.Concrete
             return _teacherDal.GetByID(id);
         }
 
+        public Teacher TTeacherLoginCheck(string username, string password)
+        {
+            return _teacherDal.TeacherLoginCheck(username, password);
+        }
+
         public void TUpdate(Teacher t)
         {
             _teacherDal.Update(t);

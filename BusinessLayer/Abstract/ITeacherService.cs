@@ -9,5 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface ITeacherService:IGenericService<Teacher>
     {
+        Teacher TTeacherLoginCheck(string username, string password);
     }
 }

@@ -38,6 +38,11 @@ namespace BusinessLayer.Concrete
             return _studentDal.GetByID(id);
         }
 
+        public Student TStudentLoginCheck(string username, string password)
+        {
+            return _studentDal.StudentLoginCheck (username, password);
+        }
+
         public void TUpdate(Student t)
         {
             _studentDal.Update(t);

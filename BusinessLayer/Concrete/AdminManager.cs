@@ -22,6 +22,11 @@ namespace BusinessLayer.Concrete
             _adminDal.Insert(t);
         }
 
+        public Admin TAdminLoginCheck(string username, string password)
+        {
+            return _adminDal.AdminLoginCheck(username, password);
+        }
+
         public void TDelete(Admin t)
         {
             _adminDal.Delete(t);

@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IAdminDal:IGenericDal<Admin>
     {
+        Admin AdminLoginCheck(string username, string password);
     }
 }

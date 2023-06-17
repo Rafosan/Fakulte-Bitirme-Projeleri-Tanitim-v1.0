@@ -1,4 +1,6 @@
-﻿@{
+﻿@using EntityLayer.Concrete
+@model List<Project>
+@{
     Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
 <!DOCTYPE html>
@@ -26,7 +28,7 @@
                             <li class="active">
                                 <a href="@Url.Action("Index","Teacher")">Proje Yayınlama </a>
                             </li>
-                            <li><a href="project_view.html">Proje Görüntüleme</a></li>
+                            <li><a href="@Url.Action("ProjectStatus","Teacher")">Proje Görüntüleme</a></li>
 
 
                         </ul>
@@ -52,7 +54,7 @@
                         </li>
 
                         <li>
-                            <a href="login.html">
+                            <a href="@Url.Action("Index","Home")">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>
@@ -90,61 +92,34 @@
                                     </thead>
 
                                     <tbody>
-                                        <tr class="gradeX">
-                                            <td>Trident</td>
-                                            <td>
-                                                Internet
-                                                Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td class="center">4</td>
-                                            <td class="center">X</td>
-                                            <td>Trident</td>
-                                            <td>
-                                                Internet
-                                                Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td class="center">4</td>
-                                            <td class="center">X</td>
-                                            <td class="center">X</td>
-                                            <td><input type="checkbox" class="i-checks" name="input[]"></td>
-                                        </tr>
-                                        <tr class="gradeC">
-                                            <td>Trident</td>
-                                            <td>
-                                                Internet
-                                                Explorer 5.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td class="center">5</td>
-                                            <td class="center">C</td>
-                                            <td>Trident</td>
-                                            <td>
-                                                Internet
-                                                Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td class="center">4</td>
-                                            <td class="center">X</td>
-                                            <td class="center">X</td>
-                                            <td><input type="checkbox" class="i-checks " name="input[]"></td>
-                                        </tr>
-
-
+                                        @foreach(var item in Model){
+                                            if (item.Status == false)
+                                            {
+                                                <tr class="gradeX">
+                                                    <td>@item.ProjectID</td>
+                                                    <td>@item.Name</td>
+                                                    <td>@item.Student</td>
+                                                    <td>@item.Student</td>
+                                                    <td>@item.CreationTime</td>
+                                                    <td>@item.Subject</td>
+                                                    <td>@item.Description</td>
+                                                    <td>@item.Image1</td>
+                                                    <td>@item.Image2</td>
+                                                    <td>@item.Image3</td>
+                                                    <td>@item.Image4</td>
+                                                    <td>
+                                                        <form action="@Url.Action("Index", "Teacher")" method="post">
+                                                            <input type="hidden" name="id" value="@item.ProjectID" />
+                                                            <button type="submit" class="btn btn-danger">Yayınla</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
                                     </tbody>
-
                                 </table>
-
-                            </div>
-                            <div class="form-group row btn-kaydet">
-                                <button class="btn btn-lg btn-primary float-right m-t-n-xs"
-                                        type="submit">
-                                    <strong>Kaydet</strong>
-                                </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

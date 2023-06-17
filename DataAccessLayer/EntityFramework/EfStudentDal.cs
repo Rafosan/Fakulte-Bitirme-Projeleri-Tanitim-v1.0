@@ -17,5 +17,10 @@ namespace DataAccessLayer.EntityFramework
         {
             _context = context;
         }
+
+        public Student StudentLoginCheck(string username, string password)
+        {
+            return _context.Students.SingleOrDefault(x => x.UserName == username && x.Password == password);
+        }
     }
 }

@@ -4,6 +4,9 @@ using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using DataAccessLayer.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +34,25 @@ builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSession();//Ben yazdým session için
+
+//builder.Services.AddMvc(config =>
+//{
+//    var policy = new AuthorizationPolicyBuilder()
+//                    .RequireAuthenticatedUser()
+//                    .Build();
+//    config.Filters.Add(new AuthorizeFilter(policy));
+//});
+
+//builder.Services.AddMvc();
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie(options =>
+//    {
+//        options.LoginPath = "/Login/Index";
+//    });
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -41,14 +63,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 app.UseStatusCodePages();
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession();//Session kullanmak için
+
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

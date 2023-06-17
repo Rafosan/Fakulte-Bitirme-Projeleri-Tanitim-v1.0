@@ -9,5 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface IAdminService:IGenericService<Admin>
     {
+        Admin TAdminLoginCheck(string username, string password);
     }
 }

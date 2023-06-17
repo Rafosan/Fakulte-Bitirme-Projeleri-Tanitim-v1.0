@@ -17,5 +17,10 @@ namespace DataAccessLayer.EntityFramework
         {
             _context = context;
         }
+
+        public Admin AdminLoginCheck(string username, string password)
+        {
+            return _context.Admins.SingleOrDefault(x => x.UserName == username && x.Password == password);
+        }
     }
 }
