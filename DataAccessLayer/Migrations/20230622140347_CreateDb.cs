@@ -49,6 +49,8 @@ namespace DataAccessLayer.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DepartmentCode = table.Column<int>(type: "int", nullable: false),
+                    EMail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Number = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NameAndSurname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -87,12 +89,15 @@ namespace DataAccessLayer.Migrations
                     Image2 = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Image3 = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Image4 = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     StudentID = table.Column<int>(type: "int", nullable: false),
-                    TeacherID = table.Column<int>(type: "int", nullable: false)
+                    TeacherID = table.Column<int>(type: "int", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LikeCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

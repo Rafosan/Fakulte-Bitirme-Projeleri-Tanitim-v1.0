@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230604144423_CreateDb")]
+    [Migration("20230622140347_CreateDb")]
     partial class CreateDb
     {
         /// <inheritdoc />
@@ -88,6 +88,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -103,6 +106,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<byte[]>("Image4")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<int>("LikeCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -120,6 +126,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<int>("TeacherID")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ProjectID");
 
@@ -141,8 +150,14 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("DepartmentCode")
                         .HasColumnType("int");
 
+                    b.Property<string>("EMail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NameAndSurname")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")

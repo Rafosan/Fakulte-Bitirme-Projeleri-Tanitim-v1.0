@@ -62,23 +62,40 @@
 
         <div class="row tm-mb-90">
             <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
-                @Model.Image1
-                <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
+                @{
+                        byte[] imageBytes = Model.Image1;
+                        string base64String = Convert.ToBase64String(imageBytes);
+                        string imgSrc = string.Format("data:image/jpeg;base64,{0}", base64String); 
+                }
+                <img class="img-fluid" src="@imgSrc" alt="Image @(1)"/>
             </div>
             <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
-                @Model.Image2
-                <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
+                @{
+                    byte[] imageBytes2 = Model.Image2;
+                    string base64String2 = Convert.ToBase64String(imageBytes2);
+                    string imgSrc2 = string.Format("data:image/jpeg;base64,{0}", base64String2);
+                }
+                <img class="img-fluid" src="@imgSrc2" alt="Image @(2)" />
             </div>
         </div>
         <div class="row tm-mb-90">
             <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
-                @Model.Image3
-                <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
+                @{
+                    byte[] imageBytes3 = Model.Image3;
+                    string base64String3 = Convert.ToBase64String(imageBytes3);
+                    string imgSrc3 = string.Format("data:image/jpeg;base64,{0}", base64String3);
+                }
+                <img class="img-fluid" src="@imgSrc3" alt="Image @(3)" />
             </div>
             <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
-                @Model.Image4
-                <img src="img/img-01-big.jpg" alt="Image" class="img-fluid" />
+            @{
+                byte[] imageBytes4 = Model.Image4;
+                string? base64String4 = Convert.ToBase64String(imageBytes4);
+                string? imgSrc4 = string.Format("data:image/jpeg;base64,{0}", base64String4);
+            }
+            <img class="img-fluid" src="@imgSrc4" alt="Image @(4)" />
             </div>
+        </div>
         </div>
         <div class="col-xl-12 col-lg-5 col-md-6 col-sm-12">
             <div class="tm-bg-gray tm-video-details">

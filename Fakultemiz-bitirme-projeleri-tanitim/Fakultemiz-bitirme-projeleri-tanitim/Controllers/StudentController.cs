@@ -93,7 +93,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         
         public IActionResult ProjectStatus(int id)
         {
-            var values = _projectService.TGetByID(id + 5);
+            var values = _projectService.TGetByID(id+1);
             return View(values);
         }
 

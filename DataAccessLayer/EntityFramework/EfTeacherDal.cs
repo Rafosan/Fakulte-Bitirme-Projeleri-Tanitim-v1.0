@@ -10,8 +10,6 @@ using EntityLayer.Concrete;
 
 namespace DataAccessLayer.EntityFramework
 {
-    //bunları da bu şekilde eklemen lazım birde yine DI a ITeacherDal istenirse  EfTeacherDal
-    //ver gibisinden eklemen lazım diğerlerini de
     public class EfTeacherDal : GenericRepository<Teacher>, ITeacherDal
     {
         private readonly MyDbContext _context;

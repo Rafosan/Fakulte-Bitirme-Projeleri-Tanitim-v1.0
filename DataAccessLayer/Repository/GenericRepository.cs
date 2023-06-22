@@ -13,7 +13,6 @@ namespace DataAccessLayer.Repository
 {
     public class GenericRepository<T> : IGenericDal<T> where T : class
     {
-        //bunu bu şekilde kullanamazsın DI dan çözdürmen lazım
         private readonly MyDbContext _context;
         public GenericRepository(MyDbContext context)
         {

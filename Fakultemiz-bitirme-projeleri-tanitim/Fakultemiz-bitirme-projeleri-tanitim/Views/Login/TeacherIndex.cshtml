@@ -43,22 +43,24 @@
     <div class="card">
         <h5 class="header">Akademisyen Girişi</h5>
         <div class="card-body">
-            <form class="form">
+            <form class="form" method="post" action="@Url.Action("TeacherIndex", "Login")">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Kullanıcı Adı :</label>
                     <input class="form-control"
                            id="exampleInputEmail1"
                            aria-describedby="emailHelp"
-                           placeholder="" />
+                           placeholder=""
+                           name="username" />
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Şifre :</label>
                     <input type="password"
                            class="form-control"
                            id="exampleInputPassword1"
-                           placeholder="" />
+                           placeholder="" 
+                           name="password" />
                 </div>
-                <a href="@Url.Action("Index", "Teacher")" class="btn btn-primary">Giriş Yap</a>
+                <button type="submit" class="btn btn-primary">Giriş Yap</button>
             </form>
         </div>
     </div>

@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class Student:BaseEntiy
+    public class Student : BaseEntiy
     {
         public int DepartmentCode { get; set; }
+        public string? EMail { get; set; }
+        public string? Number { get; set; }
         public List<Project> Projects { get; set; }
     }
 }

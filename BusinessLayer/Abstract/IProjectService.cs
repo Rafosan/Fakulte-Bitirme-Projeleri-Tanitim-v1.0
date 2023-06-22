@@ -11,6 +11,8 @@ namespace BusinessLayer.Abstract
     public interface IProjectService:IGenericService<Project>
     {
         List<Project> TGetListWithExpressionStudentAndTeacher(int id);
-        
+        List<Project> TGetProjectsByTeacherId(int id);
+
+
     }
 }

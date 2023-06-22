@@ -11,5 +11,6 @@ namespace DataAccessLayer.Abstract
     public interface IProjectDal:IGenericDal<Project>
     {
         List<Project> GetListWithExpressionStudentAndTeacher(Expression<Func<Project, bool>> filter);
+        public List<Project> GetProjectsByTeacherId(int id);
     }
 }

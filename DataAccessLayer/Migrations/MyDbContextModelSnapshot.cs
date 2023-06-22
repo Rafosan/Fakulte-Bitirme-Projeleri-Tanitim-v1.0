@@ -85,6 +85,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -100,6 +103,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<byte[]>("Image4")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<int>("LikeCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -117,6 +123,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<int>("TeacherID")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ProjectID");
 
@@ -138,8 +147,14 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("DepartmentCode")
                         .HasColumnType("int");
 
+                    b.Property<string>("EMail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NameAndSurname")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")

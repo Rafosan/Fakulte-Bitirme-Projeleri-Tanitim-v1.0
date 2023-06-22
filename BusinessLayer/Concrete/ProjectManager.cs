@@ -46,5 +46,10 @@ namespace BusinessLayer.Concrete
         {
            return _projectDal.GetByID(id);
         }
+
+        public List<Project> TGetProjectsByTeacherId(int id)
+        {
+            return _projectDal.GetProjectsByTeacherId(id);
+        }
     }
 }
