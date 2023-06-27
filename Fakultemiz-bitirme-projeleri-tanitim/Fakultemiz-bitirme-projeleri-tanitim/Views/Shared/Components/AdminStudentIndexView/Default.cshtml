@@ -13,8 +13,7 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="block m-t-xs font-bold">Bilge Gökkaya</span>
-                                <span class="text-muted text-xs block">Admin</span>
+                                <span class="block m-t-xs font-bold">Admin Paneli</span>
                             </a>
                         </div>
                     </li>
@@ -65,11 +64,11 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li style="padding: 20px">
-                            <span class="m-r-sm text-muted welcome-message">ISUBÜ TEKNOLOJİ FAKÜLTESİ BİTİRME PROJELERİ ADMİN SAYFASI </span>
+                            <span class="m-r-sm text-muted welcome-message">ISUBÜ TEKNOLOJİ FAKÜLTESİ BİTİRME PROJELERİ TANITIM </span>
                         </li>
 
                         <li>
-                            <a href="login.html">
+                            <a href="@Url.Action("Index","Home")">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>
@@ -98,12 +97,8 @@
                                     <label class="col-sm-2 col-form-label">Öğrenci Bölüm : </label>
 
                                     <div class="col-sm-10">
-                                        @Html.DropDownListFor(x => x.DepartmentCode, new SelectList(new List<string>
-                                    {
-                                    "Bilgisayar Mühendisliği", "İnşaat Mühendisliği",
-                                    "Mekatronik Mühendisliği", "Elektrik Mühendisliği"
-                                    }), "Seçiniz", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(x=>x.DepartmentCode)
+                                        @Html.DropDownListFor(x => x.DepartmentCode, Enum.GetValues(typeof(DepartmentCode)).Cast<DepartmentCode>().Select(e => new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() }), "Seçiniz", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.DepartmentCode)
                                     </div>
                                 </div>
                                 <div class="form-group row">

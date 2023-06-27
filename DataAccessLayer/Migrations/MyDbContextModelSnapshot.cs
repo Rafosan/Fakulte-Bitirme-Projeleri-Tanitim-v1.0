@@ -47,7 +47,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Admins");
+                    b.ToTable("Admins", (string)null);
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
@@ -71,7 +71,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Categorys");
+                    b.ToTable("Categorys", (string)null);
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Project", b =>
@@ -93,15 +93,19 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Image1")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("Image2")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("Image3")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("Image4")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<int>("LikeCount")
@@ -133,7 +137,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("TeacherID");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Student", b =>
@@ -170,7 +174,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Teacher", b =>
@@ -201,7 +205,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teachers", (string)null);
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Project", b =>

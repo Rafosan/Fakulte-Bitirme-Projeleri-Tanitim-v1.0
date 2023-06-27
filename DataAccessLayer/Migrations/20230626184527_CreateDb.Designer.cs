@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230622140347_CreateDb")]
+    [Migration("20230626184527_CreateDb")]
     partial class CreateDb
     {
         /// <inheritdoc />
@@ -96,15 +96,19 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Image1")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("Image2")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("Image3")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("Image4")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<int>("LikeCount")

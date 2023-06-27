@@ -37,6 +37,11 @@ namespace BusinessLayer.Concrete
             return _teacherDal.GetByID(id);
         }
 
+        public List<Project> TProjectListByTeacher(int id)
+        {
+            return _teacherDal.ProjectListByTeacher(id);
+        }
+
         public Teacher TTeacherLoginCheck(string username, string password)
         {
             return _teacherDal.TeacherLoginCheck(username, password);

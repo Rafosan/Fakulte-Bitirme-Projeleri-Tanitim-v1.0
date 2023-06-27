@@ -27,35 +27,33 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         [HttpPost]
         public IActionResult Index(Project paramatre,int id,List<IFormFile> Image1, List<IFormFile> Image2, List<IFormFile> Image3, List<IFormFile> Image4)
         {
-            ProjectValidator validator = new ProjectValidator();
-            ValidationResult validationResult = validator.Validate(paramatre);
-            if (validationResult.IsValid)
-            { 
-                List<List<IFormFile>> imageLists = new List<List<IFormFile>> { Image1, Image2, Image3, Image4 };
-                List<byte[]> fileDataList = new List<byte[]>();
-                foreach (var imageList in imageLists)
+            List<List<IFormFile>> imageLists = new List<List<IFormFile>> { Image1, Image2, Image3, Image4 };
+            List<byte[]> fileDataList = new List<byte[]>();
+            foreach (var imageList in imageLists)
+            {
+                var file = imageList.FirstOrDefault(f => f.Length > 0);
+                if (file != null)
                 {
-                    var file = imageList.FirstOrDefault(f => f.Length > 0);
-                    if (file != null)
+                    using (var ms = new MemoryStream())
                     {
-                        using (var ms = new MemoryStream())
-                        {
-                            file.CopyTo(ms);
-                            fileDataList.Add(ms.ToArray());
-                        }
+                        file.CopyTo(ms);
+                        fileDataList.Add(ms.ToArray());
                     }
                 }
-                paramatre.Image1 = fileDataList.ElementAtOrDefault(0);
-                paramatre.Image2 = fileDataList.ElementAtOrDefault(1);
-                paramatre.Image3 = fileDataList.ElementAtOrDefault(2);
-                paramatre.Image4 = fileDataList.ElementAtOrDefault(3);
-
+            }
+            paramatre.Image1 = fileDataList.ElementAtOrDefault(0);
+            paramatre.Image2 = fileDataList.ElementAtOrDefault(1);
+            paramatre.Image3 = fileDataList.ElementAtOrDefault(2);
+            paramatre.Image4 = fileDataList.ElementAtOrDefault(3);
+            ProjectValidator validator = new ProjectValidator();
+            ValidationResult validationResult = validator.Validate(paramatre);
+            
+            if (validationResult.IsValid)
+            { 
+                paramatre.Student = _studentService.TGetByID(id);
+                paramatre.Teacher = _teacherService.TGetByID(id);
                 paramatre.CreationTime = DateTime.Now;
                 paramatre.Status = true;
-                var values = _studentService.TGetByID(id + 1);
-                var values2 = _teacherService.TGetByID(id + 1);
-                paramatre.Student = values;
-                paramatre.Teacher = values2;
                 _projectService.TAdd(paramatre);
                 return RedirectToAction("Index", "Student");
             }
@@ -81,10 +79,10 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             ValidationResult validationResult = validator.Validate(paramatre);
             if (validationResult.IsValid)
             {
-                var values=_studentService.TGetByID(id + 1);
-                var values2 = _teacherService.TGetByID(1);
-                paramatre.Student=values;
-                paramatre.Teacher=values2;
+                paramatre.Student = _studentService.TGetByID(id + 1);
+                paramatre.Teacher = _teacherService.TGetByID(1);
+                paramatre.UpdateTime = DateTime.Now;
+                paramatre.Status = false;
                 _projectService.TUpdate(paramatre);
                 return RedirectToAction("ProjectUpdate", "Student");
             }

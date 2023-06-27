@@ -12,14 +12,15 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _teacherService = teacherService;
             _projectService = projectService;
         }
+        
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            var values=_projectService.TGetAll();
+            var values = _projectService.TGetProjectsByTeacherId(id);
             return View(values);
         }
         [HttpPost]
-        public IActionResult Index(int id)
+        public IActionResult Index(int id,int id2)
         {
             var values = _projectService.TGetByID(id);
             values.Status = !values.Status;

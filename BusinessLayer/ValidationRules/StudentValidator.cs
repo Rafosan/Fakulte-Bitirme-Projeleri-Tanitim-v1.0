@@ -14,6 +14,7 @@ namespace BusinessLayer.ValidationRules
         {
             RuleFor(x => x.NameAndSurname).NotEmpty().WithMessage("Öğrenci adı boş olamaz");
             RuleFor(x => x.NameAndSurname).MinimumLength(2).MaximumLength(50).WithMessage("Öğrenci adı 2-50 karakter aralığında olmalıdır");
+            RuleFor(x => x.DepartmentCode).NotEmpty().WithMessage("Öğrenci bölümü boş olamaz");
             RuleFor(x => x.UserName).NotEmpty().WithMessage("Öğrenci kullanıcı adı boş olamaz");
             RuleFor(x => x.Password).NotEmpty().WithMessage("Öğrenci adı boş olamaz");
         }

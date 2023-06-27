@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
     public interface ITeacherDal:IGenericDal<Teacher>
     {
         Teacher TeacherLoginCheck (string username, string password);
+        List<Project> ProjectListByTeacher(int id);
     }
 }

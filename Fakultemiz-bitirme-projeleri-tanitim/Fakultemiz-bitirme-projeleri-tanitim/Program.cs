@@ -52,7 +52,6 @@ builder.Services.AddSession();//Ben yazdým session için
 //        options.LoginPath = "/Login/Index";
 //    });
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -67,6 +66,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseSession();//Session kullanmak için
+//app.UseAuthentication();
 
 app.UseRouting();
 app.UseAuthorization();

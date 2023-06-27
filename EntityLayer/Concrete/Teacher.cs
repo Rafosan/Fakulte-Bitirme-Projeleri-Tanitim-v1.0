@@ -10,7 +10,14 @@ namespace EntityLayer.Concrete
 {
     public class Teacher:BaseEntiy
     {
-        public int MajorScienceCode { get; set; }
+        public MajorScienceCode MajorScienceCode { get; set; }
         public List<Project> Projects { get; set; }
     }
+    public enum MajorScienceCode
+    {
+        DonanimAnaBilimDali = 100,
+        YazilimAnaBilimDali = 101,
+        MekanikAnaBilimDali = 102
+    }
+
 }

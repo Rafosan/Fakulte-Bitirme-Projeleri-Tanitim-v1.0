@@ -31,7 +31,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             ValidationResult validationResult = validator.Validate(parametre);
             if (validationResult.IsValid)
             {
-                parametre.MajorScienceCode = 1000;
                 parametre.Status = true;
                 _teacherService.TAdd(parametre);
                 return RedirectToAction("Index", "Admin");
@@ -82,7 +81,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             if (validationResult.IsValid)
             {
                 parametre.Status = true;
-                parametre.DepartmentCode = 100;
                 _studentService.TAdd(parametre);
                 return RedirectToAction("StudentIndex", "Admin");
             }
