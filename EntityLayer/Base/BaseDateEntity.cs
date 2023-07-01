@@ -11,6 +11,5 @@ namespace EntityLayer.Base
         public DateTime CreationTime { get; set; }
         public DateTime? DeleteTime { get; set; }
         public DateTime? UpdateTime { get; set; }
-        public int LikeCount { get; set; }
     }
 }

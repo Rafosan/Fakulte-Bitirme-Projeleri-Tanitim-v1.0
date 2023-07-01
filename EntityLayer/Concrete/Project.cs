@@ -19,6 +19,7 @@ namespace EntityLayer.Concrete
         public byte[] Image4 { get; set; }
         public string Subject { get; set; }
         public string Description { get; set; }
+        public int LikeCount { get; set; }
         public bool Status { get; set; }//
         public Student Student { get; set; }
         public Teacher Teacher { get; set;}

@@ -91,13 +91,13 @@ namespace DataAccessLayer.Migrations
                     Image4 = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LikeCount = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     StudentID = table.Column<int>(type: "int", nullable: false),
                     TeacherID = table.Column<int>(type: "int", nullable: false),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LikeCount = table.Column<int>(type: "int", nullable: false)
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {

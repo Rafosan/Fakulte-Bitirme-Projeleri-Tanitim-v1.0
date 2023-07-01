@@ -17,14 +17,10 @@ namespace DataAccessLayer.EntityFramework
         {
             _context = context;
         }
-
-        
-
         public Teacher TeacherLoginCheck(string username, string password)
         {
             return _context.Teachers.SingleOrDefault(x => x.UserName == username && x.Password == password);
         }
-
         List<Project> ITeacherDal.ProjectListByTeacher(int id)
         {
             return _context.Teachers

@@ -13,8 +13,7 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="block m-t-xs font-bold">Bilge Gökkaya</span>
-                                <span class="text-muted text-xs block">Öğrenci</span>
+                                <span class="block m-t-xs font-bold">Öğrenci Paneli</span>
                             </a>
                         </div>
                     </li>
@@ -30,6 +29,7 @@
                             </li>
                             <li><a href="@Url.Action("ProjectUpdate","Student")">Proje Güncelleme</a></li>
                             <li><a href="@Url.Action("ProjectStatus","Student")">Proje Durumu</a></li>
+                            <li><a href="@Url.Action("Information","Student")">Bilgi Ekleme</a></li>
 
                         </ul>
                     </li>
@@ -38,28 +38,7 @@
         </nav>
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top"
-                     role="navigation"
-                     style="margin-bottom: 0">
-                    <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#">
-                            <i class="fa fa-bars"></i>
-                        </a>
-                    </div>
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li style="padding: 20px">
-                            <span class="m-r-sm text-muted welcome-message">ISUBÜ TEKNOLOJİ FAKÜLTESİ BİTİRME PROJELERİ ÖĞRENCİ SAYFASI </span>
-                        </li>
-
-                        <li>
-                            <a href="@Url.Action("Index","Home")">
-                                <i class="fa fa-sign-out"></i> Log out
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            @await Html.PartialAsync("~/Views/Shared/Partial/PanelNavbarPartial.cshtml")
 
             <div class="row">
                 <div class="col-lg-12">
@@ -78,11 +57,11 @@
                                         @Html.ValidationMessageFor(x=>x.Name)
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">
-                                        Projeyi yapan kişilerin adı soyadı :
+                                        Projeyi yapan kişilerin adları:
                                     </label>
-
                                     <div class="col-sm-10">
                                         @Html.TextBoxFor(x=>x.Student.NameAndSurname,new { @class = "form-control",placeholder = "Aralarına virgül koyarak yazın"})
                                         @Html.ValidationMessageFor(x=>x.Student.NameAndSurname)

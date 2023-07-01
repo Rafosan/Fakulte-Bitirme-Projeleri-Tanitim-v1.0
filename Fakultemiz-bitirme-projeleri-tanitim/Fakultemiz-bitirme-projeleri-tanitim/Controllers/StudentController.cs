@@ -50,8 +50,8 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             
             if (validationResult.IsValid)
             { 
-                paramatre.Student = _studentService.TGetByID(id);
-                paramatre.Teacher = _teacherService.TGetByID(id);
+                paramatre.Student = _studentService.TGetByID(id+1);
+                paramatre.Teacher = _teacherService.TGetByID(id+1);
                 paramatre.CreationTime = DateTime.Now;
                 paramatre.Status = true;
                 _projectService.TAdd(paramatre);
@@ -94,6 +94,12 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             var values = _projectService.TGetByID(id+1);
             return View(values);
         }
+
+        public IActionResult Information()
+        { 
+            return View(); 
+        }
+
 
     }
 }

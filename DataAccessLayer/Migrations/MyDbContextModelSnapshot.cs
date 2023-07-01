@@ -47,7 +47,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Admins", (string)null);
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
@@ -71,7 +71,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Categorys", (string)null);
+                    b.ToTable("Categorys");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Project", b =>
@@ -137,7 +137,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("TeacherID");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Student", b =>
@@ -174,7 +174,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Teacher", b =>
@@ -205,7 +205,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Teachers", (string)null);
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Project", b =>

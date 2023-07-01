@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230626184527_CreateDb")]
+    [Migration("20230701061431_CreateDb")]
     partial class CreateDb
     {
         /// <inheritdoc />

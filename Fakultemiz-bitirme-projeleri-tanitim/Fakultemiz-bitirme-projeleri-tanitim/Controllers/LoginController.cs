@@ -18,10 +18,27 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _teacherService = teacherService;
             _studentService = studentService;
         }
+        [HttpGet]
         public IActionResult StudentIndex()
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult StudentIndex(Student parametre, string username, string password)
+        {
+            var datavalue = _studentService.TStudentLoginCheck(parametre.UserName, parametre.Password);
+
+            if (datavalue != null)
+            {
+                HttpContext.Session.SetString("username", parametre.UserName);
+                return RedirectToAction("Index", "Student");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
 
         [HttpGet]
         public IActionResult TeacherIndex()
