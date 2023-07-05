@@ -1,12 +1,13 @@
 ﻿using BusinessLayer.Abstract;
-using EntityLayer.Concrete;
+using Fakultemiz_bitirme_projeleri_tanitim.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata;
+using System.Security.Claims;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
-    //[AllowAnonymous]
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly IAdminService _adminService;
@@ -19,67 +20,54 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _studentService = studentService;
         }
         [HttpGet]
-        public IActionResult StudentIndex()
+        public IActionResult Index()
         {
+            return View(new LoginViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(LoginViewModel model, string selectedRole)
+        {
+            if (selectedRole == "Admin")
+            {
+                var datavalue = _adminService.TAdminLoginCheck(model.UserName, model.Password);
+                if (datavalue != null)
+                {
+                    await SignInAsync(datavalue.UserName);
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            else if (selectedRole == "Teacher")
+            {
+                var datavalue = _teacherService.TTeacherLoginCheck(model.UserName, model.Password);
+                if (datavalue != null)
+                {
+                    await SignInAsync(datavalue.UserName);
+                    return RedirectToAction("Index", "Teacher");
+                }
+            }
+            else if (selectedRole == "Student")
+            {
+                var datavalue = _studentService.TStudentLoginCheck(model.UserName, model.Password);
+                if (datavalue != null)
+                {
+                    await SignInAsync(datavalue.UserName);
+                    return RedirectToAction("Index", "Student");
+                }
+            }
+
+            ModelState.AddModelError(string.Empty, "Invalid username or password.");
             return View();
         }
-        [HttpPost]
-        public IActionResult StudentIndex(Student parametre, string username, string password)
+
+        private async Task SignInAsync(string userName)
         {
-            var datavalue = _studentService.TStudentLoginCheck(parametre.UserName, parametre.Password);
-
-            if (datavalue != null)
-            {
-                HttpContext.Session.SetString("username", parametre.UserName);
-                return RedirectToAction("Index", "Student");
-            }
-            else
-            {
-                return View();
-            }
-        }
-
-
-        [HttpGet]
-        public IActionResult TeacherIndex()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult TeacherIndex(Teacher parametre ,string username,string password)
-        {
-            var datavalue = _teacherService.TTeacherLoginCheck(parametre.UserName, parametre.Password);
-
-            if (datavalue != null)
-            {
-                HttpContext.Session.SetString("username", parametre.UserName);
-                return RedirectToAction("Index", "Teacher");
-            }
-            else
-            {
-                return View();
-            }
-        }
-
-        [HttpGet]
-        public IActionResult AdminIndex()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult AdminIndex(Admin parametre,string username, string password)
-        {
-            var datavalue = _adminService.TAdminLoginCheck(parametre.UserName, parametre.Password);
-
-            if (datavalue != null)
-            {
-                HttpContext.Session.SetString("username", parametre.UserName);
-                return RedirectToAction("Index", "Admin");
-            }
-            else
-            {
-                return View();
-            }
+            var claims = new List<Claim>{
+                new Claim(ClaimTypes.Name, userName)
+                };
+            var userIdentity = new ClaimsIdentity(claims, "c");
+            ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+            await HttpContext.SignInAsync(principal);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
 <html lang="en">
 <body style="background-color: #69f0ae">
     <!-- Page Loader -->
@@ -38,36 +41,37 @@
     </nav>
 
     <div class="card">
-        <h5 class="header">Admin ve Akademisyen Girişi</h5>
+        <h5 class="header">Giriş Sayfası</h5>
         <div class="card-body">
-            <form class="form">
+            <form class="form" method="post" action="@Url.Action("Index", "Login")">
+                <div class="form-group">
+                    <label>Select Role:</label><br />
+                    <input type="radio" name="SelectedRole" value="Admin" /> Admin<br />
+                    <input type="radio" name="SelectedRole" value="Teacher" /> Teacher<br />
+                    <input type="radio" name="SelectedRole" value="Student" /> Student<br />
+                </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Kullanıcı Adı :</label>
                     <input class="form-control"
+                           type="text"
                            id="exampleInputEmail1"
                            aria-describedby="emailHelp"
-                           placeholder="" />
+                           placeholder=""
+                           name="username" />
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Şifre :</label>
                     <input type="password"
                            class="form-control"
                            id="exampleInputPassword1"
-                           placeholder="" />
+                           placeholder=""
+                           name="password" />
                 </div>
-                <a href="@Url.Action("Index", "Admin")" class="btn btn-primary">Giriş Yap</a>
+                <button type="submit" class="btn btn-primary">Giriş Yap</button>
             </form>
         </div>
     </div>
-
     @await Html.PartialAsync("~/Views/Shared/Partial/FooterPartial.cshtml")
-
-    <script src="~/Ana-Sayfa-Template/js/plugins.js"></script>
-    <script>
-        $(window).on("load", function () {
-            $("body").addClass("loaded");
-        });
-    </script>
 </body>
 </html>
 

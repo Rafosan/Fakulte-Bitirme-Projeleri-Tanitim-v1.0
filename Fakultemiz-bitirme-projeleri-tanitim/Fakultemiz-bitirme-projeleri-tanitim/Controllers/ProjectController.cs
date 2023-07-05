@@ -1,9 +1,11 @@
 ﻿using BusinessLayer.Abstract;
 using Fakultemiz_bitirme_projeleri_tanitim.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
+    [AllowAnonymous]
     public class ProjectController : Controller
     {
         private readonly IProjectService _projectService;
@@ -18,12 +20,5 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             var values = _projectService.TGetListWithExpressionStudentAndTeacher(id).FirstOrDefault();
             return View(values);
         }
-
-        //[HttpPost]
-        //public IActionResult ToggleLike()
-        //{
-        //    _projectService.TGetLikeCount();
-        //    return RedirectToAction("Index","Project");
-        //}
     }
 }

@@ -2,11 +2,13 @@
 using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Packaging.Signing;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
+    [Authorize(AuthenticationSchemes = "LoginScheme")]
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
@@ -22,6 +24,8 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            var username = User.Identity.Name;
+            ViewBag.Username = username;
             return View();
         }
         [HttpPost]

@@ -34,16 +34,7 @@
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link nav-link-1 btn btn-primary"
-                           aria-current="page"
-                           href="@Url.Action("StudentIndex","Login")">Öğrenci Girişi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-1 btn btn-primary"
-                           href="@Url.Action("TeacherIndex","Login")">Akademisyen Girişi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-1 btn btn-primary"
-                           href="@Url.Action("AdminIndex","Login")">Admin Girişi</a>
+                           href="@Url.Action("Index","Login")">Giriş Yapma Sayfası</a>
                     </li>
                 </ul>
             </div>
@@ -72,7 +63,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach (var item in Model.Kategoriler)
                                 {
-                                    if (item.Type == "Yıl")
+                                    if (item.Type==Category.Types.Yıl)
                                     {
                                         <a class="dropdown-item" href="#">@item.Value</a>
                                     }
@@ -93,7 +84,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach (var item in Model.Kategoriler)
                                 {
-                                    if (item.Type == "Bölüm")
+                                    if (item.Type == Category.Types.Bölüm)
                                     {
                                         <a class="dropdown-item" href="#">@item.Value</a>
                                     }
@@ -114,7 +105,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach (var item in Model.Kategoriler)
                                 {
-                                    if (item.Type == "Danışman")
+                                    if (item.Type == Category.Types.Danışman)
                                     {
                                         <a class="dropdown-item" href="#">@item.Value</a>
                                     }

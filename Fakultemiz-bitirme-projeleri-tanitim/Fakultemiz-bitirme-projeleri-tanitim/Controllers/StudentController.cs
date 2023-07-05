@@ -3,11 +3,13 @@ using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
 using Fakultemiz_bitirme_projeleri_tanitim.Models;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
+    [Authorize(AuthenticationSchemes = "LoginScheme")]
     public class StudentController : Controller
     {
         private readonly IStudentService _studentService;
@@ -22,6 +24,8 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            var username = User.Identity.Name;
+            ViewBag.Username = username;
             return View();
         }
         [HttpPost]
@@ -53,7 +57,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                 paramatre.Student = _studentService.TGetByID(id+1);
                 paramatre.Teacher = _teacherService.TGetByID(id+1);
                 paramatre.CreationTime = DateTime.Now;
-                paramatre.Status = true;
+                paramatre.Status = false;
                 _projectService.TAdd(paramatre);
                 return RedirectToAction("Index", "Student");
             }
@@ -97,7 +101,8 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 
         public IActionResult Information()
         { 
-            return View(); 
+            var values=_studentService.TGetAll();
+            return View(values); 
         }
 
 

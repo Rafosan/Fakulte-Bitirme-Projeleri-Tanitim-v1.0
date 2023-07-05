@@ -33,7 +33,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <button class="btn btn-primary" id="project-heart-button">Projeyi Beğen</button>
+                        <button onclick="@Url.Action("ToggleLike","Project")" class="btn btn-primary" id="project-heart-button">Projeyi Beğen</button>
                     </li>
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Ana Sayfa</a>

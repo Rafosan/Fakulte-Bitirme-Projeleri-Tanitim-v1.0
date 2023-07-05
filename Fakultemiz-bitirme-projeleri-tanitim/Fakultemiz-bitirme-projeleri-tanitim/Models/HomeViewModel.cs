@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concrete;
+﻿
+using EntityLayer.Concrete;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Models
 {

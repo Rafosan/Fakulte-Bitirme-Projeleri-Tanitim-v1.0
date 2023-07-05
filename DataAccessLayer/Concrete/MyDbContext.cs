@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Concrete
 {
-    public class MyDbContext: DbContext
+    public class MyDbContext : DbContext
     {
         public MyDbContext(DbContextOptions<MyDbContext> options)
         : base(options)
-        {}
+        { }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }

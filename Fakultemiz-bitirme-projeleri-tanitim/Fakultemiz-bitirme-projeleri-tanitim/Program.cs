@@ -4,17 +4,14 @@ using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using DataAccessLayer.Repository;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("MyDbConnection");
-builder.Services.AddDbContext<MyDbContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<MyDbContext>(options =>options.UseSqlServer(connectionString));
 //burada da servislere eklemen lazým repositoryi
 builder.Services.AddScoped(typeof(IGenericDal<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<EfStudentDal>();
@@ -33,10 +30,7 @@ builder.Services.AddScoped<EfCategoryDal>();
 builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
-builder.Services.AddControllersWithViews();
-
-builder.Services.AddSession();//Ben yazdým session için
-
+//builder.Services.AddSession();//Ben yazdým session için
 //builder.Services.AddMvc(config =>
 //{
 //    var policy = new AuthorizationPolicyBuilder()
@@ -45,13 +39,31 @@ builder.Services.AddSession();//Ben yazdým session için
 //    config.Filters.Add(new AuthorizeFilter(policy));
 //});
 
-//builder.Services.AddMvc();
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//    .AddCookie(options =>
-//    {
-//        options.LoginPath = "/Login/Index";
-//    });
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+    options.SlidingExpiration = true;
+});
+builder.Services.AddAuthorization(options =>
+{
+    options.DefaultPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "LoginScheme";
+    options.DefaultChallengeScheme = "LoginScheme";
+    options.DefaultSignInScheme = "LoginScheme";
+})
+.AddCookie("LoginScheme", options =>
+{
+    options.LoginPath = "/Login/Index";
+});
+
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -65,11 +77,14 @@ app.UseStatusCodePages();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseSession();//Session kullanmak için
-//app.UseAuthentication();
-
 app.UseRouting();
+//app.UseSession();//Session kullanmak için
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapDefaultControllerRoute();
+});
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

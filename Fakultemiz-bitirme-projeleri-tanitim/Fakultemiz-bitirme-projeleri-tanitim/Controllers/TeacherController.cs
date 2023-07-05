@@ -1,18 +1,22 @@
 ﻿using BusinessLayer.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
+    [Authorize(AuthenticationSchemes = "LoginScheme")]
     public class TeacherController : Controller
     {
         private readonly ITeacherService _teacherService;
         private readonly IProjectService _projectService;
-        public TeacherController(ITeacherService teacherService, IProjectService projectService)
+        private readonly IStudentService _studentService;
+        public TeacherController(ITeacherService teacherService, IProjectService projectService, IStudentService studentService)
         {
             _teacherService = teacherService;
             _projectService = projectService;
+            _studentService = studentService;
         }
-        
+
         [HttpGet]
         public IActionResult Index(int id)
         {
@@ -45,6 +49,11 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult ProjectDelete()
         {
             return View();
+        }
+        public IActionResult StudentInformation()
+        {
+            var values=_studentService.TGetAll();
+            return View(values);
         }
 
     }

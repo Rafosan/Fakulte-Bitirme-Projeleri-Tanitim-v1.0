@@ -11,8 +11,15 @@ namespace EntityLayer.Concrete
     {
         [Key]
         public int ID { get; set; }
-        public string Type { get; set; }
+        public Types Type { get; set; }
         public string Value { get; set; }
         public bool Status { get; set; }
+
+        public enum Types
+        {
+            Yıl=1,
+            Bölüm=2,
+            Danışman=3
+        }
     }
 }
