@@ -30,6 +30,12 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<DateTime?>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NameAndSurname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -40,6 +46,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -58,11 +67,20 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<DateTime?>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Value")
                         .IsRequired()
@@ -81,7 +99,7 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectID"));
 
-                    b.Property<DateTime>("CreationTime")
+                    b.Property<DateTime?>("CreationTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeleteTime")
@@ -147,6 +165,12 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<DateTime?>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DepartmentCode")
                         .HasColumnType("int");
 
@@ -167,6 +191,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -184,6 +211,12 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<DateTime?>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("MajorScienceCode")
                         .HasColumnType("int");
 
@@ -197,6 +230,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
                         .IsRequired()

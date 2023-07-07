@@ -61,11 +61,11 @@
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">
-                                        Projeyi yapan kişilerin adları:
+                                        Projeyi yapanların adları:
                                     </label>
                                     <div class="col-sm-10">
-                                        @Html.TextBoxFor(x=>x.Student.NameAndSurname,new { @class = "form-control",placeholder = "Aralarına virgül koyarak yazın"})
-                                        @Html.ValidationMessageFor(x=>x.Student.NameAndSurname)
+                                        @Html.TextBoxFor(x=>x.Student,new { @class = "form-control",placeholder = "Aralarına virgül koyarak yazın"})
+                                        @Html.ValidationMessageFor(x=>x.Student)
                                     </div>
                                 </div>
                                 
@@ -95,11 +95,8 @@
                                     <label class="col-sm-2 col-form-label">Akademik Danışman :</label>
 
                                     <div class="col-sm-10">
-                                        @Html.DropDownListFor(x => x.Teacher.NameAndSurname, new SelectList(new List<string>
-                                    {
-                                    "Tuncay Aydoğan", "Serdar Paçacı", "Burhan Duman"
-                                    }), "Seçiniz", new { @class = "form-control " })
-                                        @Html.ValidationMessageFor(x=>x.Teacher.NameAndSurname)
+                                        @*@Html.DropDownListFor(x => x.Teacher.NameAndSurname, new SelectList(ViewBag.TeacherList, "Value", "Text"), "Seçiniz", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.Teacher.NameAndSurname)*@
                                     </div>
                                 </div>
 

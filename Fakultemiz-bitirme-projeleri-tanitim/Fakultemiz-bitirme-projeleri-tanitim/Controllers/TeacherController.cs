@@ -1,10 +1,12 @@
 ﻿using BusinessLayer.Abstract;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.Login;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
     [Authorize(AuthenticationSchemes = "LoginScheme")]
+    [Authorize(Roles = Roles.Teacher)]
     public class TeacherController : Controller
     {
         private readonly ITeacherService _teacherService;

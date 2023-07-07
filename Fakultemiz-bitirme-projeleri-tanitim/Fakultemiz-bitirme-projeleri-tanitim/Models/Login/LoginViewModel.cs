@@ -1,7 +1,6 @@
-﻿using EntityLayer.Concrete;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Fakultemiz_bitirme_projeleri_tanitim.Models
+namespace Fakultemiz_bitirme_projeleri_tanitim.Models.Login
 {
     public class LoginViewModel
     {

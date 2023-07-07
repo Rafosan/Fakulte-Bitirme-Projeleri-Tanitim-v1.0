@@ -25,5 +25,6 @@ namespace EntityLayer.Concrete
         İnşaatMühendisliği = 14,
         MekatronikMühendisliği = 15,
         TemelBilimler=16,
+        Diğer=17,
     }
 }

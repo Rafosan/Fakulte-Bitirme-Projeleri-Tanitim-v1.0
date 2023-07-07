@@ -17,6 +17,9 @@ namespace DataAccessLayer.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NameAndSurname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -35,7 +38,10 @@ namespace DataAccessLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<int>(type: "int", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false)
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,6 +57,9 @@ namespace DataAccessLayer.Migrations
                     DepartmentCode = table.Column<int>(type: "int", nullable: false),
                     EMail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Number = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NameAndSurname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -68,6 +77,9 @@ namespace DataAccessLayer.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MajorScienceCode = table.Column<int>(type: "int", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NameAndSurname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -95,7 +107,7 @@ namespace DataAccessLayer.Migrations
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     StudentID = table.Column<int>(type: "int", nullable: false),
                     TeacherID = table.Column<int>(type: "int", nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },

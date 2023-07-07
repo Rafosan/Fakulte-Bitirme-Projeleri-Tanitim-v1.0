@@ -1,15 +1,17 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
-using Fakultemiz_bitirme_projeleri_tanitim.Models;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.Login;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.Student;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
     [Authorize(AuthenticationSchemes = "LoginScheme")]
+    [Authorize(Roles = Roles.Student)]
     public class StudentController : Controller
     {
         private readonly IStudentService _studentService;
@@ -24,12 +26,10 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var username = User.Identity.Name;
-            ViewBag.Username = username;
             return View();
         }
         [HttpPost]
-        public IActionResult Index(Project paramatre,int id,List<IFormFile> Image1, List<IFormFile> Image2, List<IFormFile> Image3, List<IFormFile> Image4)
+        public IActionResult Index(Project paramatre, int teacherId,List<IFormFile> Image1, List<IFormFile> Image2, List<IFormFile> Image3, List<IFormFile> Image4)
         {
             List<List<IFormFile>> imageLists = new List<List<IFormFile>> { Image1, Image2, Image3, Image4 };
             List<byte[]> fileDataList = new List<byte[]>();
@@ -51,11 +51,11 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             paramatre.Image4 = fileDataList.ElementAtOrDefault(3);
             ProjectValidator validator = new ProjectValidator();
             ValidationResult validationResult = validator.Validate(paramatre);
-            
+            var studentId = int.Parse(TempData["studentId"].ToString());
             if (validationResult.IsValid)
-            { 
-                paramatre.Student = _studentService.TGetByID(id+1);
-                paramatre.Teacher = _teacherService.TGetByID(id+1);
+            {
+                paramatre.Student = _studentService.TGetByID(studentId);
+                paramatre.Teacher = _teacherService.TGetByID(teacherId);
                 paramatre.CreationTime = DateTime.Now;
                 paramatre.Status = false;
                 _projectService.TAdd(paramatre);
@@ -70,6 +70,8 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             }
             return View();
         }
+
+
         [HttpGet]
         public IActionResult ProjectUpdate(int id)
         {
@@ -104,6 +106,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             var values=_studentService.TGetAll();
             return View(values); 
         }
+
 
 
     }

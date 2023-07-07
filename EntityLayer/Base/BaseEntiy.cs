@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Base
 {
-    public abstract class BaseEntiy
+    public abstract class BaseEntiy:BaseDateEntity
     {
         [Key]
         public int ID { get; set; }

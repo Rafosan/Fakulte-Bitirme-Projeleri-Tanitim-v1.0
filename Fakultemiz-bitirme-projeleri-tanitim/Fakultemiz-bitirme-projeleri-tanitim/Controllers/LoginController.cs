@@ -4,6 +4,11 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using EntityLayer.Concrete;
+using System.Data;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.Login;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
@@ -19,6 +24,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _teacherService = teacherService;
             _studentService = studentService;
         }
+        private int _userId;
         [HttpGet]
         public IActionResult Index()
         {
@@ -28,30 +34,34 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel model, string selectedRole)
         {
-            if (selectedRole == "Admin")
+            if (selectedRole == Roles.Admin)
             {
                 var datavalue = _adminService.TAdminLoginCheck(model.UserName, model.Password);
                 if (datavalue != null)
                 {
-                    await SignInAsync(datavalue.UserName);
-                    return RedirectToAction("Index", "Admin");
+                    _userId = datavalue.ID;
+                    await SignInAsync(datavalue.UserName, Roles.Admin);
+                    return RedirectToAction("Index", "Admin", new { adminId = _userId });
                 }
             }
-            else if (selectedRole == "Teacher")
+            else if (selectedRole == Roles.Teacher)
             {
                 var datavalue = _teacherService.TTeacherLoginCheck(model.UserName, model.Password);
                 if (datavalue != null)
                 {
-                    await SignInAsync(datavalue.UserName);
-                    return RedirectToAction("Index", "Teacher");
+                    _userId = datavalue.ID;
+                    await SignInAsync(datavalue.UserName, Roles.Teacher);
+                    return RedirectToAction("Index", "Teacher", new { teacherId = _userId });
                 }
             }
-            else if (selectedRole == "Student")
+            else if (selectedRole == Roles.Student)
             {
                 var datavalue = _studentService.TStudentLoginCheck(model.UserName, model.Password);
                 if (datavalue != null)
                 {
-                    await SignInAsync(datavalue.UserName);
+                    _userId = datavalue.ID;
+                    await SignInAsync(datavalue.UserName, Roles.Student);
+                    TempData["studentId"] = _userId;
                     return RedirectToAction("Index", "Student");
                 }
             }
@@ -60,12 +70,13 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             return View();
         }
 
-        private async Task SignInAsync(string userName)
+        private async Task SignInAsync(string userName, string role)
         {
             var claims = new List<Claim>{
-                new Claim(ClaimTypes.Name, userName)
+                new Claim(ClaimTypes.Name, userName),
+                new Claim(ClaimTypes.Role, role)
                 };
-            var userIdentity = new ClaimsIdentity(claims, "c");
+            var userIdentity = new ClaimsIdentity(claims, "b");
             ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
             await HttpContext.SignInAsync(principal);
         }

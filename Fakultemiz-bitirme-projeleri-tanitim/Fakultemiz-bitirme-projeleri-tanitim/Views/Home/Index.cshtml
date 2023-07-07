@@ -3,6 +3,10 @@
 }
 @using EntityLayer.Concrete
 @model HomeViewModel
+@using Fakultemiz_bitirme_projeleri_tanitim.Models.Home;
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -145,7 +149,7 @@
             </div>
         </div>
         <div class="row tm-mb-90 tm-gallery">
-            @foreach (var item in Model.Projeler)
+            @*@foreach (var item in Model.Projeler)
             {
                 @if (item.Status == true)
                 {
@@ -164,7 +168,7 @@
                         </figure>
                         <div class="d-flex justify-content-between tm-text-gray">
                             <h6 class="tm-text-gray-light">@item.Name</h6>
-                            <h6>@item.CreationTime.ToString("Y")</h6>
+                            <h6>@item.CreationTime?.ToString("Y")</h6>
                         </div>
                         <p class="tm-pt-30">
                             @{
@@ -184,7 +188,10 @@
 
                 </div>
                 }
-            }
+            }*@
+            @Html.PagedListPager(Model.Projeler, page => Url.Action("Index", new { page }),
+            new PagedListRenderOptions { LiElementClasses = new[] { "page-item" }, PageClasses = new[] { "page-link" } })
+
         </div>
         @await Html.PartialAsync("~/Views/Shared/Partial/PagingPartial.cshtml")
     </div>

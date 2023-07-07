@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
 using BusinessLayer.Abstract;
-using EntityLayer.Concrete;
 using Fakultemiz_bitirme_projeleri_tanitim.Models;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.Home;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
@@ -23,9 +24,11 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _projectService = projectService;
             _categoryService = categoryService;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            var values = _projectService.TGetAll();
+            int pageNumber = page ?? 1; 
+            int pageSize = 16;
+            var values = _projectService.TGetAll().ToPagedList(pageNumber, pageSize);
             var values2 = _categoryService.TGetAll();
             var model = new HomeViewModel()
             {

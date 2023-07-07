@@ -8,7 +8,7 @@ namespace EntityLayer.Base
 {
     public abstract class BaseDateEntity
     {
-        public DateTime CreationTime { get; set; }
+        public DateTime? CreationTime { get; set; }
         public DateTime? DeleteTime { get; set; }
         public DateTime? UpdateTime { get; set; }
     }

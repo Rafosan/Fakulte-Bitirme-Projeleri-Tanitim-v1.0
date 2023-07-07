@@ -1,14 +1,15 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.Login;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Packaging.Signing;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
     [Authorize(AuthenticationSchemes = "LoginScheme")]
+    [Authorize(Roles = Roles.Admin)]
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;

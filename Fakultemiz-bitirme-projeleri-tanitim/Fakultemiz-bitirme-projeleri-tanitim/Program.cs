@@ -4,6 +4,8 @@ using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using DataAccessLayer.Repository;
+using Fakultemiz_bitirme_projeleri_tanitim.Models;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.Login;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,19 +32,11 @@ builder.Services.AddScoped<EfCategoryDal>();
 builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
-//builder.Services.AddSession();//Ben yazdým session için
-//builder.Services.AddMvc(config =>
-//{
-//    var policy = new AuthorizationPolicyBuilder()
-//                    .RequireAuthenticatedUser()
-//                    .Build();
-//    config.Filters.Add(new AuthorizeFilter(policy));
-//});
-
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+    options.LoginPath = "/Login/Index";
     options.SlidingExpiration = true;
 });
 builder.Services.AddAuthorization(options =>
@@ -50,6 +44,9 @@ builder.Services.AddAuthorization(options =>
     options.DefaultPolicy = new AuthorizationPolicyBuilder()
         .RequireAuthenticatedUser()
         .Build();
+    options.AddPolicy(Roles.Admin, policy => policy.RequireRole(Roles.Admin));
+    options.AddPolicy(Roles.Teacher, policy => policy.RequireRole(Roles.Teacher));
+    options.AddPolicy(Roles.Student, policy => policy.RequireRole(Roles.Student));
 });
 
 builder.Services.AddAuthentication(options =>
@@ -66,11 +63,9 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 app.UseStatusCodePages();
@@ -78,7 +73,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-//app.UseSession();//Session kullanmak için
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
