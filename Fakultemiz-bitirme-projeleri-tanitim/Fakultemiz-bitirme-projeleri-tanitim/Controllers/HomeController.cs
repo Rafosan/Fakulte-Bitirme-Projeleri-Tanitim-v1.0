@@ -26,9 +26,9 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         }
         public IActionResult Index(int? page)
         {
-            int pageNumber = page ?? 1; 
-            int pageSize = 16;
-            var values = _projectService.TGetAll().ToPagedList(pageNumber, pageSize);
+            //int pageNumber = page ?? 1; 
+            //int pageSize = 16;
+            var values = _projectService.TGetAll();
             var values2 = _categoryService.TGetAll();
             var model = new HomeViewModel()
             {

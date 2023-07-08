@@ -1,13 +1,8 @@
 ﻿using BusinessLayer.Abstract;
-using Fakultemiz_bitirme_projeleri_tanitim.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using EntityLayer.Concrete;
-using System.Data;
 using Fakultemiz_bitirme_projeleri_tanitim.Models.Login;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
@@ -40,8 +35,9 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                 if (datavalue != null)
                 {
                     _userId = datavalue.ID;
+                    TempData["adminId"] = _userId;
                     await SignInAsync(datavalue.UserName, Roles.Admin);
-                    return RedirectToAction("Index", "Admin", new { adminId = _userId });
+                    return RedirectToAction("Index", "Admin");
                 }
             }
             else if (selectedRole == Roles.Teacher)
@@ -49,9 +45,10 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                 var datavalue = _teacherService.TTeacherLoginCheck(model.UserName, model.Password);
                 if (datavalue != null)
                 {
-                    _userId = datavalue.ID;
+                    _userId = datavalue.ID; 
+                    TempData["teacherId"] = _userId;
                     await SignInAsync(datavalue.UserName, Roles.Teacher);
-                    return RedirectToAction("Index", "Teacher", new { teacherId = _userId });
+                    return RedirectToAction("Index", "Teacher");
                 }
             }
             else if (selectedRole == Roles.Student)
@@ -60,8 +57,8 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                 if (datavalue != null)
                 {
                     _userId = datavalue.ID;
-                    await SignInAsync(datavalue.UserName, Roles.Student);
                     TempData["studentId"] = _userId;
+                    await SignInAsync(datavalue.UserName, Roles.Student);
                     return RedirectToAction("Index", "Student");
                 }
             }
