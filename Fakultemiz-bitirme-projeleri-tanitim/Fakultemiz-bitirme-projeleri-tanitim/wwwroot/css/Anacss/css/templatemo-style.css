@@ -775,7 +775,7 @@ select:not([multiple]) {
 .card {
   margin-top: 150px;
   margin-bottom: 150px;
-  height: 400px;
+  height: auto;
   width: 30%;
   left: 35%;
   align-items: center;
@@ -794,9 +794,19 @@ select:not([multiple]) {
 .form-group {
   margin-bottom: 25px;
 }
-.btn-devam{
-  text-decoration:underline;
-  
+
+.loginBtn{
+    float:right;
+}
+.login-form{
+    margin-right:60px;
+}
+.form-labell {
+    margin-right: 20px;  
+}
+
+.btn-devam {
+    text-decoration: underline;
 }
 .btn-devam:hover{
   color: #009999;
