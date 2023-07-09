@@ -149,7 +149,7 @@
             </div>
         </div>
         <div class="row tm-mb-90 tm-gallery">
-            @*@foreach (var item in Model.Projeler)
+            @foreach (var item in Model.Projeler)
             {
                 @if (item.Status == true)
                 {
@@ -188,10 +188,11 @@
 
                 </div>
                 }
-            }*@
-            @Html.PagedListPager(Model.Projeler, page => Url.Action("Index", new { page }),
-            new PagedListRenderOptions { LiElementClasses = new[] { "page-item" }, PageClasses = new[] { "page-link" } })
+            }
 
+@*            @Html.PagedListPager(Model.Projeler, page => Url.Action("Index", new { page }),
+            new PagedListRenderOptions { LiElementClasses = new[] { "page-item" }, PageClasses = new[] { "page-link" } })
+*@
         </div>
         @await Html.PartialAsync("~/Views/Shared/Partial/PagingPartial.cshtml")
     </div>

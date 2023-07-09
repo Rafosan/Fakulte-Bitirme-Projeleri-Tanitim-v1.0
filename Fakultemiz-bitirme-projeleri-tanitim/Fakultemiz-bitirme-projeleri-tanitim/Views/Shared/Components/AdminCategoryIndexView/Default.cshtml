@@ -1,5 +1,5 @@
 ﻿@using EntityLayer.Concrete
-@model List<Teacher>
+@model Category
 @{
     Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
@@ -17,7 +17,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="@Url.Action("Index","Admin")">
                             <i class="fa fa-th-large"></i>
                             <span class="nav-label">Akademik Danışman İşlemleri</span>
@@ -27,12 +27,9 @@
                             <li>
                                 <a href="@Url.Action("Index","Admin")">Akademik Danışman Ekle </a>
                             </li>
-                            <li>
-                                <a href="@Url.Action("TeacherDelete","Admin")">Akademik Danışman Sil</a>
-                            </li>
-                            <li class="active">
-                                <a href="@Url.Action("TeacherList","Admin")">Akademik Danışman Listele</a>
-                            </li>
+                            <li><a href="@Url.Action("TeacherDelete","Admin")">Akademik Danışman Sil</a></li>
+                            <li><a href="@Url.Action("TeacherList","Admin")">Akademik Danışman Listele</a></li>
+
                         </ul>
                     </li>
                     <li>
@@ -47,6 +44,7 @@
                             </li>
                             <li><a href="@Url.Action("StudentDelete","Admin")">Öğrenci Sil</a></li>
                             <li><a href="@Url.Action("StudentList","Admin")">Öğrenci Listele</a></li>
+
                         </ul>
                     </li>
                     <li>
@@ -64,14 +62,14 @@
 
                         </ul>
                     </li>
-                    <li>
-                        <a href="@Url.Action("CategoryIndex","Admin")">
+                    <li class="active">
+                        <a  href="@Url.Action("CategoryIndex","Admin")">
                             <i class="fa fa-th-large"></i>
                             <span class="nav-label">Kategori İşlemleri</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li>
+                            <li class="active"> 
                                 <a href="@Url.Action("CategoryIndex","Admin")">Kategori Ekle </a>
                             </li>
                             <li><a href="@Url.Action("CategoryDelete","Admin")">Kategori Sil</a></li>
@@ -95,14 +93,12 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li style="padding: 20px">
-                            <span class="m-r-sm text-muted welcome-message">
-                                ISUBÜ TEKNOLOJİ FAKÜLTESİ BİTİRME PROJELERİ TANITIM
-                            </span>
+                            <span class="m-r-sm text-muted welcome-message">ISUBÜ TEKNOLOJİ FAKÜLTESİ BİTİRME PROJELERİ TANITIM </span>
                         </li>
 
                         <li>
                             <a href="@Url.Action("Index","Home")">
-                                <i class="fa fa-sign-out"></i> Çıkış Yap
+                                <i class="fa fa-sign-out"></i>Çıkış Yap
                             </a>
                         </li>
                     </ul>
@@ -113,34 +109,36 @@
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Akademik Danışman Listeleme</h5>
+                            <h5>Kategori Ekleme Formu</h5>
                         </div>
                         <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Akademik Danışman Adı</th>
-                                            <th>Akademik Danışman Bölümü</th>
-                                            <th>Akademik Danışman Kullanıcı Adı</th>
-                                            <th>Akademik Danışman Şifre</th>
-                                        </tr>
-                                    </thead>
+                            @using (Html.BeginForm("CategoryIndex", "Admin", FormMethod.Post))
+                            {
+                                
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Kategori Türü : </label>
+                                    <div class="col-sm-10">
+                                        @Html.DropDownListFor(x => x.Type, Enum.GetValues(typeof(Category.Types)).Cast<Category.Types>().Select(e => new SelectListItem { Value = ((int)e).ToString(), Text = e.ToString() }), "Seçiniz", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.Type)
 
-                                    <tbody>
-                                        @foreach(var item in Model){
-                                        <tr class="gradeX">
-                                            <td>@item.ID</td>
-                                            <td>@item.NameAndSurname</td>
-                                            <td>@item.MajorScienceCode</td>
-                                            <td>@item.UserName</td>
-                                            <td>@item.Password</td>
-                                        </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Kategori Değeri : </label>
+
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(x=>x.Value, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x=>x.Value)
+                                    </div>
+                                </div>
+                               
+                                <div class="form-group row btn-kaydet">
+                                    <button class="btn btn-lg btn-primary float-right m-t-n-xs"
+                                            type="submit" id="add-category">
+                                        <strong>Kaydet</strong>
+                                    </button>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -149,3 +147,9 @@
     </div>
 </body>
 </html>
+<script>
+    $('#add-category').click(function () {
+        alert("Kategori eklendi! ");
+    });
+</script>
+

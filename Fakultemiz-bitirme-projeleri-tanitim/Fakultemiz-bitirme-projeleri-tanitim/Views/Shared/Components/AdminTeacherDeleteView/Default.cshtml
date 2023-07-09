@@ -47,6 +47,35 @@
 
                         </ul>
                     </li>
+                    <li>
+                        <a href="@Url.Action("AdminIndex","Admin")">
+                            <i class="fa fa-th-large"></i>
+                            <span class="nav-label">Admin İşlemleri</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="@Url.Action("AdminIndex","Admin")">Admin Ekle </a>
+                            </li>
+                            <li><a href="@Url.Action("AdminDelete","Admin")">Admin Sil</a></li>
+                            <li><a href="@Url.Action("AdminList","Admin")">Admin Listele</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("CategoryIndex","Admin")">
+                            <i class="fa fa-th-large"></i>
+                            <span class="nav-label">Kategori İşlemleri</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="@Url.Action("CategoryIndex","Admin")">Kategori Ekle </a>
+                            </li>
+                            <li><a href="@Url.Action("CategoryDelete","Admin")">Kategori Sil</a></li>
+                            <li><a href="@Url.Action("CategoryList","Admin")">Kategori Listele</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>

@@ -15,11 +15,13 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         private readonly IAdminService _adminService;
         private readonly ITeacherService _teacherService;
         private readonly IStudentService _studentService;
-        public AdminController(IAdminService adminService, ITeacherService teacherService, IStudentService studentService)
+        private readonly ICategoryService _categoryService;
+        public AdminController(IAdminService adminService, ITeacherService teacherService, IStudentService studentService, ICategoryService categoryService)
         {
             _adminService = adminService;
             _teacherService = teacherService;
             _studentService = studentService;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
@@ -113,12 +115,106 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             {
                 _studentService.TDelete(student);
             }
-            return RedirectToAction("StudentDelete");
+            return RedirectToAction("StudentDelete","Admin");
         }
 
         public IActionResult StudentList()
         {
             var values=_studentService.TGetAll();
+            return View(values);
+        }
+        [HttpGet]
+        public IActionResult AdminIndex()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AdminIndex(Admin parametre)
+        {
+            AdminValidator validatior = new AdminValidator();
+            ValidationResult validationResult=validatior.Validate(parametre);
+            if (validationResult.IsValid)
+            {
+                parametre.CreationTime = DateTime.Now;
+                parametre.Status = true;
+                _adminService.TAdd(parametre);
+                return RedirectToAction("AdminIndex", "Admin");
+            }
+            else
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult AdminDelete()
+        {
+            var values=_adminService.TGetAll();
+            return View(values);
+        }
+        [HttpPost]
+        public IActionResult AdminDelete(int id)
+        {
+            var admin=_adminService.TGetByID(id);
+            if (admin != null)
+            {
+                _adminService.TDelete(admin);
+            }
+            return RedirectToAction("AdminDelete", "Admin");
+        }
+        public IActionResult AdminList()
+        {
+            var values =_adminService.TGetAll();
+            return View(values);
+        }
+
+        [HttpGet]
+        public IActionResult CategoryIndex()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CategoryIndex(Category parametre)
+        {
+            CategoryValidator validator = new CategoryValidator();
+            ValidationResult validationResult = validator.Validate(parametre);
+            if (validationResult.IsValid)
+            {
+                parametre.CreationTime = DateTime.Now;
+                parametre.Status=true;
+                return RedirectToAction("CategoryIndex", "Admin");
+            }
+            else
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult CategoryDelete()
+        {
+            var values =_categoryService.TGetAll();
+            return View(values);
+        }
+        [HttpPost]
+        public IActionResult CategoryDelete(int id)
+        {
+            var category=_categoryService.TGetByID(id);
+            if (category != null)
+            {
+                _categoryService.TDelete(category);
+            }
+            return RedirectToAction("CategoryDelete", "Admin");
+        }
+        public IActionResult CategoryList()
+        {
+            var values=_categoryService.TGetAll();
             return View(values);
         }
     }
