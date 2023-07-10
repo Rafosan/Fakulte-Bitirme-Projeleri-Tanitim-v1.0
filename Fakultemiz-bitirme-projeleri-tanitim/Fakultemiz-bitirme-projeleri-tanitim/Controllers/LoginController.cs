@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Fakultemiz_bitirme_projeleri_tanitim.Models.Login;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.LoginV;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
@@ -19,7 +19,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _teacherService = teacherService;
             _studentService = studentService;
         }
-        private int _userId;
         [HttpGet]
         public IActionResult Index()
         {
@@ -34,8 +33,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                 var datavalue = _adminService.TAdminLoginCheck(model.UserName, model.Password);
                 if (datavalue != null)
                 {
-                    _userId = datavalue.ID;
-                    TempData["adminId"] = _userId;
+                    HttpContext.Session.SetInt32("adminId", datavalue.ID);
                     await SignInAsync(datavalue.UserName, Roles.Admin);
                     return RedirectToAction("Index", "Admin");
                 }
@@ -45,8 +43,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                 var datavalue = _teacherService.TTeacherLoginCheck(model.UserName, model.Password);
                 if (datavalue != null)
                 {
-                    _userId = datavalue.ID; 
-                    TempData["teacherId"] = _userId;
+                    HttpContext.Session.SetInt32("teacherId", datavalue.ID);
                     await SignInAsync(datavalue.UserName, Roles.Teacher);
                     return RedirectToAction("Index", "Teacher");
                 }
@@ -56,8 +53,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                 var datavalue = _studentService.TStudentLoginCheck(model.UserName, model.Password);
                 if (datavalue != null)
                 {
-                    _userId = datavalue.ID;
-                    TempData["studentId"] = _userId;
+                    HttpContext.Session.SetInt32("studentId", datavalue.ID);
                     await SignInAsync(datavalue.UserName, Roles.Student);
                     return RedirectToAction("Index", "Student");
                 }

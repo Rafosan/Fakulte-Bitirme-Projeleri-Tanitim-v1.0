@@ -1,10 +1,10 @@
 ﻿using EntityLayer.Concrete;
 
-namespace Fakultemiz_bitirme_projeleri_tanitim.Models.Student
+namespace Fakultemiz_bitirme_projeleri_tanitim.Models.StudentV
 {
     public class StudentIndexViewModel
     {
         public Project Proje { get; set; }
-        public List<Teacher> Danismanlar { get; set; }
+        public Student Ogrenci { get; set; }
     }
 }

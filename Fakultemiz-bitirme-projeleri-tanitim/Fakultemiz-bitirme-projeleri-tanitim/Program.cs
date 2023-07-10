@@ -5,7 +5,7 @@ using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using DataAccessLayer.Repository;
 using Fakultemiz_bitirme_projeleri_tanitim.Models;
-using Fakultemiz_bitirme_projeleri_tanitim.Models.Login;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.LoginV;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,6 +32,11 @@ builder.Services.AddScoped<EfCategoryDal>();
 builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
+builder.Services.AddSession(options =>
+{
+    options.Cookie.IsEssential = true; 
+    options.IdleTimeout = TimeSpan.FromMinutes(10);                                    
+});
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
@@ -71,7 +76,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStatusCodePages();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

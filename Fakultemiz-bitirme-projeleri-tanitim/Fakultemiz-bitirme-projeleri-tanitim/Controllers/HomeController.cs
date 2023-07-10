@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using BusinessLayer.Abstract;
 using Fakultemiz_bitirme_projeleri_tanitim.Models;
-using Fakultemiz_bitirme_projeleri_tanitim.Models.Home;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.HomeV;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;

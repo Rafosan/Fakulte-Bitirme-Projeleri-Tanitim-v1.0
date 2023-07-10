@@ -12,6 +12,7 @@ namespace DataAccessLayer.Abstract
     {
         List<Project> GetListWithExpressionStudentAndTeacher(Expression<Func<Project, bool>> filter);
         List<Project> GetProjectsByTeacherId(int id);
+        Project GetProjectByStudentId(int studentId);
 
     }
 }

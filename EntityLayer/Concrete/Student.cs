@@ -19,12 +19,13 @@ namespace EntityLayer.Concrete
     public enum DepartmentCode
     {
         BilgisayarMühendsliği = 10,
-        ElektrikElektronikMühendisliği = 11,
-        BiyomedikalMühendisliği = 12,
-        MakineMühendisliği = 13,
-        İnşaatMühendisliği = 14,
-        MekatronikMühendisliği = 15,
-        TemelBilimler=16,
-        Diğer=17,
+        ElektrikElektronikMühendisliği=11,
+        MakineMühendisliği=12,
+        MakineveİmalatMühendisliği=13,
+        MekatronikMühendisliği=14,
+        İnşaatMühendisliği=15,
+        İmalatMühendisliği=16,
+        EnerjiSistemleriMühendisliği=17,
+        Diğer=18,
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Fakultemiz_bitirme_projeleri_tanitim.Models.Login
+namespace Fakultemiz_bitirme_projeleri_tanitim.Models.LoginV
 {
     public class LoginViewModel
     {

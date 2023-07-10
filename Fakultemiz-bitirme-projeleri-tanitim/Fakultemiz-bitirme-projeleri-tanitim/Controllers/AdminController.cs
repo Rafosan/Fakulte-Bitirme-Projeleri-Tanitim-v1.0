@@ -1,7 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
-using Fakultemiz_bitirme_projeleri_tanitim.Models.Login;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.LoginV;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,8 +27,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var username = User.Identity.Name;
-            ViewBag.Username = username;
             return View();
         }
         [HttpPost]
@@ -38,6 +36,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             ValidationResult validationResult = validator.Validate(parametre);
             if (validationResult.IsValid)
             {
+                parametre.CreationTime = DateTime.Now;
                 parametre.Status = true;
                 _teacherService.TAdd(parametre);
                 return RedirectToAction("Index", "Admin");
@@ -87,6 +86,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             ValidationResult validationResult = validator.Validate(parametre);
             if (validationResult.IsValid)
             {
+                parametre.CreationTime = DateTime.Now;
                 parametre.Status = true;
                 _studentService.TAdd(parametre);
                 return RedirectToAction("StudentIndex", "Admin");
@@ -152,6 +152,8 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         [HttpGet]
         public IActionResult AdminDelete()
         {
+            var adminId = (int)HttpContext.Session.GetInt32("adminId");
+            ViewBag.AdminId = adminId;
             var values=_adminService.TGetAll();
             return View(values);
         }
@@ -185,6 +187,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             {
                 parametre.CreationTime = DateTime.Now;
                 parametre.Status=true;
+                _categoryService.TAdd(parametre);
                 return RedirectToAction("CategoryIndex", "Admin");
             }
             else

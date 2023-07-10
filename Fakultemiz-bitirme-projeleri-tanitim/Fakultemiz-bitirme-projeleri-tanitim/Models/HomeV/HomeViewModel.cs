@@ -1,7 +1,6 @@
 ﻿using EntityLayer.Concrete;
-using X.PagedList;
 
-namespace Fakultemiz_bitirme_projeleri_tanitim.Models.Home
+namespace Fakultemiz_bitirme_projeleri_tanitim.Models.HomeV
 {
     public class HomeViewModel
     {

@@ -23,7 +23,11 @@ namespace EntityLayer.Concrete
         public int LikeCount { get; set; }
         public bool Status { get; set; }//
 
-        public Student Student { get; set; }
-        public Teacher Teacher { get; set;}
+        [ForeignKey("Student")]
+        public int StudentID { get; set; }
+        public virtual Student Student { get; set; }
+        [ForeignKey("Teacher")]
+        public int TeacherID { get; set; }
+        public virtual Teacher Teacher { get; set;}
     }
 }

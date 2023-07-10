@@ -1,5 +1,5 @@
 ﻿using BusinessLayer.Abstract;
-using Fakultemiz_bitirme_projeleri_tanitim.Models.Login;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.LoginV;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

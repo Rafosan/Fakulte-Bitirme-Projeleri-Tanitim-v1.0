@@ -14,6 +14,7 @@
                         <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="block m-t-xs font-bold">Öğrenci Paneli</span>
+                                <span class="block m-t-xs font-bold">Kullanıcı Adı:@ViewBag.UserName</span>
                             </a>
                         </div>
                     </li>
@@ -64,23 +65,32 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>@Model.ProjectID</td>
-                                                <td>@Model.Name</td>
-                                                <td>@Model.CreationTime</td>
-                                                <td>@Model.Subject</td>
-                                                <td>@Model.Description</td>
-                                                <td>
-                                                    @if (Model.Status==true)
-                                                    {
-                                                        <span>Yayınlandı</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span>Yayınlanmadı</span>
-                                                    }
+                                            @if (Model != null)
+                                            {
+                                                <tr>
+                                                    <td>@Model.ProjectID</td>
+                                                    <td>@Model.Name</td>
+                                                    <td>@Model.CreationTime</td>
+                                                    <td>@Model.Subject</td>
+                                                    <td>@Model.Description</td>
+                                                    <td>
+                                                        @if (Model.Status == true)
+                                                        {
+                                                            <span>Yayınlandı</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>Yayınlanmadı</span>
+                                                        }
                                                     </td>
-                                            </tr>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="6">Proje bulunamadı.</td>
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
 

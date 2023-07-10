@@ -14,7 +14,7 @@
                         <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="block m-t-xs font-bold">Öğrenci Paneli</span>
-                                <span class="block m-t-xs font-bold">@ViewBag.Username</span>
+                                <span class="block m-t-xs font-bold">Kullanıcı Adı:@ViewBag.UserName</span>
                             </a>
                         </div>
                     </li>
@@ -45,7 +45,7 @@
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Proje Ekleme Formu</h5>
+                            <h5>Proje Ekleme Formu (4 Adet Resim Yüklenmelidir)</h5>
                         </div>
                         <div class="ibox-content">
                             @using (Html.BeginForm("Index", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -64,8 +64,8 @@
                                         Projeyi yapanların adları:
                                     </label>
                                     <div class="col-sm-10">
-                                        @Html.TextBoxFor(x=>x.Student,new { @class = "form-control",placeholder = "Aralarına virgül koyarak yazın"})
-                                        @Html.ValidationMessageFor(x=>x.Student)
+                                        @Html.TextBoxFor(x=>x.Student.NameAndSurname,new { @class = "form-control",placeholder = "Aralarına virgül koyarak yazın"})
+                                        @Html.ValidationMessageFor(x=>x.Student.NameAndSurname)
                                     </div>
                                 </div>
                                 
@@ -95,8 +95,8 @@
                                     <label class="col-sm-2 col-form-label">Akademik Danışman :</label>
 
                                     <div class="col-sm-10">
-                                        @*@Html.DropDownListFor(x => x.Teacher.NameAndSurname, new SelectList(ViewBag.TeacherList, "Value", "Text"), "Seçiniz", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(x => x.Teacher.NameAndSurname)*@
+                                        @Html.DropDownListFor(x => x.TeacherID, (SelectList)ViewBag.TeacherList, "Seçiniz", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.TeacherID)
                                     </div>
                                 </div>
 

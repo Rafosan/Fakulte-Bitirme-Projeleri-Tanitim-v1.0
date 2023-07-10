@@ -24,6 +24,13 @@ namespace DataAccessLayer.EntityFramework
             return _context.Projects.Include(x => x.Student).Include(x => x.Teacher).Where(filter).ToList();
         }
 
+        public Project GetProjectByStudentId(int studentId)
+        {
+            return _context.Projects
+            .Include(p => p.Student)
+            .FirstOrDefault(p => p.StudentID == studentId);
+        }
+
         public List<Project> GetProjectsByTeacherId(int id)
         {
             return _context.Set<Project>()
