@@ -86,6 +86,16 @@ app.UseEndpoints(endpoints =>
 });
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"); 
 
+app.Use(async (context, next) =>
+    {
+        var session = context.Session;
+        if (session != null && !session.IsAvailable)
+        {
+            context.Response.Redirect("/Home/Index");
+            return;
+        }
+        await next();
+    });
 app.Run();

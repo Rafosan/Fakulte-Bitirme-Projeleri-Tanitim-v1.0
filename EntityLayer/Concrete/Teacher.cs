@@ -20,5 +20,6 @@ namespace EntityLayer.Concrete
         Donanım=1001,
         YapayZeka=1002,
         Termodinamik=1003,
+        Diğer=1004,
     }
 }

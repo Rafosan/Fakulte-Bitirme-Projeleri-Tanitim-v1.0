@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using Fakultemiz_bitirme_projeleri_tanitim.Models.LoginV;
+using Fakultemiz_bitirme_projeleri_tanitim.Models.TeacherV;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,27 +21,51 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int id)
+        public IActionResult Index()
         {
-            var values = _projectService.TGetProjectsByTeacherId(id);
-            return View(values);
+            var studentUserName = User.Identity.Name;
+            ViewBag.UserName = studentUserName;
+
+            int teacherId=(int)HttpContext.Session.GetInt32("teacherId");
+            var projects = _projectService.TGetProjectsByTeacherId(teacherId);
+
+            var model = new TeacherIndexViewModel()
+            {
+                Projeler = projects,
+                ProjelerOgrenciBilgisi = new List<ProjectWithStudentInfo>()
+            };
+
+            foreach (var project in projects)
+            {
+                var ogrenci = _studentService.TGetByID(project.StudentID);
+                var projectWithStudentInfo = new ProjectWithStudentInfo()
+                {
+                    Project = project,
+                    OgrenciAdi = ogrenci.NameAndSurname,
+                    OgrenciBolumKodu = ogrenci.DepartmentCode
+                };
+
+                model.ProjelerOgrenciBilgisi.Add(projectWithStudentInfo);
+            }
+            return View(model);
         }
         [HttpPost]
-        public IActionResult Index(int id,int id2)
+        public IActionResult Index(int id)
         {
-            var values = _projectService.TGetByID(id);
+            var values=_projectService.TGetByID(id);
             values.Status = !values.Status;
             _projectService.TUpdate(values);
             return RedirectToAction("Index", "Teacher");
         }
         [HttpGet]
-        public IActionResult ProjectStatus(int id)
+        public IActionResult ProjectStatus()
         {
-            var values = _projectService.TGetProjectsByTeacherId(id+1);
+            int teacherId = (int)HttpContext.Session.GetInt32("teacherId");
+            var values = _projectService.TGetProjectsByTeacherId(teacherId);
             return View(values);
         }
         [HttpPost]
-        public IActionResult ProjectStatus(int id,int id2)
+        public IActionResult ProjectStatus(int id)
         {
             var values = _projectService.TGetByID(id);
             values.Status=!values.Status;
