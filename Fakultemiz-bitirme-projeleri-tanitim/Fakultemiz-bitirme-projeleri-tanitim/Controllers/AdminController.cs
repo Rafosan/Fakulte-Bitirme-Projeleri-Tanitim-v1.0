@@ -5,6 +5,7 @@ using Fakultemiz_bitirme_projeleri_tanitim.Models.LoginV;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
@@ -190,13 +191,13 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         }
         [HttpPost]
         public IActionResult CategoryIndex(Category parametre)
-         {
+        {
             CategoryValidator validator = new CategoryValidator();
             ValidationResult validationResult = validator.Validate(parametre);
             if (validationResult.IsValid)
             {
                 parametre.CreationTime = DateTime.Now;
-                parametre.Status=true;
+                parametre.Status = true;
                 _categoryService.TAdd(parametre);
                 return RedirectToAction("CategoryIndex", "Admin");
             }
@@ -209,6 +210,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             }
             return View();
         }
+
         [HttpGet]
         public IActionResult CategoryDelete()
         {
