@@ -58,7 +58,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                     return RedirectToAction("Index", "Student");
                 }
             }
-
             ModelState.AddModelError(string.Empty, "Invalid username or password.");
             return View();
         }

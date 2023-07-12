@@ -58,6 +58,10 @@
                                                 <th>Yükleme Tarihi</th>
                                                 <th>Konu</th>
                                                 <th>Açıklama</th>
+                                                <th>Resim1</th>
+                                                <th>Resim2</th>
+                                                <th>Resim3</th>
+                                                <th>Resim4</th>
                                                 <th>Yayınlanma Durumu</th>
                                             </tr>
                                         </thead>
@@ -70,6 +74,50 @@
                                                     <td>@Model.CreationTime</td>
                                                     <td>@Model.Subject</td>
                                                     <td>@Model.Description</td>
+                                                    <td>
+                                                        @{
+                                                            if (Model.Image1 != null && Model.Image1.Length > 0)
+                                                            {
+                                                                byte[] imageBytes = Model.Image1;
+                                                                string base64String = Convert.ToBase64String(imageBytes);
+                                                                string imgSrc = string.Format("data:image/jpeg;base64,{0}", base64String);
+                                                                <img src="@imgSrc" alt="Image1" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (Model.Image2 != null && Model.Image2.Length > 0)
+                                                            {
+                                                                byte[] imageBytes2 = Model.Image2;
+                                                                string base64String2 = Convert.ToBase64String(imageBytes2);
+                                                                string imgSrc2 = string.Format("data:image/jpeg;base64,{0}", base64String2);
+                                                                <img src="@imgSrc2" alt="Image2" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (Model.Image3 != null && Model.Image3.Length > 0)
+                                                            {
+                                                                byte[] imageBytes3 = Model.Image3;
+                                                                string base64String3 = Convert.ToBase64String(imageBytes3);
+                                                                string imgSrc3 = string.Format("data:image/jpeg;base64,{0}", base64String3);
+                                                                <img src="@imgSrc3" alt="Image3" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (Model.Image4 != null && Model.Image4.Length > 0)
+                                                            {
+                                                                byte[] imageBytes4 = Model.Image4;
+                                                                string base64String4 = Convert.ToBase64String(imageBytes4);
+                                                                string imgSrc4 = string.Format("data:image/jpeg;base64,{0}", base64String4);
+                                                                <img src="@imgSrc4" alt="Image4" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
                                                     <td>
                                                         @if (Model.Status == true)
                                                         {

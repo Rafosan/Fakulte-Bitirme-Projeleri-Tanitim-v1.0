@@ -1,5 +1,5 @@
-﻿@using EntityLayer.Concrete
-@model List<Project>
+﻿@using Fakultemiz_bitirme_projeleri_tanitim.Models.TeacherV;
+@model TeacherIndexViewModel
 @{
     Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
@@ -14,7 +14,7 @@
                         <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="block m-t-xs font-bold">Akademik Danışman Paneli</span>
-                                <span class="text-muted text-xs block">Kullanıcı Adı:@ViewBag.UserName</span>
+                                <span class="text-muted text-xs block">Kullanıcı Adı:@ViewBag.TeacherName</span>
                             </a>
                         </div>
                     </li>
@@ -59,7 +59,7 @@
                                             <th>Bölümü</th>
                                             <th>Yılı</th>
                                             <th>Konusu</th>
-                                            <th>özeti</th>
+                                            <th>Özeti</th>
                                             <th>Resim 1</th>
                                             <th>Resim 2</th>
                                             <th>Resim 3</th>
@@ -71,29 +71,82 @@
                                     </thead>
 
                                     <tbody>
-                                        @foreach(var item in Model){
-                                            if (item.Status == true)
+                                        @{
+                                            int countnonpublished = 1;
+                                            bool anyProjectsRemaining = false;
+                                        }
+                                        @foreach (var projectWithStudentInfo in Model.Projeler)
+                                        {
+                                            if (projectWithStudentInfo.Status)
                                             {
+                                                anyProjectsRemaining = true;
                                                 <tr class="gradeX">
-                                                    <td>@item.ProjectID</td>
-                                                    <td>@item.Name</td>
-                                                    <td>@item.Student</td>
-                                                    <td>@item.Student</td>
-                                                    <td>@item.CreationTime</td>
-                                                    <td>@item.Subject</td>
-                                                    <td>@item.Description</td>
-                                                    <td>@item.Image1</td>
-                                                    <td>@item.Image2</td>
-                                                    <td>@item.Image3</td>
-                                                    <td>@item.Image4</td>
+                                                    <td>@countnonpublished</td>
+                                                    <td>@projectWithStudentInfo.Name</td>
+                                                    <td>@projectWithStudentInfo.Student.NameAndSurname </td>
+                                                    <td>@projectWithStudentInfo.Student.DepartmentCode</td>
+                                                    <td>@projectWithStudentInfo.CreationTime</td>
+                                                    <td>@projectWithStudentInfo.Subject</td>
+                                                    <td>@projectWithStudentInfo.Description</td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image1 != null && projectWithStudentInfo.Image1.Length > 0)
+                                                            {
+                                                                byte[] imageBytes = projectWithStudentInfo.Image1;
+                                                                string base64String = Convert.ToBase64String(imageBytes);
+                                                                string imgSrc = string.Format("data:image/jpeg;base64,{0}", base64String);
+                                                                <img src="@imgSrc" alt="Image1" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image2 != null && projectWithStudentInfo.Image2.Length > 0)
+                                                            {
+                                                                byte[] imageBytes2 = projectWithStudentInfo.Image2;
+                                                                string base64String2 = Convert.ToBase64String(imageBytes2);
+                                                                string imgSrc2 = string.Format("data:image/jpeg;base64,{0}", base64String2);
+                                                                <img src="@imgSrc2" alt="Image2" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image3 != null && projectWithStudentInfo.Image3.Length > 0)
+                                                            {
+                                                                byte[] imageBytes3 = projectWithStudentInfo.Image3;
+                                                                string base64String3 = Convert.ToBase64String(imageBytes3);
+                                                                string imgSrc3 = string.Format("data:image/jpeg;base64,{0}", base64String3);
+                                                                <img src="@imgSrc3" alt="Image3" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image4 != null && projectWithStudentInfo.Image4.Length > 0)
+                                                            {
+                                                                byte[] imageBytes4 = projectWithStudentInfo.Image4;
+                                                                string base64String4 = Convert.ToBase64String(imageBytes4);
+                                                                string imgSrc4 = string.Format("data:image/jpeg;base64,{0}", base64String4);
+                                                                <img src="@imgSrc4" alt="Image4" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
                                                     <td>
                                                         <form action="@Url.Action("ProjectStatus", "Teacher")" method="post">
-                                                            <input type="hidden" name="id" value="@item.ProjectID" />
+                                                            <input type="hidden" name="id" value="@projectWithStudentInfo.ProjectID" />
                                                             <button type="submit" class="btn btn-danger">Yayından Kaldır</button>
                                                         </form>
                                                     </td>
                                                 </tr>
+                                                countnonpublished++;
                                             }
+                                        }
+                                        @if (!anyProjectsRemaining)
+                                        {
+                                            <tr>
+                                                <td colspan="11">Yayınlanan Proje Yok.</td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -112,7 +165,7 @@
                                             <th>Bölümü</th>
                                             <th>Yılı</th>
                                             <th>Konusu</th>
-                                            <th>özeti</th>
+                                            <th>Özeti</th>
                                             <th>Resim 1</th>
                                             <th>Resim 2</th>
                                             <th>Resim 3</th>
@@ -123,37 +176,86 @@
                                     </thead>
 
                                     <tbody>
-                                        @foreach (var item in Model)
+                                        @{
+                                            int countpublished = 1;
+                                            bool countanyProjectsRemaining = false;
+                                        }
+                                        @foreach (var projectWithStudentInfo in Model.Projeler)
                                         {
-                                            if (item.Status == false)
+                                            if (!projectWithStudentInfo.Status)
                                             {
+                                                countanyProjectsRemaining = true;
                                                 <tr class="gradeX">
-                                                    <td>@item.ProjectID</td>
-                                                    <td>@item.Name</td>
-                                                    <td>@item.Student</td>
-                                                    <td>@item.Student</td>
-                                                    <td>@item.CreationTime</td>
-                                                    <td>@item.Subject</td>
-                                                    <td>@item.Description</td>
-                                                    <td>@item.Image1</td>
-                                                    <td>@item.Image2</td>
-                                                    <td>@item.Image3</td>
-                                                    <td>@item.Image4</td>
+                                                    <td>@countpublished</td>
+                                                    <td>@projectWithStudentInfo.Name</td>
+                                                    <td>@projectWithStudentInfo.Student.NameAndSurname </td>
+                                                    <td>@projectWithStudentInfo.Student.DepartmentCode</td>
+                                                    <td>@projectWithStudentInfo.CreationTime</td>
+                                                    <td>@projectWithStudentInfo.Subject</td>
+                                                    <td>@projectWithStudentInfo.Description</td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image1 != null && projectWithStudentInfo.Image1.Length > 0)
+                                                            {
+                                                                byte[] imageBytes = projectWithStudentInfo.Image1;
+                                                                string base64String = Convert.ToBase64String(imageBytes);
+                                                                string imgSrc = string.Format("data:image/jpeg;base64,{0}", base64String);
+                                                                <img src="@imgSrc" alt="Image1" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image2 != null && projectWithStudentInfo.Image2.Length > 0)
+                                                            {
+                                                                byte[] imageBytes2 = projectWithStudentInfo.Image2;
+                                                                string base64String2 = Convert.ToBase64String(imageBytes2);
+                                                                string imgSrc2 = string.Format("data:image/jpeg;base64,{0}", base64String2);
+                                                                <img src="@imgSrc2" alt="Image2" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image3 != null && projectWithStudentInfo.Image3.Length > 0)
+                                                            {
+                                                                byte[] imageBytes3 = projectWithStudentInfo.Image3;
+                                                                string base64String3 = Convert.ToBase64String(imageBytes3);
+                                                                string imgSrc3 = string.Format("data:image/jpeg;base64,{0}", base64String3);
+                                                                <img src="@imgSrc3" alt="Image3" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image4 != null && projectWithStudentInfo.Image4.Length > 0)
+                                                            {
+                                                                byte[] imageBytes4 = projectWithStudentInfo.Image4;
+                                                                string base64String4 = Convert.ToBase64String(imageBytes4);
+                                                                string imgSrc4 = string.Format("data:image/jpeg;base64,{0}", base64String4);
+                                                                <img src="@imgSrc4" alt="Image4" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
                                                     <td>
                                                         <form action="@Url.Action("ProjectStatus", "Teacher")" method="post">
-                                                            <input type="hidden" name="id" value="@item.ProjectID" />
-                                                            <button type="submit" class="btn btn-danger">Yayına Al</button>
+                                                            <input type="hidden" name="id" value="@projectWithStudentInfo.ProjectID" />
+                                                            <button type="submit" class="btn btn-danger">Yayınla</button>
                                                         </form>
                                                     </td>
                                                 </tr>
+                                                countpublished++;
                                             }
                                         }
+                                        @if (!countanyProjectsRemaining)
+                                        {
+                                            <tr>
+                                                <td colspan="11">Yayınlanmayan Proje Yok.</td>
+                                            </tr>
+                                        }
                                     </tbody>
-
                                 </table>
-
                             </div>
-
                         </div>
                     </div>
                 </div>

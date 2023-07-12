@@ -27,6 +27,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.AdminName = User.Identity.Name;
             return View();
         }
         [HttpPost]
@@ -55,6 +56,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult TeacherDelete()
         {
             var values = _teacherService.TGetAll();
+            ViewBag.AdminName = User.Identity.Name;
             return View(values);
         }
         [HttpPost]
@@ -71,12 +73,14 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult TeacherList()
         {
             var values=_teacherService.TGetAll();
+            ViewBag.AdminName = User.Identity.Name;
             return View(values);
         }
 
         [HttpGet]
         public IActionResult StudentIndex()
         {
+            ViewBag.AdminName = User.Identity.Name;
             return View();
         }
         [HttpPost]
@@ -105,6 +109,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult StudentDelete()
         {
             var values=_studentService.TGetAll();
+            ViewBag.AdminName = User.Identity.Name;
             return View(values);
         }
         [HttpPost]
@@ -121,11 +126,13 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult StudentList()
         {
             var values=_studentService.TGetAll();
+            ViewBag.AdminName = User.Identity.Name;
             return View(values);
         }
         [HttpGet]
         public IActionResult AdminIndex()
         {
+            ViewBag.AdminName = User.Identity.Name;
             return View();
         }
         [HttpPost]
@@ -153,8 +160,9 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult AdminDelete()
         {
             var adminId = (int)HttpContext.Session.GetInt32("adminId");
-            ViewBag.AdminId = adminId;
             var values=_adminService.TGetAll();
+            ViewBag.AdminId = adminId;
+            ViewBag.AdminName = User.Identity.Name;
             return View(values);
         }
         [HttpPost]
@@ -170,17 +178,19 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult AdminList()
         {
             var values =_adminService.TGetAll();
+            ViewBag.AdminName = User.Identity.Name;
             return View(values);
         }
 
         [HttpGet]
         public IActionResult CategoryIndex()
         {
+            ViewBag.AdminName = User.Identity.Name;
             return View();
         }
         [HttpPost]
         public IActionResult CategoryIndex(Category parametre)
-        {
+         {
             CategoryValidator validator = new CategoryValidator();
             ValidationResult validationResult = validator.Validate(parametre);
             if (validationResult.IsValid)
@@ -203,6 +213,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult CategoryDelete()
         {
             var values =_categoryService.TGetAll();
+            ViewBag.AdminName = User.Identity.Name;
             return View(values);
         }
         [HttpPost]
@@ -217,7 +228,8 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         }
         public IActionResult CategoryList()
         {
-            var values=_categoryService.TGetAll();
+            var values = _categoryService.TGetAll();
+            ViewBag.AdminName = User.Identity.Name;
             return View(values);
         }
     }

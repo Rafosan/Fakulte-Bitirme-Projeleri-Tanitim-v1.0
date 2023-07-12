@@ -23,9 +23,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var studentUserName = User.Identity.Name;
-            ViewBag.UserName = studentUserName;
-
             int teacherId=(int)HttpContext.Session.GetInt32("teacherId");
             var projects = _projectService.TGetProjectsByTeacherId(teacherId);
 
@@ -44,9 +41,9 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                     OgrenciAdi = ogrenci.NameAndSurname,
                     OgrenciBolumKodu = ogrenci.DepartmentCode
                 };
-
                 model.ProjelerOgrenciBilgisi.Add(projectWithStudentInfo);
             }
+            ViewBag.TeacherName = User.Identity.Name;
             return View(model);
         }
         [HttpPost]
@@ -57,12 +54,32 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _projectService.TUpdate(values);
             return RedirectToAction("Index", "Teacher");
         }
+
         [HttpGet]
         public IActionResult ProjectStatus()
         {
             int teacherId = (int)HttpContext.Session.GetInt32("teacherId");
-            var values = _projectService.TGetProjectsByTeacherId(teacherId);
-            return View(values);
+            var projects = _projectService.TGetProjectsByTeacherId(teacherId);
+
+            var model = new TeacherIndexViewModel()
+            {
+                Projeler = projects,
+                ProjelerOgrenciBilgisi = new List<ProjectWithStudentInfo>()
+            };
+
+            foreach (var project in projects)
+            {
+                var ogrenci = _studentService.TGetByID(project.StudentID);
+                var projectWithStudentInfo = new ProjectWithStudentInfo()
+                {
+                    Project = project,
+                    OgrenciAdi = ogrenci.NameAndSurname,
+                    OgrenciBolumKodu = ogrenci.DepartmentCode
+                };
+                model.ProjelerOgrenciBilgisi.Add(projectWithStudentInfo);
+            }
+            ViewBag.TeacherName = User.Identity.Name;
+            return View(model);
         }
         [HttpPost]
         public IActionResult ProjectStatus(int id)
@@ -72,14 +89,43 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _projectService.TUpdate(values);
             return RedirectToAction("ProjectStatus", "Teacher");
         }
-
+        [HttpGet]
         public IActionResult ProjectDelete()
         {
-            return View();
+            int teacherId = (int)HttpContext.Session.GetInt32("teacherId");
+            var projects = _projectService.TGetProjectsByTeacherId(teacherId);
+
+            var model = new TeacherIndexViewModel()
+            {
+                Projeler = projects,
+                ProjelerOgrenciBilgisi = new List<ProjectWithStudentInfo>()
+            };
+
+            foreach (var project in projects)
+            {
+                var ogrenci = _studentService.TGetByID(project.StudentID);
+                var projectWithStudentInfo = new ProjectWithStudentInfo()
+                {
+                    Project = project,
+                    OgrenciAdi = ogrenci.NameAndSurname,
+                    OgrenciBolumKodu = ogrenci.DepartmentCode
+                };
+                model.ProjelerOgrenciBilgisi.Add(projectWithStudentInfo);
+            }
+            ViewBag.TeacherName = User.Identity.Name;
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult ProjectDelete(int id)
+        {
+            var values = _projectService.TGetByID(id);
+            _projectService.TDelete(values);
+            return RedirectToAction("ProjectDelete", "Teacher");
         }
         public IActionResult StudentInformation()
         {
             var values=_studentService.TGetAll();
+            ViewBag.TeacherName = User.Identity.Name;
             return View(values);
         }
 

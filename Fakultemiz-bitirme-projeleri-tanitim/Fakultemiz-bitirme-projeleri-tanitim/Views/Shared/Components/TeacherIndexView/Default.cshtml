@@ -14,7 +14,7 @@
                         <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="block m-t-xs font-bold">Akademik Danışman Paneli</span>
-                                <span class="text-muted text-xs block">Kullanıcı Adı:@ViewBag.UserName</span>
+                                <span class="text-muted text-xs block">Kullanıcı Adı:@ViewBag.TeacherName</span>
                             </a>
                         </div>
                     </li>
@@ -72,12 +72,17 @@
                                     </thead>
 
                                     <tbody>
+                                        @{
+                                            int count = 1;
+                                            bool anyProjectsRemaining = false;
+                                        }
                                         @foreach (var projectWithStudentInfo in Model.Projeler)
                                         {
                                             if (!projectWithStudentInfo.Status)
                                             {
+                                                anyProjectsRemaining = true;
                                                 <tr class="gradeX">
-                                                    <td>@projectWithStudentInfo.ProjectID</td>
+                                                    <td>@count</td>
                                                     <td>@projectWithStudentInfo.Name</td>
                                                     <td>@projectWithStudentInfo.Student.NameAndSurname </td>
                                                     <td>@projectWithStudentInfo.Student.DepartmentCode</td>
@@ -135,7 +140,14 @@
                                                         </form>
                                                     </td>
                                                 </tr>
+                                                count++;
                                             }
+                                        }
+                                        @if (!anyProjectsRemaining)
+                                        {
+                                            <tr>
+                                                <td colspan="11">Bütün projeler yayınlandı.</td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>

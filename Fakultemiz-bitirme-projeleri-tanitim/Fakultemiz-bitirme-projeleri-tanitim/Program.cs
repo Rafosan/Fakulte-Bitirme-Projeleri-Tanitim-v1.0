@@ -35,12 +35,12 @@ builder.Services.AddScoped<ICategoryService, CategoryManager>();
 builder.Services.AddSession(options =>
 {
     options.Cookie.IsEssential = true; 
-    options.IdleTimeout = TimeSpan.FromMinutes(10);                                    
+    options.IdleTimeout = TimeSpan.FromMinutes(20);                                    
 });
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     options.LoginPath = "/Login/Index";
     options.SlidingExpiration = true;
 });
@@ -74,12 +74,19 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 app.UseStatusCodePages();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseSession();
+
 app.UseRouting();
+
+app.UseExceptionHandler("/Home/Error");
+
+app.UseSession();
+
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapDefaultControllerRoute();
@@ -87,6 +94,7 @@ app.UseEndpoints(endpoints =>
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"); 
+
 
 app.Use(async (context, next) =>
     {

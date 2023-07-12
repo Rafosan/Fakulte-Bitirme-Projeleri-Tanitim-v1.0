@@ -16,10 +16,22 @@ namespace EntityLayer.Concrete
     }
     public enum MajorScienceCode
     {
-        Yazılım=1000,
-        Donanım=1001,
-        YapayZeka=1002,
-        Termodinamik=1003,
-        Diğer=1004,
+        BilgisayarBilimleri=1000,
+        BilgisayarDonanımı=1001,
+        BilgisayarYazılımı=1002,
+        YapayZeka =1003,
+        Biyomedikal=1004,
+        ElektrikElektronik=1005,
+        Makine=1006,
+        Hidrolik=1007,
+        Ulaştırma=1008,
+        YapıMalzemeleri=1009,
+        Yapı=1010,
+        Mekanik=1011,
+        YapımYönetimi=1012,
+        Geoteknik=1013,
+        Mekatronik=1014,
+        TemelBilimler=1015,
+        Diğer=1016,
     }
 }

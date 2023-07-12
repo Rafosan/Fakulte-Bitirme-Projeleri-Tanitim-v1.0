@@ -28,22 +28,21 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         {
             var studentId = (int)HttpContext.Session.GetInt32("studentId");
             var values=_projectService.TGetProjectByStudentId(studentId);
-            if (values != null || values.StudentID != studentId)
+            if (values != null)
             {
                 return RedirectToAction("ProjectStatus", "Student");
             }
 
-            var teacherList =_teacherService.TGetAll();
-            var selectList = new SelectList(teacherList, "ID", "NameAndSurname");
-            ViewBag.TeacherList = selectList;
+            ViewBag.TeacherList = new SelectList(_teacherService.TGetAll(), "ID", "NameAndSurname");
             ViewBag.UserName = User.Identity.Name;
             return View();
         }
         [HttpPost]
         public IActionResult Index(Project paramatre, int teacherId,List<IFormFile> Image1, List<IFormFile> Image2, List<IFormFile> Image3, List<IFormFile> Image4)
         {
+            ViewBag.TeacherList = new SelectList(_teacherService.TGetAll(), "ID", "NameAndSurname", teacherId);
             var studentId = (int)HttpContext.Session.GetInt32("studentId");
-
+            
             List<List<IFormFile>> imageLists = new List<List<IFormFile>> { Image1, Image2, Image3, Image4 };
             List<byte[]> fileDataList = GetFileDataList(imageLists);
             paramatre.Image1 = fileDataList.ElementAtOrDefault(0);
@@ -82,14 +81,12 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         {
             var studentId = (int)HttpContext.Session.GetInt32("studentId");
             var values = _projectService.TGetProjectByStudentId(studentId);
-            if (values == null || values.StudentID!=studentId)
+            if (values == null)
             {
                 return RedirectToAction("Index", "Student");
             }
 
-            var teacherList = _teacherService.TGetAll();
-            var selectList = new SelectList(teacherList, "ID", "NameAndSurname");
-            ViewBag.TeacherList = selectList;
+            ViewBag.TeacherList = new SelectList(_teacherService.TGetAll(), "ID", "NameAndSurname");
             ViewBag.UserName = User.Identity.Name;
             return View(values);
         }
@@ -98,6 +95,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         {
             var studentId = (int)HttpContext.Session.GetInt32("studentId");
             var project = _projectService.TGetProjectByStudentId(studentId);
+            ViewBag.TeacherList = new SelectList(_teacherService.TGetAll(), "ID", "NameAndSurname", teacherId);
 
             List<List<IFormFile>> imageLists = new List<List<IFormFile>> { Image1, Image2, Image3, Image4 };
             List<byte[]> fileDataList = GetFileDataList(imageLists);
@@ -124,7 +122,14 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                 project.UpdateTime = DateTime.Now;
                 project.Status = false;
                 _projectService.TUpdate(project);
-                return RedirectToAction("ProjectUpdate", "Student");
+                return RedirectToAction("ProjectStatus", "Student");
+            }
+            else
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
             }
             return View();
         }
@@ -158,7 +163,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             {
                 values.UpdateTime = DateTime.Now;
                 _studentService.TUpdate(values);
-                return RedirectToAction("Information", "Student");
+                return RedirectToAction("ProjectStatus", "Student");
             }
             else
             {

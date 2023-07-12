@@ -14,10 +14,10 @@ namespace EntityLayer.Concrete
         [Key]
         public int ProjectID { get; set; }
         public string Name { get; set; }
-        public byte[] Image1 { get; set; }
-        public byte[] Image2 { get; set; }
-        public byte[] Image3 { get; set; }
-        public byte[] Image4 { get; set; }
+        public byte[]? Image1 { get; set; }
+        public byte[]? Image2 { get; set; }
+        public byte[]? Image3 { get; set; }
+        public byte[]? Image4 { get; set; }
         public string Subject { get; set; }
         public string Description { get; set; }
         public int LikeCount { get; set; }

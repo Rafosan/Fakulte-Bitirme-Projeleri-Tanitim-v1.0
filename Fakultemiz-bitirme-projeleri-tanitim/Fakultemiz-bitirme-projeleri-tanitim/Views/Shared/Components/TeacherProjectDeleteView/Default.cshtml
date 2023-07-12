@@ -1,5 +1,5 @@
-﻿@using EntityLayer.Concrete
-@model List<Project>
+﻿@using Fakultemiz_bitirme_projeleri_tanitim.Models.TeacherV;
+@model TeacherIndexViewModel
 @{
     Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
@@ -14,7 +14,7 @@
                         <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="block m-t-xs font-bold">Akademik Danışman Paneli</span>
-                                <span class="text-muted text-xs block">Kullanıcı Adı:@ViewBag.UserName</span>
+                                <span class="text-muted text-xs block">Kullanıcı Adı:@ViewBag.TeacherName</span>
                             </a>
                         </div>
                     </li>
@@ -70,66 +70,84 @@
                                     </thead>
 
                                     <tbody>
-                                        <tr class="gradeX">
-                                            <td>Trident</td>
-                                            <td>
-                                                Internet
-                                                Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td class="center">4</td>
-                                            <td class="center">X</td>
-                                            <td>Trident</td>
-                                            <td>
-                                                Internet
-                                                Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td class="center">4</td>
-                                            <td class="center">X</td>
-                                            <td class="center">X</td>
-                                            <td>
-                                                <button class="btn btn-lg btn-primary  m-t-n-xs"
-                                                        type="submit">
-                                                    <strong>Sil</strong>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr class="gradeC">
-                                            <td>Trident</td>
-                                            <td>
-                                                Internet
-                                                Explorer 5.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td class="center">5</td>
-                                            <td class="center">C</td>
-                                            <td>Trident</td>
-                                            <td>
-                                                Internet
-                                                Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td class="center">4</td>
-                                            <td class="center">X</td>
-                                            <td class="center">X</td>
-                                            <td>
-                                                <button class="btn btn-lg btn-primary  m-t-n-xs"
-                                                        type="submit">
-                                                    <strong>Sil</strong>
-                                                </button>
-                                            </td>
-                                        </tr>
-
-
+                                        @{
+                                            int count = 1;
+                                            bool anyProjectsRemaining = false;
+                                        }
+                                        @foreach (var projectWithStudentInfo in Model.Projeler)
+                                        {
+                                                anyProjectsRemaining = true;
+                                                <tr class="gradeX">
+                                                    <td>@count</td>
+                                                    <td>@projectWithStudentInfo.Name</td>
+                                                    <td>@projectWithStudentInfo.Student.NameAndSurname </td>
+                                                    <td>@projectWithStudentInfo.Student.DepartmentCode</td>
+                                                    <td>@projectWithStudentInfo.CreationTime</td>
+                                                    <td>@projectWithStudentInfo.Subject</td>
+                                                    <td>@projectWithStudentInfo.Description</td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image1 != null && projectWithStudentInfo.Image1.Length > 0)
+                                                            {
+                                                                byte[] imageBytes = projectWithStudentInfo.Image1;
+                                                                string base64String = Convert.ToBase64String(imageBytes);
+                                                                string imgSrc = string.Format("data:image/jpeg;base64,{0}", base64String);
+                                                                <img src="@imgSrc" alt="Image1" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image2 != null && projectWithStudentInfo.Image2.Length > 0)
+                                                            {
+                                                                byte[] imageBytes2 = projectWithStudentInfo.Image2;
+                                                                string base64String2 = Convert.ToBase64String(imageBytes2);
+                                                                string imgSrc2 = string.Format("data:image/jpeg;base64,{0}", base64String2);
+                                                                <img src="@imgSrc2" alt="Image2" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image3 != null && projectWithStudentInfo.Image3.Length > 0)
+                                                            {
+                                                                byte[] imageBytes3 = projectWithStudentInfo.Image3;
+                                                                string base64String3 = Convert.ToBase64String(imageBytes3);
+                                                                string imgSrc3 = string.Format("data:image/jpeg;base64,{0}", base64String3);
+                                                                <img src="@imgSrc3" alt="Image3" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            if (projectWithStudentInfo.Image4 != null && projectWithStudentInfo.Image4.Length > 0)
+                                                            {
+                                                                byte[] imageBytes4 = projectWithStudentInfo.Image4;
+                                                                string base64String4 = Convert.ToBase64String(imageBytes4);
+                                                                string imgSrc4 = string.Format("data:image/jpeg;base64,{0}", base64String4);
+                                                                <img src="@imgSrc4" alt="Image4" width="150" height="150" />
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                    <form action="@Url.Action("ProjectDelete", "Teacher")" method="post">
+                                                            <input type="hidden" name="id" value="@projectWithStudentInfo.ProjectID" />
+                                                            <button type="submit" class="btn btn-danger">Sil</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                count++;
+                                        }
+                                        @if (!anyProjectsRemaining)
+                                        {
+                                            <tr>
+                                                <td colspan="11">Proje Bulunamadı.</td>
+                                            </tr>
+                                        }
                                     </tbody>
-
                                 </table>
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>

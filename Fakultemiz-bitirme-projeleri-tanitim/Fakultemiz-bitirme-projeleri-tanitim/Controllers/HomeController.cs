@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using BusinessLayer.Abstract;
+using EntityLayer.Concrete;
 using Fakultemiz_bitirme_projeleri_tanitim.Models;
 using Fakultemiz_bitirme_projeleri_tanitim.Models.HomeV;
 using Microsoft.AspNetCore.Authorization;
@@ -24,16 +25,19 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _projectService = projectService;
             _categoryService = categoryService;
         }
-        public IActionResult Index(int? page)
+        public IActionResult Index(int page=1)
         {
-            //int pageNumber = page ?? 1; 
-            //int pageSize = 16;
-            var values = _projectService.TGetAll();
-            var values2 = _categoryService.TGetAll();
+            int pageSize = 16;
+            var values = _projectService.TGetAll().ToPagedList(page, pageSize);
+            var yillar = _categoryService.TGetAll().Where(k => k.Type == Category.Types.Yıl);
+            var bolumler = _categoryService.TGetAll().Where(k => k.Type == Category.Types.Bölüm);
+            var danismanlar = _categoryService.TGetAll().Where(k => k.Type == Category.Types.Danışman);
             var model = new HomeViewModel()
             {
                 Projeler=values,
-                Kategoriler=values2,
+                Yillar = yillar,
+                Bolumler = bolumler,
+                Danismanlar = danismanlar,
             };
             return View(model);
         }

@@ -1,5 +1,8 @@
 ﻿@using EntityLayer.Concrete
 @model List<Student>
+@{
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
 <!DOCTYPE html>
 <html>
 <body>
@@ -11,7 +14,7 @@
                         <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="block m-t-xs font-bold">Akademik Danışman Paneli</span>
-                                <span class="text-muted text-xs block">Kullanıcı Adı:@ViewBag.UserName</span>
+                                <span class="text-muted text-xs block">Kullanıcı Adı:@ViewBag.TeacherName</span>
                             </a>
                         </div>
                     </li>
@@ -51,31 +54,29 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Proje Sahibinin Adı</th>
-                                            <th>Yıl</th>
+                                            <th>Proje Sahiplerinin Adları</th>
+                                            <th>Bölümü</th>
                                             <th>E Posta</th>
                                             <th>Telefon Numarası</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach(var item in Model){
-                                        <tr class="gradeX">
-                                            <td>@item.ID</td>
-                                            <td>@item.NameAndSurname</td>
-                                            <td>@item.UserName</td>
-                                            <td>@item.EMail</td>
-                                            <td>@item.Number</td>
-                                        </tr>
+                                        @{int count = 1;}
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr class="gradeX">
+                                                <td>@count</td>
+                                                <td>@item.NameAndSurname</td>
+                                                <td>@item.DepartmentCode</td>
+                                                <td>@item.EMail</td>
+                                                <td>@item.Number</td>
+                                            </tr>
+                                            count++;
                                         }
                                     </tbody>
-
                                 </table>
-
                             </div>
-
                         </div>
-
-
                     </div>
                 </div>
             </div>
