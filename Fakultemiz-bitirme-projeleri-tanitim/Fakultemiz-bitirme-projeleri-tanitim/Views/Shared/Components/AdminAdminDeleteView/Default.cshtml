@@ -119,7 +119,7 @@
                                                     <td>
                                                         <form action="@Url.Action("AdminDelete", "Admin")" method="post">
                                                             <input type="hidden" name="id" value="@item.ID"/>
-                                                            <button id="delete-admin" type="submit" class="btn btn-danger">Sil</button>
+                                                            <button onclick="return confirm('Silmek istediğinize emin misiniz?')" id="delete-admin" type="submit" class="btn btn-danger">Sil</button>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -136,9 +136,4 @@
     </div>
 </body>
 </html>
-<script>
-    $('#delete-admin').click(function () {
-        alert("Admin Silindi! ");
-    });
-</script>
 

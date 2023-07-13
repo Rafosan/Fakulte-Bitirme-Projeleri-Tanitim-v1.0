@@ -30,7 +30,6 @@ namespace DataAccessLayer.EntityFramework
             .Include(p => p.Student)
             .FirstOrDefault(p => p.StudentID == studentId);
         }
-
         public List<Project> GetProjectsByTeacherId(int id)
         {
             return _context.Set<Project>()
@@ -38,5 +37,43 @@ namespace DataAccessLayer.EntityFramework
                 .Where(project => project.Teacher.ID == id && project.Teacher.ID == id)
                 .ToList();
         }
+
+
+        public List<Project> GetProjectsByCategory(Category.Types categoryType, string value)
+        {
+            if (categoryType == Category.Types.Yıl)
+            {
+                int year;
+                if (Int32.TryParse(value, out year))
+                {
+                    return _context.Projects.Where(p => p.CreationTime.HasValue && p.CreationTime.Value.Year == year).ToList();
+                }
+                else
+                {
+                    return new List<Project>();
+                }
+            }
+            else if (categoryType == Category.Types.Bölüm)
+            {
+                DepartmentCode departmentCode;
+                if (Enum.TryParse(value, out departmentCode))
+                {
+                    return _context.Projects.Include(p => p.Student).Where(p => p.Student.DepartmentCode == departmentCode).ToList();
+                }
+                else
+                {
+                    return new List<Project>();
+                }
+            }
+            else if (categoryType == Category.Types.Danışman)
+            {
+                return _context.Projects.Include(p => p.Teacher).Where(p => p.Teacher.NameAndSurname == value.ToString()).ToList();
+            }
+            else
+            {
+                return new List<Project>();
+            }
+        }
+
     }
 }

@@ -56,5 +56,10 @@ namespace BusinessLayer.Concrete
         {
             return _projectDal.GetProjectByStudentId(studentId);
         }
+
+        public List<Project> TGetProjectsByCategory(Category.Types categoryType, string value)
+        {
+            return _projectDal.GetProjectsByCategory(categoryType, value);
+        }
     }
 }

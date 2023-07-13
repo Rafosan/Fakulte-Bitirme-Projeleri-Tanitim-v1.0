@@ -17,11 +17,13 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         private readonly IStudentService _studentService;
         private readonly IProjectService _projectService;
         private readonly ITeacherService  _teacherService;
-        public StudentController(IStudentService studentService, IProjectService projectService,ITeacherService teacherService)
+        private readonly ICategoryService _categoryService;
+        public StudentController(IStudentService studentService, IProjectService projectService, ITeacherService teacherService, ICategoryService categoryService)
         {
             _studentService = studentService;
             _projectService = projectService;
             _teacherService = teacherService;
+            _categoryService = categoryService;
         }
         [HttpGet]
         public IActionResult Index()
@@ -54,6 +56,20 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             ValidationResult validationResult = validator.Validate(paramatre);
             if (validationResult.IsValid)
             {
+                paramatre.CreationTime = DateTime.Now;
+                var yearCategory = _categoryService.TGetCategoryByValue(Category.Types.Yıl, paramatre.CreationTime.Value.Year.ToString());
+                if(yearCategory==null)
+                {
+                    yearCategory = new Category
+                    {
+                        Type = Category.Types.Yıl,
+                        Value = paramatre.CreationTime.Value.Year.ToString(),
+                        CreationTime = DateTime.Now,
+                        Status = true
+                    };
+                    _categoryService.TAdd(yearCategory);
+                }
+
                 var values = _studentService.TGetByID(studentId);
                 values.NameAndSurname = paramatre.Student.NameAndSurname;
                 values.UpdateTime = DateTime.Now;
@@ -61,7 +77,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 
                 paramatre.Student = values;
                 paramatre.Teacher = _teacherService.TGetByID(teacherId);
-                paramatre.CreationTime = DateTime.Now;
                 paramatre.Status = false;
                 _projectService.TAdd(paramatre);
                 return RedirectToAction("Index", "Student");
@@ -163,7 +178,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             {
                 values.UpdateTime = DateTime.Now;
                 _studentService.TUpdate(values);
-                return RedirectToAction("ProjectStatus", "Student");
+                return RedirectToAction("Information", "Student");
             }
             else
             {

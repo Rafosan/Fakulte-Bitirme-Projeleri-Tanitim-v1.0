@@ -38,6 +38,11 @@ namespace BusinessLayer.Concrete
             return _categoryDal.GetByID(id);
         }
 
+        public Category TGetCategoryByValue(Category.Types types, string value)
+        {
+            return _categoryDal.GetCategoryByValue(types, value);
+        }
+
         public void TUpdate(Category t)
         {
             _categoryDal.Update(t);

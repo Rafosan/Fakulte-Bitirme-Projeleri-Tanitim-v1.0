@@ -113,7 +113,7 @@
                                
                                 <div class="form-group row btn-kaydet">
                                     <button class="btn btn-lg btn-primary float-right m-t-n-xs"
-                                            type="submit" id="add-category">
+                                            type="submit" onclick="checkStatus()">
                                         <strong>Kaydet</strong>
                                     </button>
                                 </div>
@@ -127,3 +127,13 @@
     </div>
 </body>
 </html>
+<script>
+    function checkStatus() {
+        var status = Math.random() < 0.5;
+        if (status) {
+            alert('Kategori Eklendi');
+        } else {
+            alert('Kategori Eklenemedi');
+        }
+    }
+</script>

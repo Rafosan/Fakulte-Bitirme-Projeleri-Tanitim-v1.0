@@ -38,6 +38,19 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             ValidationResult validationResult = validator.Validate(parametre);
             if (validationResult.IsValid)
             {
+                var danismancategory = _categoryService.TGetCategoryByValue(Category.Types.Danışman, parametre.NameAndSurname);
+                if (danismancategory == null)
+                {
+                    danismancategory = new Category
+                    {
+                        Type = Category.Types.Danışman,
+                        Value = parametre.NameAndSurname,
+                        CreationTime = DateTime.Now,
+                        Status = true
+                    };
+                    _categoryService.TAdd(danismancategory);
+                }
+
                 parametre.CreationTime = DateTime.Now;
                 parametre.Status = true;
                 _teacherService.TAdd(parametre);
@@ -91,6 +104,19 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             ValidationResult validationResult = validator.Validate(parametre);
             if (validationResult.IsValid)
             {
+                var studentCategory = _categoryService.TGetCategoryByValue(Category.Types.Bölüm, parametre.DepartmentCode.ToString());
+                if(studentCategory==null)
+                {
+                    studentCategory = new Category
+                    {
+                        Type = Category.Types.Bölüm,
+                        Value = parametre.DepartmentCode.ToString(),
+                        CreationTime = DateTime.Now,
+                        Status = true
+                    };
+                    _categoryService.TAdd(studentCategory);
+                }
+
                 parametre.CreationTime = DateTime.Now;
                 parametre.Status = true;
                 _studentService.TAdd(parametre);

@@ -108,9 +108,12 @@
                                     </thead>
 
                                     <tbody>
+                                        @{
+                                            int count = 1;
+                                        }
                                         @foreach(var item in Model){
                                         <tr class="gradeX">
-                                            <td>@item.ID</td>
+                                            <td>@count</td>
                                             <td>@item.NameAndSurname</td>
                                             <td>@item.DepartmentCode</td>
                                             <td>@item.UserName</td>
@@ -118,10 +121,11 @@
                                             <td>
                                                     <form action="@Url.Action("StudentDelete", "Admin")" method="post">
                                                         <input type="hidden" name="id" value="@item.ID" />
-                                                        <button type="submit" class="btn btn-danger">Sil</button>
+                                                        <button onclick="return confirm('Silmek istediğinize emin misiniz?')" type="submit" class="btn btn-danger">Sil</button>
                                                     </form>
                                             </td>
-                                        </tr>
+                                            </tr>
+                                            count++;
                                         }
                                     </tbody>
                                 </table>

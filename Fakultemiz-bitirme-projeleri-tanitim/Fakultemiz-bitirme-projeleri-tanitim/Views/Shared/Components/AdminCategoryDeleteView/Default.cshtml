@@ -105,19 +105,23 @@
                                     </thead>
 
                                     <tbody>
+                                        @{
+                                            int count = 1;
+                                        }
                                         @foreach (var item in Model)
                                         {
                                             <tr class="gradeX">
-                                                <td>@item.ID</td>
+                                                <td>@count</td>
                                                 <td>@item.Type</td>
                                                 <td>@item.Value</td>
                                                 <td>
                                                     <form action="@Url.Action("CategoryDelete", "Admin")" method="post">
                                                         <input type="hidden" name="id" value="@item.ID" />
-                                                        <button type="submit" id="delete-category" class="btn btn-danger">Sil</button>
+                                                        <button onclick="return confirm('Silmek istediğinize emin misiniz?')" type="submit" class="btn btn-danger">Sil</button>
                                                     </form>
                                                 </td>
                                             </tr>
+                                            count++;
                                         }
                                     </tbody>
                                 </table>
@@ -130,9 +134,4 @@
     </div>
 </body>
 </html>
-<script>
-    $('#delete-category').click(function () {
-        alert("Kategori silindi! ");
-    });
-</script>
 

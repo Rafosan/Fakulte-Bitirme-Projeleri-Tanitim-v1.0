@@ -13,5 +13,7 @@ namespace BusinessLayer.Abstract
         List<Project> TGetListWithExpressionStudentAndTeacher(int id);
         List<Project> TGetProjectsByTeacherId(int id);
         Project TGetProjectByStudentId(int studentId);
+
+        List<Project> TGetProjectsByCategory(Category.Types categoryType, string value);
     }
 }

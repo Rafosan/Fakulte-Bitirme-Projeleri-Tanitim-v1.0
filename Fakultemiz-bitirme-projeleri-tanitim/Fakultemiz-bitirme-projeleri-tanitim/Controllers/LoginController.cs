@@ -62,6 +62,14 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> SignOut()
+        {
+            HttpContext.Session.Clear();
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
         private async Task SignInAsync(string userName, string role)
         {
             var claims = new List<Claim>{

@@ -103,13 +103,17 @@
                                     </thead>
 
                                     <tbody>
+                                        @{
+                                            int count = 1;
+                                        }
                                         @foreach (var item in Model)
                                         {
                                             <tr class="gradeX">
-                                                <td>@item.ID</td>
+                                                <td>@count</td>
                                                 <td>@item.Type</td>
                                                 <td>@item.Value</td> 
                                             </tr>
+                                            count++;
                                         }
                                     </tbody>
                                 </table>

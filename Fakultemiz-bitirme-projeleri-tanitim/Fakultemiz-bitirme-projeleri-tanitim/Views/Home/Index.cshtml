@@ -12,7 +12,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-    <!-- Page Loader -->
     <div id="loader-wrapper">
         <div id="loader"></div>
         <div class="loader-section section-left"></div>
@@ -21,10 +20,10 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand"
-               href="https://teknoloji.isparta.edu.tr"
-               target="_blank">
+               href="@Url.Action("Index","Home")">
+               
                 <img src="~/img/logo.png" alt="logo" width="80px" />
-                Isparta Uygulamalı Bilimler Üniversitesi Teknoloji Fakültesi
+                Isparta Uygulamalı Bilimler Üniversitesi Teknoloji Fakültesi Bitirme Projeleri
             </a>
             <button class="navbar-toggler"
                     type="button"
@@ -50,7 +49,6 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary  ">
             <div class="container-fluid navbar-title navbar-place">
                 <a class="navbar-brand nav-item" href="#">Kategoriler</a>
-
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
                         style="--bs-scroll-height: 100px">
@@ -64,14 +62,19 @@
                                aria-expanded="false">
                                 Yıllar
                             </a>
-
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @foreach (var item in Model.Yillar)
-                                {
-                                    <a class="dropdown-item" href="#">@item.Value</a>
-                                }
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownYil">
+                                <form asp-action="Index" asp-controller="Home" method="get">
+                                    <input type="hidden" name="categoryType" value="@((int)Category.Types.Yıl)" />
+                                    <input type="hidden" name="value" id="yilValue" value="" />
+                                    <select class="form-control" onchange="submitForm(this, 'yil')">
+                                        <option value="">Tüm Yıllar</option>
+                                        @foreach (var item in Model.Yillar)
+                                        {
+                                            <option value="@item.Value">@item.Value</option>
+                                        }
+                                    </select>
+                                </form>
                             </div>
-
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
@@ -83,13 +86,19 @@
                                aria-expanded="false">
                                 Bölümler
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @foreach (var item in Model.Bolumler)
-                                {
-                                    <a class="dropdown-item" href="#">@item.Value</a>
-                                }
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownBolum">
+                                <form asp-action="Index" asp-controller="Home" method="get">
+                                    <input type="hidden" name="categoryType" value="@((int)Category.Types.Bölüm)" />
+                                    <input type="hidden" name="value" id="bolumValue" value="" />
+                                    <select class="form-control" onchange="submitForm(this, 'bolum')">
+                                        <option value="" >Tüm Bölümler</option>
+                                        @foreach (var item in Model.Bolumler)
+                                        {
+                                            <option value="@item.Value">@item.Value</option>
+                                        }
+                                    </select>
+                                </form>
                             </div>
-
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
@@ -101,11 +110,18 @@
                                aria-expanded="false">
                                 Danışmanlar
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @foreach (var item in Model.Danismanlar)
-                                {
-                                    <a class="dropdown-item" href="#">@item.Value</a>
-                                }
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownDanisman">
+                                <form asp-action="Index" asp-controller="Home" method="get">
+                                    <input type="hidden" name="categoryType" value="@((int)Category.Types.Danışman)" />
+                                    <input type="hidden" name="value" id="danismanValue" value="" />
+                                    <select class="form-control" onchange="submitForm(this, 'danisman')">
+                                        <option value="">Tüm Danışmanlar</option>
+                                        @foreach (var item in Model.Danismanlar)
+                                        {
+                                            <option value="@item.Value">@item.Value</option>
+                                        }
+                                    </select>
+                                </form>
                             </div>
                         </li>
                     </ul>
@@ -209,5 +225,12 @@
     @await Html.PartialAsync("~/Views/Shared/Partial/FooterPartial.cshtml")
 </body>
 </html>
+<script>
+    function submitForm(selectElement, categoryType) {
+        var value = selectElement.value;
 
+        document.getElementById(categoryType + "Value").value = value;
 
+        selectElement.closest("form").submit();
+    }
+</script>

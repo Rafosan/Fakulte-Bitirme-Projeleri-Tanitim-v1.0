@@ -4,6 +4,7 @@ using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using DataAccessLayer.Repository;
+using Fakultemiz_bitirme_projeleri_tanitim.Data.Seed;
 using Fakultemiz_bitirme_projeleri_tanitim.Models;
 using Fakultemiz_bitirme_projeleri_tanitim.Models.LoginV;
 using Microsoft.AspNetCore.Authorization;
@@ -91,6 +92,11 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapDefaultControllerRoute();
 });
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<MyDbContext>();
+    DataSeeder.SeedAdmins(dbContext);
+}
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"); 
@@ -101,7 +107,7 @@ app.Use(async (context, next) =>
         var session = context.Session;
         if (session != null && !session.IsAvailable)
         {
-            context.Response.Redirect("/Home/Index");
+            context.Response.Redirect("/Login/Index");
             return;
         }
         await next();

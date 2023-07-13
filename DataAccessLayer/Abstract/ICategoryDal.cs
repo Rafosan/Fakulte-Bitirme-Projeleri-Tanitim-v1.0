@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface ICategoryDal:IGenericDal<Category>
     {
+        Category GetCategoryByValue(Category.Types types, string value);
     }
 }

@@ -43,7 +43,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                 };
                 model.ProjelerOgrenciBilgisi.Add(projectWithStudentInfo);
             }
-            ViewBag.TeacherName = User.Identity.Name;
+            ViewBag.TeacherName = User.Identity.Name ?? string.Empty;
             return View(model);
         }
         [HttpPost]
@@ -78,7 +78,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                 };
                 model.ProjelerOgrenciBilgisi.Add(projectWithStudentInfo);
             }
-            ViewBag.TeacherName = User.Identity.Name;
+            ViewBag.TeacherName = User.Identity.Name ?? string.Empty;
             return View(model);
         }
         [HttpPost]
@@ -112,7 +112,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
                 };
                 model.ProjelerOgrenciBilgisi.Add(projectWithStudentInfo);
             }
-            ViewBag.TeacherName = User.Identity.Name;
+            ViewBag.TeacherName = User.Identity.Name ?? string.Empty;
             return View(model);
         }
         [HttpPost]
@@ -125,7 +125,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult StudentInformation()
         {
             var values=_studentService.TGetAll();
-            ViewBag.TeacherName = User.Identity.Name;
+            ViewBag.TeacherName = User.Identity.Name ?? string.Empty;
             return View(values);
         }
 

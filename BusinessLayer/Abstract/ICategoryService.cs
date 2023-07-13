@@ -9,5 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface ICategoryService:IGenericService<Category>
     {
+        Category TGetCategoryByValue(Category.Types types, string value);
     }
 }
