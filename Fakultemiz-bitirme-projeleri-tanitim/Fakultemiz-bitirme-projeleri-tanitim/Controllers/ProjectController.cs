@@ -20,17 +20,48 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             var values = _projectService.TGetListWithExpressionStudentAndTeacher(id).FirstOrDefault();
             return View(values);
         }
-		[HttpPost]
-		public IActionResult Index(int id , int likecount)
-		{
-            var values = _projectService.TGetByID(id);
-            likecount = values.LikeCount;
-            if (values != null)
+
+
+        public IActionResult ToggleLike(int id)
+        {
+            var likedProjects = GetLikedProjectsFromCookie(); // Daha önce beğenilen projeleri çerezden al
+
+            if (!likedProjects.Contains(id))
             {
-                values.LikeCount++;
-                _projectService.TUpdate(values);
+                var project = _projectService.TGetByID(id);
+                if (project != null)
+                {
+                    project.LikeCount++;
+                    _projectService.TUpdate(project);
+                    likedProjects.Add(id);
+                    SetLikedProjectsCookie(likedProjects); // Beğenilen projeleri çereze kaydet
+                }
             }
-            return RedirectToAction("Index", "Project", new { id = values?.ProjectID });
+
+            return RedirectToAction("Index", "Project", new { id });
         }
+
+        private List<int> GetLikedProjectsFromCookie()
+        {
+            var likedProjectsCookie = Request.Cookies["LikedProjects"];
+            if (!string.IsNullOrEmpty(likedProjectsCookie))
+            {
+                return likedProjectsCookie.Split(',').Select(int.Parse).ToList();
+            }
+            return new List<int>();
+        }
+
+        private void SetLikedProjectsCookie(List<int> likedProjects)
+        {
+            var likedProjectsString = string.Join(",", likedProjects);
+            Response.Cookies.Append("LikedProjects", likedProjectsString, new CookieOptions
+            {
+                Expires = DateTime.Now.AddYears(1),
+                IsEssential = true, // Çerezin olması gerektiğini işaretleyin
+            });
+        }
+
+
+
     }
 }

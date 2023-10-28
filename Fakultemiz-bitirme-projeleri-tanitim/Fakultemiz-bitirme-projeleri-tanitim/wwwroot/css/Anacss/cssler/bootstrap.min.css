@@ -355,6 +355,7 @@ legend {
     }
 }
 
+
 legend + * {
     clear: left
 }

@@ -1,18 +1,9 @@
-/*html {
-  font-size: 14px;
-}
+@media (max-width: 1100px) {
+    .my-custom-navbar .navbar-nav {
+        display: none;
+    }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    .my-custom-navbar .navbar-brand.nav-item {
+        display: none;
+    }
 }
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}*/

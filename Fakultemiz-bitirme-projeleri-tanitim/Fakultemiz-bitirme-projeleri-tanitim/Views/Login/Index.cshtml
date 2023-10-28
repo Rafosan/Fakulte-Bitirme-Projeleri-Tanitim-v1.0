@@ -14,10 +14,9 @@
     <nav class="navbar navbar-expand-lg" style="background-color: #fff">
         <div class="container-fluid">
             <a class="navbar-brand"
-               href="https://teknoloji.isparta.edu.tr"
-               target="_blank">
+               href="@Url.Action("Index","Home")">
                 <img src="~/img/logo.png" alt="logo" width="80px" />
-                Isparta Uygulamalı Bilimler Üniversitesi Teknoloji Fakültesi
+                Panel Giriş Sayfası
             </a>
             <button class="navbar-toggler"
                     type="button"
@@ -41,7 +40,7 @@
     </nav>
 
     <div class="card">
-        <h5 class="header">Giriş Sayfası</h5>
+        <h5 class="header">Rol seçip kullanıcı adı ve şifreniz ile giriş yapın</h5>
         <div class="card-body">
             <form class="form" method="post" action="@Url.Action("Index", "Login")">
                 <div class="form-group">

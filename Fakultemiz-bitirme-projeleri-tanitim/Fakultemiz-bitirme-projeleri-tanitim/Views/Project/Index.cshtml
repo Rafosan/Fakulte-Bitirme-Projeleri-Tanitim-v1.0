@@ -4,22 +4,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <body>
-    <!-- Page Loader -->
     <div id="loader-wrapper">
         <div id="loader"></div>
-
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
     </div>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand"
-               href="https://teknoloji.isparta.edu.tr"
-               target="_blank">
+               href="@Url.Action("Index","Home")">
                 <img src="~/img/logo.png" alt="logo" width="80px" />
-                Isparta Uygulamalı Bilimler Üniversitesi Teknoloji Fakültesi
+                Proje Detay Sayfası
             </a>
             <button class="navbar-toggler"
                     type="button"
@@ -34,8 +31,10 @@
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <span id="likeStatus">@Model.LikeCount</span>
-                        <a href="@Url.Action("ToggleLike", "Project",new {id=Model.ProjectID })" class="btn btn-primary" id="likeButton">Projeyi Beğen</a>
+                        <a href="@Url.Action("ToggleLike", "Project", new { id = Model.ProjectID })" class="btn btn-primary" id="likeButton">Projeyi Beğen</a>
                     </li>
+                    
+
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Ana Sayfa</a>
                     </li>
@@ -131,10 +130,51 @@
 </html>
 
 @section Scripts {
-@*     <script>
-        // Bir önceki sayfaya geri dön
-        window.history.go(-1);
-    </script> *@
+    <script>
+        // Sayfa yüklendiğinde çerezi kontrol et
+        window.onload = function () {
+            if (getCookie("liked") === "true") {
+                // Kullanıcı daha önce beğenmiş, butonu kırmızı yap
+                document.getElementById("likeButton").style.backgroundColor = "red";
+                document.getElementById("likeButton").innerText = "Beğendiniz";
+                document.getElementById("likeButton").disabled = true;
+            }
+        }
+
+        // Beğenme butonuna tıklanınca işlemi gerçekleştir
+        document.getElementById("likeButton").onclick = function () {
+            // Beğenme işlemini gerçekleştirin
+            // Burada API çağrısı yapabilir veya işlemi tamamlayabilirsiniz.
+
+            // Çereze "liked" anahtarını ekleyin ve değeri "true" olarak ayarlayın
+            setCookie("liked", "true", 365); // Çerez bir yıl boyunca geçerli olacaktır
+
+            // Butonu kırmızı yap
+            this.style.backgroundColor = "red";
+            this.innerText = "Beğendiniz";
+            this.disabled = true;
+        }
+
+        // Çerez değerini alma fonksiyonu
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+
+        // Çerez değeri ayarlama fonksiyonu
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+    </script>
+
+
 }
 
 
