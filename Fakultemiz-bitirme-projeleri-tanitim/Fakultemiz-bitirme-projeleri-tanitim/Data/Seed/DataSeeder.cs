@@ -17,7 +17,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Data.Seed
                     Status = true,
                     CreationTime = DateTime.Now
                 };
-
                 dbContext.Admins.Add(admin);
                 dbContext.SaveChanges();
             }

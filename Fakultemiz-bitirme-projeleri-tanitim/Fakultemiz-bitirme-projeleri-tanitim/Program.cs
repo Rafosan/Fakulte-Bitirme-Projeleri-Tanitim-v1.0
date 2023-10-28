@@ -36,12 +36,12 @@ builder.Services.AddScoped<ICategoryService, CategoryManager>();
 builder.Services.AddSession(options =>
 {
     options.Cookie.IsEssential = true; 
-    options.IdleTimeout = TimeSpan.FromMinutes(20);                                    
+    options.IdleTimeout = TimeSpan.FromDays(2);                                    
 });
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.ExpireTimeSpan = TimeSpan.FromDays(2);  
     options.LoginPath = "/Login/Index";
     options.SlidingExpiration = true;
 });

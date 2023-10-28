@@ -33,7 +33,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <button onclick="@Url.Action("ToggleLike","Project")" class="btn btn-primary" id="project-heart-button">Projeyi Beğen</button>
+                        <span id="likeStatus">@Model.LikeCount</span>
+                        <a href="@Url.Action("ToggleLike", "Project",new {id=Model.ProjectID })" class="btn btn-primary" id="likeButton">Projeyi Beğen</a>
                     </li>
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Ana Sayfa</a>
@@ -124,10 +125,17 @@
         <a href="@Url.Action("Index", "Home")" class="btn btn-primary project-detail-button">Ana Sayfaya geri dön</a>
         <br />
         <br />
-    </div>
+
     @await Html.PartialAsync("~/Views/Shared/Partial/FooterPartial.cshtml")
 </body>
 </html>
+
+@section Scripts {
+@*     <script>
+        // Bir önceki sayfaya geri dön
+        window.history.go(-1);
+    </script> *@
+}
 
 
     

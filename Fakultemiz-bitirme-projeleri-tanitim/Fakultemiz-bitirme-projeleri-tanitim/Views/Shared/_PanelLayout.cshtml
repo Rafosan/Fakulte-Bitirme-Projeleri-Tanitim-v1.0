@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>@ViewData["Title"]Panel</title>
-    <link href="~/Panel-Ana Fontawasome/Panel/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="~/css/Panelcss/css/animate.css" rel="stylesheet" />
-    <link href="~/css/Panelcss/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/css/Panelcss/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/css/Panelcss/css/style.css" rel="stylesheet" />
-</head>
-<body>
+    <link rel="icon" type="image/x-icon" href="~/img/logo.ico" />
+
+    <link href="~/css/Panelcss/cssler/animate.css" rel="stylesheet" />
+    <link href="~/css/Panelcss/cssler/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/Panelcss/cssler/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/Panelcss/cssler/style.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
     <script src="~/js/Paneljs/popper.min.js"></script>
     <script src="~/js/Paneljs/inspinia.js"></script>
     <script src="~/js/Paneljs/jquery-2.1.1.js"></script>
@@ -21,9 +22,10 @@
     <script src="~/js/Paneljs/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="~/js/Paneljs/plugins/slimscroll/jquery.slimscroll.js"></script>
     <script src="~/js/Paneljs/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-    @RenderSection("Scripts", required: false)
+</head>
+<body>
     @RenderBody()
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
 

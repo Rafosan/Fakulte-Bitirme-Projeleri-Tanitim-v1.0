@@ -25,22 +25,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _projectService = projectService;
             _categoryService = categoryService;
         }
-        //public IActionResult Index(int page = 1)
-        //{
-        //    int pageSize = 16;
-        //    var values = _projectService.TGetAll().ToPagedList(page, pageSize);
-        //    var yillar = _categoryService.TGetAll().Where(k => k.Type == Category.Types.Yıl);
-        //    var bolumler = _categoryService.TGetAll().Where(k => k.Type == Category.Types.Bölüm);
-        //    var danismanlar = _categoryService.TGetAll().Where(k => k.Type == Category.Types.Danışman);
-        //    var model = new HomeViewModel()
-        //    {
-        //        Projeler = values,
-        //        Yillar = yillar,
-        //        Bolumler = bolumler,
-        //        Danismanlar = danismanlar,
-        //    };
-        //    return View(model);
-        //}
 
         public IActionResult Index(Category.Types? categoryType, string value, int page = 1)
         {

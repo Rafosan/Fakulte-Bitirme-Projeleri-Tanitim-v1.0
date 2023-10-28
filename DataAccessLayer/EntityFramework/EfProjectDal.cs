@@ -21,7 +21,11 @@ namespace DataAccessLayer.EntityFramework
         }
         public List<Project> GetListWithExpressionStudentAndTeacher(Expression<Func<Project, bool>> filter)
         {
-            return _context.Projects.Include(x => x.Student).Include(x => x.Teacher).Where(filter).ToList();
+            return _context.Projects
+                .Include(x => x.Student)
+                .Include(x => x.Teacher)
+                .Where(filter)
+                .ToList();
         }
 
         public Project GetProjectByStudentId(int studentId)

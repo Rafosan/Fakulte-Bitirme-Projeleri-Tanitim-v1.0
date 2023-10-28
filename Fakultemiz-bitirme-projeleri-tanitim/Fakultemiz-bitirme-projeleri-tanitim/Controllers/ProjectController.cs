@@ -20,5 +20,17 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             var values = _projectService.TGetListWithExpressionStudentAndTeacher(id).FirstOrDefault();
             return View(values);
         }
+		[HttpPost]
+		public IActionResult Index(int id , int likecount)
+		{
+            var values = _projectService.TGetByID(id);
+            likecount = values.LikeCount;
+            if (values != null)
+            {
+                values.LikeCount++;
+                _projectService.TUpdate(values);
+            }
+            return RedirectToAction("Index", "Project", new { id = values?.ProjectID });
+        }
     }
 }

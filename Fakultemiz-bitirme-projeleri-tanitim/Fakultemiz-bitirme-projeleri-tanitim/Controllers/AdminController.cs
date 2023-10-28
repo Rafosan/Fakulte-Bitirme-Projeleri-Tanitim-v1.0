@@ -24,12 +24,23 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _studentService = studentService;
             _categoryService = categoryService;
         }
+		private void SetAdminNameInViewBag()
+		{
+			if (User.Identity.IsAuthenticated)
+			{
+				ViewBag.AdminName = User.Identity.Name;
+			}
+            else
+            {
+                ViewBag.AdminName = "AdminDeneme";
 
-        [HttpGet]
+			}
+		}
+		[HttpGet]
         public IActionResult Index()
         {
-            ViewBag.AdminName = User.Identity.Name;
-            return View();
+			SetAdminNameInViewBag();
+			return View();
         }
         [HttpPost]
         public IActionResult Index(Teacher parametre)
@@ -69,9 +80,9 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         [HttpGet]
         public IActionResult TeacherDelete()
         {
-            var values = _teacherService.TGetAll();
-            ViewBag.AdminName = User.Identity.Name;
-            return View(values);
+			SetAdminNameInViewBag();
+			var values = _teacherService.TGetAll();
+			return View(values);
         }
         [HttpPost]
         public IActionResult TeacherDelete(int id)
@@ -87,15 +98,15 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult TeacherList()
         {
             var values=_teacherService.TGetAll();
-            ViewBag.AdminName = User.Identity.Name;
-            return View(values);
+			SetAdminNameInViewBag();
+			return View(values);
         }
 
         [HttpGet]
         public IActionResult StudentIndex()
         {
-            ViewBag.AdminName = User.Identity.Name;
-            return View();
+			SetAdminNameInViewBag();
+			return View();
         }
         [HttpPost]
         public IActionResult StudentIndex(Student parametre)
@@ -136,8 +147,8 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult StudentDelete()
         {
             var values=_studentService.TGetAll();
-            ViewBag.AdminName = User.Identity.Name;
-            return View(values);
+			SetAdminNameInViewBag();
+			return View(values);
         }
         [HttpPost]
         public IActionResult StudentDelete(int id)
@@ -153,14 +164,14 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult StudentList()
         {
             var values=_studentService.TGetAll();
-            ViewBag.AdminName = User.Identity.Name;
-            return View(values);
+			SetAdminNameInViewBag();
+			return View(values);
         }
         [HttpGet]
         public IActionResult AdminIndex()
         {
-            ViewBag.AdminName = User.Identity.Name;
-            return View();
+			SetAdminNameInViewBag();
+			return View();
         }
         [HttpPost]
         public IActionResult AdminIndex(Admin parametre)
@@ -189,31 +200,27 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             var adminId = (int)HttpContext.Session.GetInt32("adminId");
             var values=_adminService.TGetAll();
             ViewBag.AdminId = adminId;
-            ViewBag.AdminName = User.Identity.Name;
-            return View(values);
+			SetAdminNameInViewBag();
+			return View(values);
         }
         [HttpPost]
         public IActionResult AdminDelete(int id)
         {
             var admin=_adminService.TGetByID(id);
-            if (admin != null)
-            {
-                _adminService.TDelete(admin);
-            }
-            return RedirectToAction("AdminDelete", "Admin");
+			return RedirectToAction("AdminDelete", "Admin");
         }
         public IActionResult AdminList()
         {
             var values =_adminService.TGetAll();
-            ViewBag.AdminName = User.Identity.Name;
+            SetAdminNameInViewBag();
             return View(values);
         }
 
         [HttpGet]
         public IActionResult CategoryIndex()
         {
-            ViewBag.AdminName = User.Identity.Name;
-            return View();
+			SetAdminNameInViewBag();
+			return View();
         }
         [HttpPost]
         public IActionResult CategoryIndex(Category parametre)
@@ -241,7 +248,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult CategoryDelete()
         {
             var values =_categoryService.TGetAll();
-            ViewBag.AdminName = User.Identity.Name;
+            SetAdminNameInViewBag();
             return View(values);
         }
         [HttpPost]
@@ -257,7 +264,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult CategoryList()
         {
             var values = _categoryService.TGetAll();
-            ViewBag.AdminName = User.Identity.Name;
+            SetAdminNameInViewBag();
             return View(values);
         }
     }
