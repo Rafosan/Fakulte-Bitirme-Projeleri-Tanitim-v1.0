@@ -1,8 +1,10 @@
 ﻿@using EntityLayer.Concrete
+@using Microsoft.JSInterop;
 @model Project
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <!DOCTYPE html>
 <html lang="tr">
 <body>
@@ -33,7 +35,6 @@
                         <span id="likeStatus">@Model.LikeCount</span>
                         <a href="@Url.Action("ToggleLike", "Project", new { id = Model.ProjectID })" class="btn btn-primary" id="likeButton">Projeyi Beğen</a>
                     </li>
-                    
 
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Ana Sayfa</a>
@@ -136,7 +137,7 @@
             if (getCookie("liked") === "true") {
                 // Kullanıcı daha önce beğenmiş, butonu kırmızı yap
                 document.getElementById("likeButton").style.backgroundColor = "red";
-                document.getElementById("likeButton").innerText = "Beğendiniz";
+                document.getElementById("likeButton").innerText = "Projeyi Beğendiniz";
                 document.getElementById("likeButton").disabled = true;
             }
         }
@@ -173,8 +174,6 @@
             document.cookie = name + "=" + value + expires + "; path=/";
         }
     </script>
-
-
 }
 
 

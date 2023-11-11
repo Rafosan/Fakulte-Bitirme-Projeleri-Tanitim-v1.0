@@ -56,7 +56,6 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             ValidationResult validationResult = validator.Validate(paramatre);
             if (validationResult.IsValid)
             {
-                paramatre.CreationTime = DateTime.Now;
                 var yearCategory = _categoryService.TGetCategoryByValue(Category.Types.Yıl, paramatre.CreationTime.Value.Year.ToString());
                 if(yearCategory==null)
                 {

@@ -55,11 +55,11 @@
                                     <div class="col-sm-10">
                                         @if (!string.IsNullOrEmpty(Model.EMail))
                                         {
-                                            @Html.TextBoxFor(x => x.EMail, new { @class = "form-control", placeholder = "", value = Model.EMail })
+                                            @Html.TextBoxFor(x => x.EMail, new { @class = "form-control", placeholder = "Kişisel e-postanızı yazın", value = Model.EMail })
                                         }
                                         else
                                         {
-                                            @Html.TextBoxFor(x => x.EMail, new { @class = "form-control", placeholder = "" })
+                                            @Html.TextBoxFor(x => x.EMail, new { @class = "form-control", placeholder = "Kişisel e-postanızı yazın" })
                                         }
                                         @Html.ValidationMessageFor(x => x.EMail)
                                     </div>
@@ -72,11 +72,11 @@
                                     <div class="col-sm-10">
                                         @if (!string.IsNullOrEmpty(Model.Number))
                                         {
-                                            @Html.TextBoxFor(x => x.Number, new { @class = "form-control", placeholder = "", value = Model.Number })
+                                            @Html.TextBoxFor(x => x.Number, new { @class = "form-control", placeholder = "Başında 0 olmadan yazın", value = Model.Number })
                                         }
                                         else
                                         {
-                                            @Html.TextBoxFor(x => x.Number, new { @class = "form-control", placeholder = "" })
+                                            @Html.TextBoxFor(x => x.Number, new { @class = "form-control", placeholder = "Başında 0 olmadan yazın" })
                                         }
                                         @Html.ValidationMessageFor(x => x.Number)
                                     </div>
