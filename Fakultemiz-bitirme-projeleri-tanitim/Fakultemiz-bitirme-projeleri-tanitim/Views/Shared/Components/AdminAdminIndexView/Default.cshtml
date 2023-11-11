@@ -4,7 +4,12 @@
     Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
 <!DOCTYPE html>
-<html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/panelcss/cssler/sweetalert.css" rel="stylesheet" />
+</head>
 <body>
     <div id="wrapper">
         <nav class="navbar-default navbar-static-side" role="navigation">
@@ -91,7 +96,7 @@
                             <h5>Admin Ekleme Formu</h5>
                         </div>
                         <div class="ibox-content">
-                                @using (Html.BeginForm("AdminIndex", "Admin", FormMethod.Post))
+                            @using (Html.BeginForm("AdminIndex", "Admin", FormMethod.Post, new { id = "adminForm" }))
                                 {
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Admin Adı Soyadı : </label>
@@ -121,7 +126,7 @@
 
                                 <div class="form-group row btn-kaydet">
                                     <button class="btn btn-lg btn-primary float-right m-t-n-xs"
-                                            type="submit" onclick="checkStatus()">
+                                            type="button" onclick="checkStatusAndSubmitForm()">
                                         <strong>Kaydet</strong>
                                     </button>
                                 </div>
@@ -132,15 +137,38 @@
             </div>
         </div>
     </div>
+
+
+
+    @section Scripts{
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            function checkStatusAndSubmitForm() {
+                var status = Math.random() < 0.5;
+                if (status) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Başarılı!',
+                        text: 'Admin başarıyla eklendi.',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Tamam'
+                    }).then((result) => {
+                        // Eğer kullanıcı "Tamam" butonuna tıklarsa formu submit et
+                        if (result.isConfirmed) {
+                            document.getElementById("adminForm").submit();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Hata!',
+                        text: 'Admin eklenirken bir hata oluştu.',
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'Tamam'
+                    });
+                }
+            }
+        </script>  
+    }
 </body>
 </html>
-<script>
-    function checkStatus() {
-        var status = Math.random() < 0.5;
-        if (status) {
-            alert('Admin Eklendi');
-        } else {
-            alert('Admin Eklenemedi');
-        }
-    }
-</script>

@@ -207,6 +207,10 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult AdminDelete(int id)
         {
             var admin=_adminService.TGetByID(id);
+            if (admin != null) 
+            { 
+            _adminService.TDelete(admin);
+            }
 			return RedirectToAction("AdminDelete", "Admin");
         }
         public IActionResult AdminList()

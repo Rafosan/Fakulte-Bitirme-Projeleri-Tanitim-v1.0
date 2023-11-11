@@ -32,7 +32,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <span id="likeStatus">@Model.LikeCount</span>
+                            <span id="likeStatus">Projenin Beğeni Sayısı: @Model.LikeCount</span>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
                         <a href="@Url.Action("ToggleLike", "Project", new { id = Model.ProjectID })" class="btn btn-primary" id="likeButton">Projeyi Beğen</a>
                     </li>
 
@@ -131,7 +132,7 @@
 </html>
 
 @section Scripts {
-    <script>
+   @*  <script>
         // Sayfa yüklendiğinde çerezi kontrol et
         window.onload = function () {
             if (getCookie("liked") === "true") {
@@ -172,6 +173,60 @@
                 expires = "; expires=" + date.toUTCString();
             }
             document.cookie = name + "=" + value + expires + "; path=/";
+        }
+    </script> *@
+    <script>
+        // Sayfa yüklendiğinde çerezi kontrol et
+        window.onload = function () {
+            checkLikedStatus();
+
+            // Beğenme butonuna tıklanınca işlemi gerçekleştir
+            document.getElementById("likeButton").onclick = function () {
+                // Eğer daha önce beğenildiyse işlemi gerçekleştirme
+                if (getCookie("liked") === "true") {
+                    return;
+                }
+
+                // Beğenme işlemini gerçekleştirin
+                // Burada API çağrısı yapabilir veya işlemi tamamlayabilirsiniz.
+
+                // Çereze "liked" anahtarını ekleyin ve değeri "true" olarak ayarlayın
+                setCookie("liked", "true", 365); // Çerez bir yıl boyunca geçerli olacaktır
+
+                // Butonu kırmızı yap
+                this.style.backgroundColor = "red";
+                this.innerText = "Beğendiniz";
+                this.disabled = true;
+            };
+        };
+
+        // Çerez değerini alma fonksiyonu
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+
+        // Çerez değeri ayarlama fonksiyonu
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+
+        // Çerez kontrol işlemi
+        function checkLikedStatus() {
+            if (getCookie("liked") === "true") {
+                // Kullanıcı daha önce beğenmiş, butonu kırmızı yap
+                var likeButton = document.getElementById("likeButton");
+                likeButton.style.backgroundColor = "red";
+                likeButton.innerText = "Projeyi Beğendiniz";
+                likeButton.disabled = true;
+            }
         }
     </script>
 }
