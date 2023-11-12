@@ -132,15 +132,13 @@
 
         <div class=" tm-search">
             <form class="d-flex tm-search-form" role="search">
-                <input class="form-control tm-search-input"
-                       type="search"
-                       placeholder="Arama"
-                       aria-label="Search" />
-                <button class="btn btn-outline-success tm-search-btn" type="submit">
+                <input class="form-control tm-search-input" type="search" placeholder="Arama" aria-label="Search" id="searchInput" />
+                <button class="btn btn-outline-success tm-search-btn" type="button" onclick="performSearch()">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
         </div>
+
     </div>
 
     <div class="container-fluid tm-container-content tm-mt-60">
@@ -224,17 +222,24 @@
         </div>
     </div>
     @await Html.PartialAsync("~/Views/Shared/Partial/FooterPartial.cshtml")
+
+    @section Scripts{
+        <script>
+            function submitForm(selectElement, categoryType) {
+                var value = selectElement.value;
+
+                document.getElementById(categoryType + "Value").value = value;
+
+                selectElement.closest("form").submit();
+            }
+        </script>
+        <script>
+            function performSearch() {
+                var projectName = document.getElementById("searchInput").value;
+                location.href = '@Url.Action("Index", "Home")' + '?projectName=' + projectName;
+            }
+        </script>
+    }
 </body>
 </html>
 
-@section Scripts{
-<script>
-    function submitForm(selectElement, categoryType) {
-        var value = selectElement.value;
-
-        document.getElementById(categoryType + "Value").value = value;
-
-        selectElement.closest("form").submit();
-    }
-</script>
-}

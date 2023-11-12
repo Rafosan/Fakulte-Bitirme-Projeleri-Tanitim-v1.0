@@ -26,7 +26,7 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             _categoryService = categoryService;
         }
 
-        public IActionResult Index(Category.Types? categoryType, string value, int page = 1)
+        public IActionResult Index(Category.Types? categoryType, string value, string? projectName, int page = 1)
         {
             int pageSize = 16;
             var values = new List<Project>();
@@ -46,6 +46,12 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
             {
                 values = _projectService.TGetAll();
             }
+
+            if (!string.IsNullOrEmpty(projectName))
+            {
+                values = values.Where(p => p.Name.Contains(projectName)).ToList();
+            }
+
             var yillar = _categoryService.TGetAll().Where(k => k.Type == Category.Types.Yıl);
             var bolumler = _categoryService.TGetAll().Where(k => k.Type == Category.Types.Bölüm);
             var danismanlar = _categoryService.TGetAll().Where(k => k.Type == Category.Types.Danışman);
