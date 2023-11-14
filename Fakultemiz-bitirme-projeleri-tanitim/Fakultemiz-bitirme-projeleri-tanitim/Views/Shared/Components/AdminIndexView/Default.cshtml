@@ -1,8 +1,9 @@
-﻿@using EntityLayer.Concrete
-@model Teacher
-@{
+﻿@{
     Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
+@using EntityLayer.Concrete
+@model Teacher
+
 <!DOCTYPE html>
 <html>
 <body>
@@ -91,11 +92,10 @@
                             <h5>Akademik Danışman Ekleme Formu</h5>
                         </div>
                         <div class="ibox-content">
-                            @using (Html.BeginForm("Index", "Admin", FormMethod.Post))
+                            @using (Html.BeginForm("Index", "Admin", FormMethod.Post, new { id = "adminTeacherForm" }))
                             {
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Danışman Adı Soyadı : </label>
-
                                     <div class="col-sm-10">
                                         @Html.TextBoxFor(x=>x.NameAndSurname,new { @class = "form-control" })
                                         @Html.ValidationMessageFor(x=>x.NameAndSurname)
@@ -127,7 +127,7 @@
 
                                 <div class="form-group row btn-kaydet">
                                     <button class="btn btn-lg btn-primary float-right m-t-n-xs"
-                                            type="submit" onclick="checkStatus()">
+                                            type="button" onclick="checkStatusAndSubmitForm()">
                                         <strong>Kaydet</strong>
                                     </button>
                                 </div>
@@ -138,15 +138,48 @@
             </div>
         </div>
     </div>
+
+    @section Scripts {
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            function checkValidity() {
+                var nameAndSurname = document.getElementById("NameAndSurname").value;
+                var majorScienceCode = document.getElementById("MajorScienceCode").value;
+                var userName = document.getElementById("UserName").value;
+                var password = document.getElementById("Password").value;
+
+                if (nameAndSurname.trim() === "" || majorScienceCode === "" || userName.trim() === "" || password.trim() === "") {
+                    return false;
+                }
+                return true; 
+            }
+
+            function checkStatusAndSubmitForm() {
+                var status = checkValidity();
+                if (status) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Başarılı!',
+                        text: 'Akademik Danışman Başarıyla Eklendi.',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Tamam'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById("adminTeacherForm").submit();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Hata!',
+                        text: 'Akademik Danışman Eklenemedi.',
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'Tamam'
+                    });
+                }
+            }
+        </script>
+    }
+
 </body>
 </html>
-<script>
-    function checkStatus() {
-        var status = Math.random() < 0.5;
-        if (status) {
-            alert('Danışman Eklendi');
-        } else {
-            alert('Danışman Eklenemedi');
-        }
-    }
-</script>

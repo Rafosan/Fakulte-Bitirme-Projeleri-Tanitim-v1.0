@@ -1,8 +1,8 @@
-﻿@using EntityLayer.Concrete
-@model List<Admin>
-@{
+﻿@{
     Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
+@using EntityLayer.Concrete
+@model List<Admin>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -153,13 +153,10 @@
                     cancelButtonText: 'İptal'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Kullanıcı "Evet, sil!" butonuna tıklarsa, AJAX isteği ile silme işlemini gerçekleştirilir
                         $.ajax({
                             url: '/Admin/AdminDelete/' + adminId,
-                            type: 'POST', // veya 'DELETE' kullanabilirsiniz
+                            type: 'POST',
                             success: function (data) {
-                                // Silme işlemi başarılı olduysa yapılacak işlemler
-                                // Örneğin sayfayı yenileme veya başka bir işlem
                                 Swal.fire({
                                     title: 'Başarılı!',
                                     text: 'Admin başarıyla silindi.',
@@ -168,12 +165,11 @@
                                     confirmButtonText: 'Tamam'
                                 }).then((confirmResult) => {
                                     if (confirmResult.isConfirmed) {
-                                        location.reload(); // Sayfayı yenileme veya başka bir işlem
+                                        location.reload();
                                     }
                                 });
                             },
                             error: function () {
-                                // Hata durumunda yapılacak işlemler
                                 console.error('Silme işlemi başarısız!');
                             }
                         });

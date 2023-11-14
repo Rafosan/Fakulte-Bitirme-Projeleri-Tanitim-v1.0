@@ -12,11 +12,11 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
 
         private readonly IProjectService _projectService;
         private readonly ICategoryService _categoryService;

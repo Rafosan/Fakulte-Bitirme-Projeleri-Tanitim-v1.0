@@ -167,11 +167,12 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 			SetAdminNameInViewBag();
 			return View(values);
         }
+
         [HttpGet]
         public IActionResult AdminIndex()
         {
 			SetAdminNameInViewBag();
-			return View();
+            return View();
         }
         [HttpPost]
         public IActionResult AdminIndex(Admin parametre)
@@ -198,10 +199,10 @@ namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
         public IActionResult AdminDelete()
         {
             var adminId = (int)HttpContext.Session.GetInt32("adminId");
-            var values=_adminService.TGetAll();
             ViewBag.AdminId = adminId;
 			SetAdminNameInViewBag();
-			return View(values);
+            var values = _adminService.TGetAll();
+            return View(values);
         }
         [HttpPost]
         public IActionResult AdminDelete(int id)

@@ -1,8 +1,8 @@
-﻿@using EntityLayer.Concrete
-@model Admin
-@{
+﻿@{
     Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
+@using EntityLayer.Concrete
+@model Admin
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -143,17 +143,26 @@
     @section Scripts{
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+            function checkValidity() {
+                var nameAndSurname = document.getElementById("NameAndSurname").value;
+                var userName = document.getElementById("UserName").value;
+                var password = document.getElementById("Password").value;
+
+                if (nameAndSurname.trim() === "" || userName.trim() === "" || password.trim() === "") {
+                    return false;
+                }
+                return true;
+            }
             function checkStatusAndSubmitForm() {
-                var status = Math.random() < 0.5;
+                var status = checkValidity();
                 if (status) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Başarılı!',
-                        text: 'Admin başarıyla eklendi.',
+                        text: 'Admin Başarıyla Eklendi.',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Tamam'
                     }).then((result) => {
-                        // Eğer kullanıcı "Tamam" butonuna tıklarsa formu submit et
                         if (result.isConfirmed) {
                             document.getElementById("adminForm").submit();
                         }
@@ -162,7 +171,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Hata!',
-                        text: 'Admin eklenirken bir hata oluştu.',
+                        text: 'Admin Eklenemedi.',
                         confirmButtonColor: '#d33',
                         confirmButtonText: 'Tamam'
                     });
