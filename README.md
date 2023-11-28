@@ -19,5 +19,5 @@ Proje, öğrencilerin ve öğretim görevlilerinin bitirme projelerini ekleyebil
 - Entity Framework Core
 - HTML, CSS, JavaScript
 - Bootstrap
-- SQL Server
+- Microsft SQL Server
 
