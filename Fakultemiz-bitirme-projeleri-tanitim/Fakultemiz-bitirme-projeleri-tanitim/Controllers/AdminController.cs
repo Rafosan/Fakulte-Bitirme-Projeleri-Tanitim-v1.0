@@ -9,8 +9,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Fakultemiz_bitirme_projeleri_tanitim.Controllers
 {
-    [Authorize(AuthenticationSchemes = "LoginScheme")]
-    [Authorize(Roles = Roles.Admin)]
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
